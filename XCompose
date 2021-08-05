@@ -1,0 +1,398 @@
+# <https://code.s.zeid.me/etc/blob/main/XCompose>
+
+# Notes:  <https://code.s.zeid.me/etc/blob/main/XCompose.notes.md>
+
+
+include "%L"
+
+
+# Uncategorized  {{{1
+<Multi_key> <equal> <equal> <equal>     : "≡" U2261  # IDENTICAL TO
+<Multi_key> <asterisk> <asterisk>       : "∗" U2217  # ASTERISK OPERATOR
+<Multi_key> <bracketleft> <o> <bar>     : "⎄" U2384  # COMPOSITION SYMBOL
+<Multi_key> <bracketleft> <O> <bar>     : "⎄" U2384  # COMPOSITION SYMBOL
+<Multi_key> <c> <m> <p>                 : "⎄" U2384  # COMPOSITION SYMBOL
+<Multi_key> <comma> <slash>             : "✓" U2713  # CHECK MARK
+<Multi_key> <slash> <comma>             : "✓" U2713  # CHECK MARK
+<Multi_key> <t> <f>                     : "∴" U2234  # THEREFORE
+<Multi_key> <T> <F>                     : "∴" U2234  # THEREFORE
+<Multi_key> <colon> <period>            : "∴" U2234  # THEREFORE *
+<Multi_key> <b> <c>                     : "∵" U2235  # BECAUSE
+<Multi_key> <B> <C>                     : "∵" U2235  # BECAUSE
+<Multi_key> <period> <colon>            : "∵" U2235  # BECAUSE *
+<Multi_key> <v> <slash>                 : "√" U221A  # SQUARE ROOT *
+<Multi_key> <slash> <v>                 : "√" U221A  # SQUARE ROOT *
+<Multi_key> <8> <8>                     : "∞" U221E  # INFINITY *
+<Multi_key> <asciitilde> <asciitilde>   : "≈" U2248  # ALMOST EQUAL TO *
+<Multi_key> <l> <minus>                 : "£" U00A3  # POUND SIGN *
+<Multi_key> <minus> <l>                 : "£" U00A3  # POUND SIGN *
+<Multi_key> <bar> <minus>               : "†" U2020  # DAGGER
+<Multi_key> <minus> <bar>               : "†" U2020  # DAGGER
+<Multi_key> <bar> <equal>               : "‡" U2021  # DOUBLE DAGGER
+<Multi_key> <equal> <bar>               : "‡" U2021  # DOUBLE DAGGER
+<Multi_key> <asciicircum> <bar>         : "↑" U2191  # UPWARDS ARROW
+<Multi_key> <bar> <asciicircum>         : "↑" U2191  # UPWARDS ARROW
+<Multi_key> <v> <bar>                   : "↓" U2193  # DOWNWARDS ARROW
+<Multi_key> <bar> <v>                   : "↓" U2193  # DOWNWARDS ARROW
+<Multi_key> <less> <minus>              : "←" U2190  # LEFTWARDS ARROW *
+<Multi_key> <minus> <left>              : "←" U2190  # LEFTWARDS ARROW
+<Multi_key> <minus> <greater>           : "→" U2192  # RIGHTWARDS ARROW *
+<Multi_key> <greater> <minus>           : "→" U2192  # RIGHTWARDS ARROW
+<Multi_key> <less> <equal>              : "≤" U2264  # LESS-THAN OR EQUAL TO *
+<Multi_key> <equal> <less>              : "≤" U2264  # LESS-THAN OR EQUAL TO
+<Multi_key> <greater> <equal>           : "≥" U2265  # GREATER-THAN OR EQUAL TO *
+<Multi_key> <equal> <greater>           : "≥" U2265  # GREATER-THAN OR EQUAL TO
+<Multi_key> <asterisk> <slash>          : "⁄" U2044  # FRACTION SLASH
+<Multi_key> <period> <slash>            : "⧸" U29F8  # BIG SOLIDUS
+<Multi_key> <colon> <equal>             : "≔" U2254  # COLON EQUALS
+<Multi_key> <equal> <colon>             : "≕" U2255  # EQUALS COLON
+<Multi_key> <v> <period> <period>       : "⋮" U22EE  # VERTICAL ELLIPSIS †
+<Multi_key> <c> <period> <period>       : "⋯" U22EF  # MIDLINE HORIZONTAL ELLIPSIS †
+<Multi_key> <o> <v>                     : "̅" U0305  # COMBINING OVERLINE
+<Multi_key> <asciicircum> <underscore>  : "̅" U0305  # COMBINING OVERLINE
+<Multi_key> <asciicircum> <minus>       : "⁻" U207B  # SUPERSCRIPT MINUS
+<Multi_key> <underscore> <minus>        : "₋" U208B  # SUBSCRIPT MINUS †
+<Multi_key> <minus> <numbersign>        : "‒" U2012  # FIGURE DASH
+<Multi_key> <numbersign> <minus>        : "‒" U2012  # FIGURE DASH
+<Multi_key> <minus> <f>                 : "‒" U2012  # FIGURE DASH
+<Multi_key> <f> <minus>                 : "‒" U2012  # FIGURE DASH
+<Multi_key> <numbersign> <space>        : " " U2007  # FIGURE SPACE
+<Multi_key> <space> <numbersign>        : " " U2007  # FIGURE SPACE †
+<Multi_key> <f> <space>                 : " " U2007  # FIGURE SPACE
+<Multi_key> <space> <f>                 : " " U2007  # FIGURE SPACE
+<Multi_key> <t> <a> <b>                 :     U0009  # CHARACTER TABULATION ⁰
+<Multi_key> <underscore> <space>        : "␣" U2423  # OPEN BOX
+<Multi_key> <space> <underscore>        : "␣" U2423  # OPEN BOX
+<Multi_key> <backslash> <minus>         : "­" U00AD  # SOFT HYPHEN †
+<Multi_key> <bar> <space>               : " " U200A  # HAIR SPACE
+<Multi_key> <space> <bar>               : " " U200A  # HAIR SPACE †
+<Multi_key> <period> <space>            : " " U200A  # HAIR SPACE
+<Multi_key> <space> <period>            : " " U200A  # HAIR SPACE
+<Multi_key> <z> <w> <s>                 : "​" U200B  # ZERO WIDTH SPACE
+<Multi_key> <z> <s>                     : "​" U200B  # ZERO WIDTH SPACE
+<Multi_key> <0> <s>                     : "​" U200B  # ZERO WIDTH SPACE
+<Multi_key> <0> <space>                 : "​" U200B  # ZERO WIDTH SPACE
+<Multi_key> <z> <w> <n> <j>             : "‌" U200C  # ZERO WIDTH NON-JOINER
+<Multi_key> <z> <n>                     : "‌" U200C  # ZERO WIDTH NON-JOINER
+<Multi_key> <0> <n>                     : "‌" U200C  # ZERO WIDTH NON-JOINER
+<Multi_key> <z> <w> <j>                 : "‍" U200D  # ZERO WIDTH JOINER
+<Multi_key> <z> <j>                     : "‍" U200D  # ZERO WIDTH JOINER
+<Multi_key> <0> <j>                     : "‍" U200D  # ZERO WIDTH JOINER
+<Multi_key> <l> <r> <m>                 : "‎" U200E  # LEFT-TO-RIGHT MARK
+<Multi_key> <r> <l> <m>                 : "‏" U200F  # RIGHT-TO-LEFT MARK
+<Multi_key> <7> <7>                     : "⁊" U204A  # TIRONIAN SIGN ET
+<Multi_key> <C> <O>                     : "℅" U2105  # CARE OF
+
+
+# Superscript ordinal suffixes  #{{{1
+<Multi_key> <s> <t>                     : "ˢᵗ"  # MODIFIER LETTER SMALL {S,T}
+<Multi_key> <n> <d>                     : "ⁿᵈ"  # SUPERSCRIPT LATIN SMALL LETTER N, MODIFIER LETTER SMALL D
+<Multi_key> <r> <d>                     : "ʳᵈ"  # MODIFIER LETTER SMALL {R,D}
+<Multi_key> <t> <h>                     : "ᵗʰ"  # MODIFIER LETTER SMALL {T,H}
+
+
+# Emojis (except faces) / icons  #{{{1
+<Multi_key> <o> <period> <apostrophe>   : "ಠ" U0CA0  # KANNADA LETTER TTHA
+<Multi_key> <o> <i>                     : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
+<Multi_key> <s> <n> <o> <w>             : "☃" U2603  # SNOWMAN
+<Multi_key> <1> <m>                     : "☝" U261D  # WHITE UP POINTING INDEX
+<Multi_key> <1> <M>                     : "☝" U261D  # WHITE UP POINTING INDEX
+<Multi_key> <equal> <asciicircum> <bar> : "☝" U261D  # WHITE UP POINTING INDEX
+<Multi_key> <8> <t> <h>                 : "♪" U266A  # EIGHTH NOTE
+<Multi_key> <b> <8> <t> <h>             : "♫" U266B  # BEAMED EIGHTH NOTES
+<Multi_key> <less> <3>                  : "❤️"  # HEAVY BLACK HEART (U2764), EMOJI VARIATION SELECTOR (UFE0F)
+<Multi_key> <r> <a> <i> <n>             : "🌧" U1F327  # CLOUD WITH RAIN
+<Multi_key> <Multi_key> <c> <a> <k> <e> : "🎂" U1F382  # BIRTHDAY CAKE
+<Multi_key> <y> <a> <y>                 : "🎉" U1F389  # PARTY POPPER
+<Multi_key> <Y> <A> <Y>                 : "🎊" U1F38A  # CONFETTI BALL
+<Multi_key> <m> <o> <o>                 : "🐄" U1F404  # COW
+<Multi_key> <M> <O> <O>                 : "🐮" U1F42E  # COW FACE
+<Multi_key> <t> <r> <t>                 : "🐢" U1F422  # TURTLE
+<Multi_key> <t> <u> <r> <t>             : "🐢" U1F422  # TURTLE
+<Multi_key> <d> <o> <g>                 : "🐕" U1F415  # DOG
+<Multi_key> <D> <O> <G>                 : "🐶" U1F436  # DOG FACE
+<Multi_key> <p> <e> <n> <g>             : "🐧" U1F427  # PENGUIN
+<Multi_key> <t> <u> <x>                 : "🐧" U1F427  # PENGUIN
+<Multi_key> <parenleft> <quotedbl> <greater> : "🐧" U1F427  # PENGUIN
+<Multi_key> <less> <quotedbl> <parenright>   : "🐧" U1F427  # PENGUIN (broken in CrOS)
+<Multi_key> <parenleft> <quotedbl> <parenright> <greater> : "🐧" U1F427  # PENGUIN
+<Multi_key> <less> <parenleft> <quotedbl> <parenright>    : "🐧" U1F427  # PENGUIN
+<Multi_key> <m> <e> <o> <w>             : "🐱" U1F431  # CAT FACE
+<Multi_key> <M> <E> <o> <w>             : "😺" U1F63A  # SMILING CAT FACE WITH OPEN MOUTH
+<Multi_key> <p> <a> <w>                 : "🐾" U1F43E  # PAW PRINTS
+<Multi_key> <equal> <minus> <less>      : "👈" U1F448  # WHITE LEFT POINTING BACKHAND INDEX
+<Multi_key> <equal> <minus> <greater>   : "👉" U1F449  # WHITE RIGHT POINTING BACKHAND INDEX
+<Multi_key> <h> <i>                     : "👋" U1F44B  # WAVING HAND SIGN
+<Multi_key> <equal> <apostrophe>        : "👍" U1F44D  # THUMBS UP SIGN
+<Multi_key> <apostrophe> <equal>        : "👍" U1F44D  # THUMBS UP SIGN
+<Multi_key> <equal> <comma>             : "👎" U1F44E  # THUMBS DOWN SIGN
+<Multi_key> <comma> <equal>             : "👎" U1F44E  # THUMBS DOWN SIGN
+<Multi_key> <Multi_key> <c> <l> <a> <p> : "👏" U1F44F  # CLAPPING HANDS SIGN
+<Multi_key> <h> <5>                     : "🖐" U1F590  # RAISED HAND WITH FINGERS SPLAYED
+<Multi_key> <F> <U>                     : "🖕" U1F595  # REVERSED HAND WITH MIDDLE FINGER EXTENDED *
+<Multi_key> <r> <n>                     : "🗞" U1F5DE  # ROLLED-UP NEWSPAPER
+<Multi_key> <f> <c>                     : "🤞" U1F91E  # HAND WITH INDEX AND MIDDLE FINGERS CROSSED
+<Multi_key> <F> <C>                     : "🤞" U1F91E  # HAND WITH INDEX AND MIDDLE FINGERS CROSSED
+<Multi_key> <F> <P>                     : "🤦" U1F926  # FACE PALM
+<Multi_key> <f> <p>                     : "🤦" U1F926  # FACE PALM
+<Multi_key> <P> <F> <P>                 : "🤦" U1F926  # FACE PALM
+<Multi_key> <p> <f> <p>                 : "🤦" U1F926  # FACE PALM
+<Multi_key> <W> <F> <P>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
+<Multi_key> <w> <f> <p>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
+<Multi_key> <F> <F> <P>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
+<Multi_key> <f> <f> <p>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
+<Multi_key> <M> <F> <P>                 : "🤦‍♂"  # FACE PALM, ZWJ, MALE SIGN
+<Multi_key> <m> <f> <p>                 : "🤦‍♂"  # FACE PALM, ZWJ, MALE SIGN
+<Multi_key> <Multi_key> <c> <r> <a> <b> : "🦀" U1F980  # CRAB
+<Multi_key> <h> <u> <g>                 : "🫂" U1FAC2  # PEOPLE HUGGING
+
+
+# Face emojis  #{{{1
+<Multi_key> <colon> <d>                 : "😃" U1F603  # SMILING FACE WITH OPEN MOUTH
+<Multi_key> <colon> <D>                 : "😃" U1F603  # SMILING FACE WITH OPEN MOUTH
+<Multi_key> <x> <d>                     : "😆" U1F606  # SMILING FACE WITH OPEN MOUTH AND TIGHTLY-CLOSED EYES
+<Multi_key> <x> <D>                     : "😆" U1F606  # SMILING FACE WITH OPEN MOUTH AND TIGHTLY-CLOSED EYES
+<Multi_key> <X> <d>                     : "😆" U1F606  # SMILING FACE WITH OPEN MOUTH AND TIGHTLY-CLOSED EYES
+<Multi_key> <X> <D>                     : "😆" U1F606  # SMILING FACE WITH OPEN MOUTH AND TIGHTLY-CLOSED EYES
+<Multi_key> <colon> <less> <3>          : "😍" U1F60D  # SMILING FACE WITH HEART-SHAPED EYES
+<Multi_key> <colon> <less> <numbersign> : "😍" U1F60D  # SMILING FACE WITH HEART-SHAPED EYES
+<Multi_key> <colon> <bar>               : "😐" U1F610  # NEUTRAL FACE
+<Multi_key> <colon> <slash>             : "😕" U1F615  # CONFUSED FACE
+<Multi_key> <colon> <p>                 : "😛" U1F61B  # FACE WITH STUCK-OUT TONGUE
+<Multi_key> <colon> <P>                 : "😛" U1F61B  # FACE WITH STUCK-OUT TONGUE
+<Multi_key> <greater> <colon> <parenleft> : "😠" U1F620  # ANGRY FACE
+<Multi_key> <colon> <apostrophe> <parenleft> : "😢" U1F622  # CRYING FACE
+<Multi_key> <apostrophe> <colon> <parenleft> : "😢" U1F622  # CRYING FACE
+<Multi_key> <apostrophe> <parenleft>    : "😢" U1F622  # CRYING FACE
+<Multi_key> <colon> <o>                 : "😮" U1F62E  # FACE WITH OPEN MOUTH
+<Multi_key> <colon> <O>                 : "😮" U1F62E  # FACE WITH OPEN MOUTH
+<Multi_key> <asciicircum> <colon> <bar> : "😳" U1F633  # FLUSHED FACE
+<Multi_key> <colon> <z>                 : "😴" U1F634  # SLEEPING FACE
+<Multi_key> <colon> <Z>                 : "😴" U1F634  # SLEEPING FACE
+<Multi_key> <colon> <parenleft>         : "🙁" U1F641  # SLIGHTLY FROWNING FACE
+<Multi_key> <colon> <parenright>        : "🙂" U1F642  # SLIGHTLY SMILING FACE
+<Multi_key> <colon> <E>                 : "😬" U1F62C  # GRIMACING FACE
+<Multi_key> <colon> <H>                 : "😬" U1F62C  # GRIMACING FACE
+<Multi_key> <colon> <space>             : "😶" U1F636  # FACE WITHOUT MOUTH
+<Multi_key> <colon> <dollar>            : "🤑" U1F911  # MONEY-MOUTH FACE
+<Multi_key> <h> <m> <m>                 : "🤔" U1F914  # THINKING FACE
+<Multi_key> <r> <o> <f> <l>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
+<Multi_key> <slash> <x> <d>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
+<Multi_key> <slash> <x> <D>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
+<Multi_key> <slash> <X> <d>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
+<Multi_key> <slash> <X> <D>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
+<Multi_key> <colon> <exclam>            : "🤬" U1F92C  # SERIOUS FACE WITH SYMBOLS COVERING MOUTH
+<Multi_key> <greater> <colon> <exclam>  : "🤬" U1F92C  # SERIOUS FACE WITH SYMBOLS COVERING MOUTH
+<Multi_key> <asterisk> <colon> <o>      : "🤯" U1F92F  # SHOCKED FACE WITH EXPLODING HEAD
+<Multi_key> <asterisk> <colon> <O>      : "🤯" U1F92F  # SHOCKED FACE WITH EXPLODING HEAD
+<Multi_key> <colon> <colon> <parenleft> : "🥺" U1F97A  # FACE WITH PLEADING EYES
+
+
+# Text emoticons  #{{{1
+<Multi_key> <Multi_key> <d> <underscore> <d>              : "ಠ_ಠ"
+<Multi_key> <Multi_key> <o> <underscore> <o>              : "ಠ_ಠ"
+<Multi_key> <Multi_key> <9> <underscore> <9>              : "ಠ_ಠ"
+<Multi_key> <Multi_key> <colon> <slash>                   : "¯\_(ツ)_/¯"
+<Multi_key> <Multi_key> <backslash> <colon> <slash>       : "¯\_(ツ)_/¯"
+<Multi_key> <Multi_key> <s> <h> <r> <u> <g>               : "¯\_(ツ)_/¯"
+<Multi_key> <Multi_key> <backslash> <quotedbl> <slash>    : "¯\_(ツ)_/¯"
+<Multi_key> <Multi_key> <backslash> <underscore> <slash>  : "¯\_(ツ)_/¯"
+
+
+# Additional copyright and Creative Commons symbols  #{{{1
+<Multi_key> <o> <f>                     : "Ⓕ" U24BB  # CIRCLED LATIN CAPITAL LETTER F (Copyfree)
+<Multi_key> <O> <f>                     : "Ⓕ" U24BB  # CIRCLED LATIN CAPITAL LETTER F (Copyfree)
+<Multi_key> <o> <F>                     : "Ⓕ" U24BB  # CIRCLED LATIN CAPITAL LETTER F (Copyfree)
+<Multi_key> <O> <F>                     : "Ⓕ" U24BB  # CIRCLED LATIN CAPITAL LETTER F (Copyfree)
+<Multi_key> <o> <p>                     : "℗" U2117  # SOUND RECORDING COPYRIGHT
+<Multi_key> <O> <p>                     : "℗" U2117  # SOUND RECORDING COPYRIGHT
+<Multi_key> <o> <P>                     : "℗" U2117  # SOUND RECORDING COPYRIGHT
+<Multi_key> <O> <P>                     : "℗" U2117  # SOUND RECORDING COPYRIGHT
+<Multi_key> <o> <equal>                 : "⊜" U229C  # CIRCLED EQUALS (CC-ND)
+<Multi_key> <O> <equal>                 : "⊜" U229C  # CIRCLED EQUALS (CC-ND)
+<Multi_key> <parenleft> <n> <d> <parenright> : "⊜" U229C  # CIRCLED EQUALS (CC-ND)
+<Multi_key> <parenleft> <N> <D> <parenright> : "⊜" U229C  # CIRCLED EQUALS (CC-ND)
+<Multi_key> <o> <parenright>            : "🄯" U1F12F  # COPYLEFT SYMBOL
+<Multi_key> <O> <parenright>            : "🄯" U1F12F  # COPYLEFT SYMBOL
+<Multi_key> <parenleft> <c> <c> <parenright> : "🅭" U1F16D  # CIRCLED CC (Creative Commons)
+<Multi_key> <parenleft> <C> <C> <parenright> : "🅭" U1F16D  # CIRCLED CC (Creative Commons)
+<Multi_key> <o> <backslash> <c>         : "🅮" U1F16E  # CIRCLED C WITH OVERLAID BACKSLASH (public domain)
+<Multi_key> <O> <backslash> <c>         : "🅮" U1F16E  # CIRCLED C WITH OVERLAID BACKSLASH (public domain)
+<Multi_key> <o> <backslash> <C>         : "🅮" U1F16E  # CIRCLED C WITH OVERLAID BACKSLASH (public domain)
+<Multi_key> <O> <backslash> <C>         : "🅮" U1F16E  # CIRCLED C WITH OVERLAID BACKSLASH (public domain)
+<Multi_key> <parenleft> <b> <y> <parenright> : "🅯" U1F16F  # CIRCLED HUMAN FIGURE (CC-BY)
+<Multi_key> <parenleft> <B> <Y> <parenright> : "🅯" U1F16F  # CIRCLED HUMAN FIGURE (CC-BY)
+<Multi_key> <parenleft> <0> <parenright> : "🄍" U1F10D  # CIRCLED ZERO WITH SLASH (CC0)
+<Multi_key> <parenleft> <s> <a> <parenright> : "🄎" U1F10E  # CIRCLED ANTICLOCKWISE ARROW (CC-SA)
+<Multi_key> <parenleft> <S> <A> <parenright> : "🄎" U1F10E  # CIRCLED ANTICLOCKWISE ARROW (CC-SA)
+<Multi_key> <parenleft> <n> <c> <parenright> : "🄏" U1F10F  # CIRCLED DOLLAR SIGN OVERLAID BACKSLASH (CC-NC)
+<Multi_key> <parenleft> <N> <C> <parenright> : "🄏" U1F10F  # CIRCLED DOLLAR SIGN OVERLAID BACKSLASH (CC-NC)
+
+
+# Overlined digits  #{{{1
+<Multi_key> <0> <minus>                 : "0̅"  # DIGIT ZERO, COMBINING OVERLINE
+<Multi_key> <1> <minus>                 : "1̅"  # DIGIT ONE, COMBINING OVERLINE
+<Multi_key> <2> <minus>                 : "2̅"  # DIGIT TWO, COMBINING OVERLINE
+<Multi_key> <3> <minus>                 : "3̅"  # DIGIT THREE, COMBINING OVERLINE
+<Multi_key> <4> <minus>                 : "4̅"  # DIGIT FOUR, COMBINING OVERLINE
+<Multi_key> <5> <minus>                 : "5̅"  # DIGIT FIVE, COMBINING OVERLINE
+<Multi_key> <6> <minus>                 : "6̅"  # DIGIT SIX, COMBINING OVERLINE
+<Multi_key> <7> <minus>                 : "7̅"  # DIGIT SEVEN, COMBINING OVERLINE
+<Multi_key> <8> <minus>                 : "8̅"  # DIGIT EIGHT, COMBINING OVERLINE
+<Multi_key> <9> <minus>                 : "9̅"  # DIGIT NINE, COMBINING OVERLINE
+
+
+# Superscript parenthesized numbers  #{{{1
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <0> <parenright> : "⁽⁰⁾"
+<Multi_key>             <parenleft> <asciicircum>     <0> <parenright> : "⁽⁰⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <1> <parenright> : "⁽¹⁾"
+<Multi_key>             <parenleft> <asciicircum>     <1> <parenright> : "⁽¹⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <2> <parenright> : "⁽²⁾"
+<Multi_key>             <parenleft> <asciicircum>     <2> <parenright> : "⁽²⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <3> <parenright> : "⁽³⁾"
+<Multi_key>             <parenleft> <asciicircum>     <3> <parenright> : "⁽³⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <4> <parenright> : "⁽⁴⁾"
+<Multi_key>             <parenleft> <asciicircum>     <4> <parenright> : "⁽⁴⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <5> <parenright> : "⁽⁵⁾"
+<Multi_key>             <parenleft> <asciicircum>     <5> <parenright> : "⁽⁵⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <6> <parenright> : "⁽⁶⁾"
+<Multi_key>             <parenleft> <asciicircum>     <6> <parenright> : "⁽⁶⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <7> <parenright> : "⁽⁷⁾"
+<Multi_key>             <parenleft> <asciicircum>     <7> <parenright> : "⁽⁷⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <8> <parenright> : "⁽⁸⁾"
+<Multi_key>             <parenleft> <asciicircum>     <8> <parenright> : "⁽⁸⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft>     <9> <parenright> : "⁽⁹⁾"
+<Multi_key>             <parenleft> <asciicircum>     <9> <parenright> : "⁽⁹⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <0> <parenright> : "⁽¹⁰⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <0> <parenright> : "⁽¹⁰⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <1> <parenright> : "⁽¹¹⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <1> <parenright> : "⁽¹¹⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <2> <parenright> : "⁽¹²⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <2> <parenright> : "⁽¹²⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <3> <parenright> : "⁽¹³⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <3> <parenright> : "⁽¹³⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <4> <parenright> : "⁽¹⁴⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <4> <parenright> : "⁽¹⁴⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <5> <parenright> : "⁽¹⁵⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <5> <parenright> : "⁽¹⁵⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <6> <parenright> : "⁽¹⁶⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <6> <parenright> : "⁽¹⁶⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <7> <parenright> : "⁽¹⁷⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <7> <parenright> : "⁽¹⁷⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <8> <parenright> : "⁽¹⁸⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <8> <parenright> : "⁽¹⁸⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <1> <9> <parenright> : "⁽¹⁹⁾"
+<Multi_key>             <parenleft> <asciicircum> <1> <9> <parenright> : "⁽¹⁹⁾"
+<Multi_key> <Multi_key> <asciicircum> <parenleft> <2> <0> <parenright> : "⁽²⁰⁾"
+<Multi_key>             <parenleft> <asciicircum> <2> <0> <parenright> : "⁽²⁰⁾"
+
+
+# Vulgar fractions not included in the Chrome OS extension *  #{{{1
+<Multi_key> <1> <7>                     : "⅐" U2150  # VULGAR FRACTION ONE SEVENTH
+<Multi_key> <1> <9>                     : "⅑" U2151  # VULGAR FRACTION ONE NINTH
+<Multi_key> <1> <1> <0>                 : "⅒" U2152  # VULGAR FRACTION ONE TENTH
+<Multi_key> <1> <3>                     : "⅓" U2153  # VULGAR FRACTION ONE THIRD
+<Multi_key> <2> <3>                     : "⅔" U2154  # VULGAR FRACTION TWO THIRDS
+<Multi_key> <1> <5>                     : "⅕" U2155  # VULGAR FRACTION ONE FIFTH
+<Multi_key> <2> <5>                     : "⅖" U2156  # VULGAR FRACTION TWO FIFTHS
+<Multi_key> <3> <5>                     : "⅗" U2157  # VULGAR FRACTION THREE FIFTHS
+<Multi_key> <4> <5>                     : "⅘" U2158  # VULGAR FRACTION FOUR FIFTHS
+<Multi_key> <1> <6>                     : "⅙" U2159  # VULGAR FRACTION ONE SIXTH
+<Multi_key> <5> <6>                     : "⅚" U215A  # VULGAR FRACTION FIVE SIXTHS
+<Multi_key> <1> <8>                     : "⅛" U215B  # VULGAR FRACTION ONE EIGHTH
+<Multi_key> <3> <8>                     : "⅜" U215C  # VULGAR FRACTION THREE EIGHTHS
+<Multi_key> <5> <8>                     : "⅝" U215D  # VULGAR FRACTION FIVE EIGHTHS
+<Multi_key> <7> <8>                     : "⅞" U215E  # VULGAR FRACTION SEVEN EIGHTHS
+<Multi_key> <0> <3>                     : "↉" U2189  # VULGAR FRACTION ZERO THIRDS
+
+
+# Regional indicator symbols  {{{1
+<Multi_key> <R> <A>                     : "🇦" U1F1E6  # REGIONAL INDICATOR SYMBOL LETTER A
+<Multi_key> <R> <B>                     : "🇧" U1F1E7  # REGIONAL INDICATOR SYMBOL LETTER B
+<Multi_key> <R> <C>                     : "🇨" U1F1E8  # REGIONAL INDICATOR SYMBOL LETTER C
+<Multi_key> <R> <D>                     : "🇩" U1F1E9  # REGIONAL INDICATOR SYMBOL LETTER D
+<Multi_key> <R> <E>                     : "🇪" U1F1EA  # REGIONAL INDICATOR SYMBOL LETTER E
+<Multi_key> <R> <F>                     : "🇫" U1F1EB  # REGIONAL INDICATOR SYMBOL LETTER F
+<Multi_key> <R> <G>                     : "🇬" U1F1EC  # REGIONAL INDICATOR SYMBOL LETTER G
+<Multi_key> <R> <H>                     : "🇭" U1F1ED  # REGIONAL INDICATOR SYMBOL LETTER H
+<Multi_key> <R> <I>                     : "🇮" U1F1EE  # REGIONAL INDICATOR SYMBOL LETTER I
+<Multi_key> <R> <J>                     : "🇯" U1F1EF  # REGIONAL INDICATOR SYMBOL LETTER J
+<Multi_key> <R> <K>                     : "🇰" U1F1F0  # REGIONAL INDICATOR SYMBOL LETTER K
+<Multi_key> <R> <L>                     : "🇱" U1F1F1  # REGIONAL INDICATOR SYMBOL LETTER L
+<Multi_key> <R> <M>                     : "🇲" U1F1F2  # REGIONAL INDICATOR SYMBOL LETTER M
+<Multi_key> <R> <N>                     : "🇳" U1F1F3  # REGIONAL INDICATOR SYMBOL LETTER N
+<Multi_key> <R> <O>                     : "🇴" U1F1F4  # REGIONAL INDICATOR SYMBOL LETTER O
+<Multi_key> <R> <P>                     : "🇵" U1F1F5  # REGIONAL INDICATOR SYMBOL LETTER P
+<Multi_key> <R> <Q>                     : "🇶" U1F1F6  # REGIONAL INDICATOR SYMBOL LETTER Q
+<Multi_key> <R> <R>                     : "🇷" U1F1F7  # REGIONAL INDICATOR SYMBOL LETTER R
+<Multi_key> <R> <S>                     : "🇸" U1F1F8  # REGIONAL INDICATOR SYMBOL LETTER S
+<Multi_key> <R> <T>                     : "🇹" U1F1F9  # REGIONAL INDICATOR SYMBOL LETTER T
+<Multi_key> <R> <U>                     : "🇺" U1F1FA  # REGIONAL INDICATOR SYMBOL LETTER U
+<Multi_key> <R> <V>                     : "🇻" U1F1FB  # REGIONAL INDICATOR SYMBOL LETTER V
+<Multi_key> <R> <W>                     : "🇼" U1F1FC  # REGIONAL INDICATOR SYMBOL LETTER W
+<Multi_key> <R> <X>                     : "🇽" U1F1FD  # REGIONAL INDICATOR SYMBOL LETTER X
+<Multi_key> <R> <Y>                     : "🇾" U1F1FE  # REGIONAL INDICATOR SYMBOL LETTER Y
+<Multi_key> <R> <Z>                     : "🇿" U1F1FF  # REGIONAL INDICATOR SYMBOL LETTER Z
+
+
+# Greek letters — probably based on libX11 (see * below)  {{{1
+# (but see also <https://git.tobast.fr/tobast/dotfiles/src/master/files/.XCompose>)
+<Multi_key> <G> <A>                     : "Α" U0391  # GREEK CAPITAL LETTER ALPHA
+<Multi_key> <g> <a>                     : "α" U03B1  # GREEK SMALL LETTER ALPHA
+<Multi_key> <G> <B>                     : "Β" U0392  # GREEK CAPITAL LETTER BETA
+<Multi_key> <g> <b>                     : "β" U03B2  # GREEK SMALL LETTER BETA
+<Multi_key> <G> <D>                     : "Δ" U0394  # GREEK CAPITAL LETTER DELTA
+<Multi_key> <g> <d>                     : "δ" U03B4  # GREEK SMALL LETTER DELTA
+<Multi_key> <G> <E>                     : "Ε" U0395  # GREEK CAPITAL LETTER EPSILON
+<Multi_key> <g> <e>                     : "ε" U03B5  # GREEK SMALL LETTER EPSILON
+<Multi_key> <G> <F>                     : "Φ" U03A6  # GREEK CAPITAL LETTER PHI
+<Multi_key> <g> <f>                     : "φ" U03C6  # GREEK SMALL LETTER PHI
+<Multi_key> <G> <G>                     : "Γ" U0393  # GREEK CAPITAL LETTER GAMMA
+<Multi_key> <g> <g>                     : "γ" U03B3  # GREEK SMALL LETTER GAMMA
+<Multi_key> <G> <H>                     : "Η" U0397  # GREEK CAPITAL LETTER ETA
+<Multi_key> <g> <h>                     : "η" U03B7  # GREEK SMALL LETTER ETA
+<Multi_key> <G> <I>                     : "Ι" U0399  # GREEK CAPITAL LETTER IOTA
+<Multi_key> <g> <i>                     : "ι" U03B9  # GREEK SMALL LETTER IOTA
+<Multi_key> <G> <J>                     : "Θ" U0398  # GREEK CAPITAL LETTER THETA
+<Multi_key> <g> <j>                     : "θ" U03B8  # GREEK SMALL LETTER THETA
+<Multi_key> <G> <K>                     : "Κ" U039A  # GREEK CAPITAL LETTER KAPPA
+<Multi_key> <g> <k>                     : "κ" U03BA  # GREEK SMALL LETTER KAPPA
+<Multi_key> <G> <L>                     : "Λ" U039B  # GREEK CAPITAL LETTER LAMDA
+<Multi_key> <g> <l>                     : "λ" U03BB  # GREEK SMALL LETTER LAMDA
+<Multi_key> <G> <M>                     : "Μ" U039C  # GREEK CAPITAL LETTER MU
+<Multi_key> <g> <m>                     : "μ" U03BC  # GREEK SMALL LETTER MU
+<Multi_key> <G> <N>                     : "Ν" U039D  # GREEK CAPITAL LETTER NU
+<Multi_key> <g> <n>                     : "ν" U03BD  # GREEK SMALL LETTER NU
+<Multi_key> <G> <O>                     : "Ο" U039F  # GREEK CAPITAL LETTER OMICRON
+<Multi_key> <g> <o>                     : "ο" U03BF  # GREEK SMALL LETTER OMICRON
+<Multi_key> <G> <P>                     : "Π" U03A0  # GREEK CAPITAL LETTER PI
+<Multi_key> <g> <p>                     : "π" U03C0  # GREEK SMALL LETTER PI
+<Multi_key> <G> <Q>                     : "Χ" U03A7  # GREEK CAPITAL LETTER CHI
+<Multi_key> <g> <q>                     : "χ" U03C7  # GREEK SMALL LETTER CHI
+<Multi_key> <G> <R>                     : "Ρ" U03A1  # GREEK CAPITAL LETTER RHO
+<Multi_key> <g> <r>                     : "ρ" U03C1  # GREEK SMALL LETTER RHO
+<Multi_key> <G> <S>                     : "Σ" U03A3  # GREEK CAPITAL LETTER SIGMA
+<Multi_key> <g> <s>                     : "σ" U03C3  # GREEK SMALL LETTER SIGMA
+<Multi_key> <G> <T>                     : "Τ" U03A4  # GREEK CAPITAL LETTER TAU
+<Multi_key> <g> <t>                     : "τ" U03C4  # GREEK SMALL LETTER TAU
+<Multi_key> <G> <U>                     : "Υ" U03A5  # GREEK CAPITAL LETTER UPSILON
+<Multi_key> <g> <u>                     : "υ" U03C5  # GREEK SMALL LETTER UPSILON
+<Multi_key> <G> <W>                     : "Ω" U03A9  # GREEK CAPITAL LETTER OMEGA
+<Multi_key> <g> <w>                     : "ω" U03C9  # GREEK SMALL LETTER OMEGA
+<Multi_key> <G> <X>                     : "Ξ" U039E  # GREEK CAPITAL LETTER XI
+<Multi_key> <g> <x>                     : "ξ" U03BE  # GREEK SMALL LETTER XI
+<Multi_key> <G> <Y>                     : "Ψ" U03A8  # GREEK CAPITAL LETTER PSI
+<Multi_key> <g> <y>                     : "ψ" U03C8  # GREEK SMALL LETTER PSI
+<Multi_key> <G> <Z>                     : "Ζ" U0396  # GREEK CAPITAL LETTER ZETA
+<Multi_key> <g> <z>                     : "ζ" U03B6  # GREEK SMALL LETTER ZETA
+
+
+# Footnotes  {{{1
+
+# † — from dotXcompose (<https://github.com/kragen/xcompose>)
+# * — from libX11 (<https://github.com/freedesktop/xorg-libX11/blob/master/nls/en_US.UTF-8/Compose.pre>)
+#     (included for compatibility or reference)
+# ⁰ — string version intentionally omitted to prevent copy/paste mangling
+
+
+# vim: set fdm=marker:  {{{1

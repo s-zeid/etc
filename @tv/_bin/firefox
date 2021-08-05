@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+
+export GDK_SCALE=${GDK_SCALE:-2}
+
+exec "$("$(dirname -- "$0")/../../_bin/which-after" "$0")" \
+ "$@"

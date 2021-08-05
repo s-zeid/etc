@@ -1,0 +1,33 @@
+if [ -r ~/.profile ]; then . ~/.profile; fi
+
+xsetroot -solid black
+xset s off
+xset s noblank
+xset -dpms
+
+pulseaudio --start --high-priority=yes --realtime=yes &
+ssh-agent &
+
+unclutter -root &
+if which openbsd-cwm >/dev/null 2>&1; then
+ openbsd-cwm >/dev/null 2>&1 &
+elif which cwm >/dev/null 2>&1; then
+ cwm >/dev/null 2>&1 &
+fi
+if which picom >/dev/null 2>&1; then
+ picom >/dev/null 2>&1 &
+elif which compton >/dev/null 2>&1; then
+ compton >/dev/null 2>&1 &
+fi
+
+vetro -d &
+mpd &
+
+sleep 5
+
+ora &
+
+idle-loop
+
+
+# vim: set ft=sh:

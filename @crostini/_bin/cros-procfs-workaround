@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# <https://gist.github.com/01e327e485cadee4c7c50ba191ae9e9f>
+
+# Workaround for <https://bugs.chromium.org/p/chromium/issues/detail?id=1087937>
+
+# Adapted from /u/ken_duda's comment:
+# * <https://old.reddit.com/r/Crostini/comments/gsxx7o/userpid_namespaces_broken_in_crostini_83/fsqn1wj/>
+# * <https://bugs.chromium.org/p/chromium/issues/detail?id=1087937#c6>
+
+
+main() {
+ for name in cpuinfo diskstats meminfo stat uptime; do
+  if fgrep -q -e "/proc/$name" /proc/mounts; then
+   echo_run sudo umount "/proc/$name"
+  fi
+ done
+ 
+ return 0
+}
+
+
+echo_run() {
+ echo + "$@" >&2
+ command "$@"
+}
+
+
+main "$@"

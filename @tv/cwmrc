@@ -1,0 +1,23 @@
+borderwidth 0
+unbind-key all
+unbind-mouse all
+
+bind-key F6 "vetro-toggle-tv"
+
+bind-key XF86AudioRaiseVolume "pactl set-sink-volume @DEFAULT_SINK@ +4%"
+bind-key XF86AudioLowerVolume "pactl set-sink-volume @DEFAULT_SINK@ -4%"
+bind-key XF86AudioPlay "mpc toggle"
+bind-key XF86AudioPrev "mpc cdprev"
+bind-key XF86AudioNext "mpc next"
+
+#bind-key XF86Tools "..."
+bind-key XF86AudioMute "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bind-key XF86AudioForward "mpc seek +5"
+bind-key XF86AudioRewind "mpc seek -5"
+
+#bind-key XF86Sleep "..."
+#bind-key XF86HomePage "..."
+#bind-key Menu "..."
+
+
+# vim: set ft=sh:

@@ -1,0 +1,725 @@
+#!/usr/bin/env cmdtree
+# vim: set fdm=marker ft=sh:
+
+# Get cmdtree  #{{{1
+#/*
+set -ex; bin="$HOME/bin"
+(which sudo >/dev/null 2>&1) && sudo apk update || su -c 'apk update && apk add sudo'
+which git >/dev/null 2>&1 || (sudo apk add git)
+[ -d "$bin" ] || git clone 'https://gitlab.com/scottywz/bin.git' "$bin"
+exec "$bin/cmdtree" "$0" "$@"
+#*/
+
+
+# Dependencies for setup  #{{{1
+
+$ if ! which sudo >/dev/null 2>&1; then
+$  su -c 'apk update && apk add sudo'
+$ fi
+
+
+# Constants  #{{{1
+
+$ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
+   | head -n 1 | sed -e "s/^[^=]*=//g; s/[\"']//g")
+
+#%if grep -q -e '/edge/' /etc/apk/repositories
+#% define EDGE
+#%fi
+
+#%if grep -q -e 'postmarketos' /etc/apk/repositories
+#% define PMOS
+#% define GUI
+#%fi
+
+#%if grep -q -e '/edge/' /etc/apk/repositories && grep -q -e 'postmarketos' /etc/apk/repositories
+#% define PMOS_EDGE
+#%fi
+
+#%if grep -q -e 'Raspberry Pi' /proc/device-tree/model 2>/dev/null
+#% define RPI
+#% define GUI
+#%fi
+
+#%if grep -q -e 'Pine64 PinePhone' /proc/device-tree/model 2>/dev/null
+#% define PINEPHONE
+#% define GUI
+#%fi
+
+
+# Sources  #{{{1
+
+# sgerrand (for alpine-pkg-glibc)  #{{{2
+
+#%if [ x"$ARCH" = x"x86_64" ]
+$ if ! [ -f '/etc/apk/keys/sgerrand.rsa.pub' ]; then
+$  wget -nv 'https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub' -O-
+   | sudo tee '/etc/apk/keys/sgerrand.rsa.pub' >/dev/null
+$ fi
+#%fi
+
+
+$ sudo apk update  #{{{1
+
+
+# Upgrade and install packages  #{{{1
+
+$ sudo sh -c 'set -ex; apk upgrade && apk add "$@"' --
+
+# All environments  #{{{2
+
+# Base
+apk-tools-doc
+fuse,-
+ doc
+#%if [ x"$ARCH" != x"x86_64" ]
+gcompat  # TODO: does not work with AppImages?
+#%fi
+man-db,-
+ doc
+openrc,-
+ doc
+openssh,-
+ doc
+shadow,-
+ doc
+sudo,-
+ doc
+tzdata,-
+ doc
+
+# Command line utils
+acl,-
+ doc
+attr,-
+ doc
+bc,-
+ doc
+dateutils,-
+ doc
+expect,-
+ doc
+file,-
+ doc
+git,-
+ doc
+jq,-
+ doc
+lsof,-
+ doc
+lzip,-
+ doc
+ncdu,-
+ doc
+openssl,-
+ doc
+pv,-
+ doc
+py3-fonttools,-
+ doc
+#rename,-
+# doc
+rsync,-
+ doc
+sl
+sqlite,-
+ doc
+units,-
+ doc
+#%if %EDGE
+util-linux-misc,-
+#%else
+util-linux,-
+#%endif
+ doc
+uuidgen,-
+# doc
+vim,-
+ doc
+ help
+zsh,-
+ doc
+
+# Filesystems
+btrfs-progs,-
+ doc
+cdrkit,-
+ doc
+dosfstools,-
+ doc
+e2fsprogs,-
+ extra
+ doc
+fuse-exfat,-
+ doc
+ utils
+ntfs-3g,-
+ doc
+ progs
+squashfs-tools
+
+# Archival/compression
+dmg2img
+lzip,-
+ doc
+p7zip,-
+ doc
+#unshield,-
+# doc
+unzip,-
+ doc
+zip,-
+ doc
+zstd,-
+ doc
+
+# Containers
+buildah,-
+ doc
+debootstrap,-
+ doc
+runc,-
+ doc
+skopeo,-
+ doc
+#%if %EDGE
+#TODO: only in edge right now
+proot,-
+ doc
+singularity,-
+ doc
+#%endif
+
+# QEMU
+qemu,-
+ aarch64
+ arm
+ i386
+ x86_64
+ system-,
+  aarch64
+  arm
+  i386
+  m68k
+  ppc
+  ppc64
+  riscv32
+  riscv64
+  x86_64
+ ui-,
+  curses
+  gtk
+  sdl
+  spice-app
+  spice-core
+ doc
+ img
+
+# Android tools
+android-tools
+
+# Miscellaneous
+man-pages  # non-free in part:  POSIX man pages (section 1p) limit modifications; see:
+           # * <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=234205#15>
+           # * <http://lists.debian.org/debian-legal/2004/06/msg00173.html>
+           #     * <https://lists.debian.org/debian-legal/2004/06/msg00176.html>
+           #     * <https://lists.debian.org/debian-legal/2004/06/msg00182.html>
+
+# Development
+alpine-sdk
+autoconf
+automake
+binutils,-
+ doc
+intltool
+libtool
+pkgconf
+
+# Languages
+dash,-
+ doc
+python2
+py2-,
+ setuptools
+python3,-
+ dev
+ doc
+py3-,
+ dateutil
+ lz4
+ mypy
+ pillow
+ pip
+ setproctitle
+ toml
+ tz
+ yaml
+nodejs
+npm
+rust  # TODO: use rustup
+cargo,-
+ doc
+
+# Media
+fbida-exiftran
+exiv2,-
+ doc
+ffmpeg,-
+ doc
+imagemagick,-
+ doc
+jpegoptim,-
+ doc
+optipng,-
+ doc
+
+# Networking
+bind-tools
+dnsmasq,-
+ doc
+libmbim,-
+ doc
+ tools
+libqmi,-
+ doc
+modemmanager,-
+ doc
+ openrc
+nmap-ncat
+networkmanager,-
+ doc
+ openrc
+nftables,-
+ doc
+ openrc
+socat,-
+ doc
+whois,-
+ doc
+wpa_supplicant,-
+ doc
+ openrc
+zerotier-one,-  # non-free but source available (BUSL-1.1; change license: Apache-2.0)
+ doc
+ openrc
+
+# Libraries
+readline-dev  # for renameutils
+
+
+# GUI environments  #{{{2
+#%if %GUI
+
+# Libraries
+libarchive-dev  # for mpv
+
+# Language libraries
+python3-,
+ tkinter
+py3-
+ xlib
+
+# Media
+mpv,-
+ doc
+
+# X.org utilities
+scrot,-
+ doc
+xdotool,-
+ doc
+xterm,-
+ doc
+# x11-server-utils
+xgamma,-
+ doc
+xmodmap,-
+ doc
+xrandr,-
+ doc
+xrdb,-
+ doc
+xset,-
+ doc
+xsetroot,-
+ doc
+# x11-xkb-utils
+setxkbmap,-
+ doc
+# x11-utils
+xdpyinfo,-
+ doc
+xev,-
+ doc
+xkill,-
+ doc
+xprop,-
+ doc
+xwininfo,-
+ doc
+
+#%endif
+
+
+# Raspberry Pi  #{{{2
+#%if %RPI
+
+# Drivers
+mesa-dri-gallium
+
+# Networking
+bluez-,
+ doc
+hostapd,-
+ doc
+
+# X.org base
+xorg-server,-
+ doc
+lightdm,-
+ doc
+ openrc
+unclutter-xfixes,-
+ doc
+dbus-x11
+cwm,-
+ doc
+picom,-
+ doc
+
+# Media
+pulseaudio,-
+ doc
+ equalizer  # <https://github.com/pulseaudio-equalizer-ladspa/equalizer> is not in Alpine
+ utils
+ zeroconf
+
+# GUI apps
+epiphany,-
+ doc
+omxplayer,-
+ doc
+
+#%endif
+
+
+# Mobile  #{{{2
+#%if %PMOS
+
+postmarketos-anbox
+
+# GUI apps
+epiphany,-
+ doc
+evince
+gnome-
+ usage
+ weather
+lollypop
+seahorse
+
+#%endif
+
+#%if %PMOS_EDGE
+geary
+numberstation
+#%endif
+
+#%if %PINEPHONE
+powersupply
+#%endif
+
+
+# Manual packages  #{{{1
+
+$ LOCAL_FONTS=/usr/share/fonts/local
+
+# sgerrand/alpine-pkg-glibc  #{{{2
+#%if [ x"$ARCH" = x"x86_64" ]
+$ curl -L "$(gh-release-url sgerrand/alpine-pkg-glibc latest '.apk')"
+  -o /dev/shm/glibc.apk
+$ sudo apk add /dev/shm/glibc.apk
+$ rm -f /dev/shm/glibc.apk
+#%fi
+
+
+# pyftfeatfreeze  #{{{2
+$ sudo pip3 install -U opentype-feature-freezer
+
+
+# sl man page  #{{{2
+$ sl_version=5.02
+$ curl -L "https://github.com/mtoyoda/sl/raw/$sl_version/sl.1"
+  | sudo tee /usr/share/man/man1/sl.1 >/dev/null
+
+
+# renameutils  #{{{2
+$ renameutils_src=renameutils-0.12.0
+$ if ! [ -e "/usr/local/src/$renameutils_src/_installed" ]; then
+$  sudo mkdir -p /usr/local/src && cd /usr/local/src
+$  curl -o "/dev/shm/$renameutils_src.tar.gz"
+   -L "https://download.savannah.gnu.org/releases/renameutils/$renameutils_src.tar.gz" &&
+   [ x"$(sha256sum "/dev/shm/$renameutils_src.tar.gz" | sed -e 's/[^0-9a-fA-F].*$//g')"
+   = x"cbd2f002027ccf5a923135c3f529c6d17fabbca7d85506a394ca37694a9eb4a3" ]
+$  sudo tar -xzf "/dev/shm/$renameutils_src.tar.gz" && rm -f "/dev/shm/$renameutils_src.tar.gz"
+$  cd "$renameutils_src"
+$  sudo sed -i -e 's/(\$bindir)/$(bindir)/g' src/Makefile.in
+$  sudo ./configure
+$  sudo make
+$  sudo make install
+$  sudo touch _installed
+$  cd -
+$ fi
+
+
+# Inter fonts  #{{{2
+#%if %GUI
+$ sudo mkdir -p "$LOCAL_FONTS/inter" && cd "$LOCAL_FONTS/inter"
+$ sudo tee Makefile >/dev/null <<'EOF'
+$$ MAKEFILE := $(lastword ${MAKEFILE_LIST})
+$$ 
+$$ all:
+$$ 	@set -ex && trap 'rm -rf /dev/shm/inter.zip ./new' EXIT INT QUIT TERM && \
+$$ 	 curl -L "$$(make -s -f "${MAKEFILE}" url)" -o /dev/shm/inter.zip && \
+$$ 	 rm -rf new && mkdir new && \
+$$ 	 unzip -d new /dev/shm/inter.zip && find new/"Inter Hinted"*/Desktop -type f \
+$$ 	  -exec sh -c 'mv "$$1" "$$1".disabled' -- {} \; && \
+$$ 	 rm -rf ./'Inter '* ./*.txt && mv new/* .
+$$ 
+$$ url:
+$$ 	@set -ex && repo=rsms/inter; tag=latest; contains='.zip' && \
+$$ 	curl -f "https://api.github.com/repos/$$repo/releases/$$tag" \
+$$ 	 | jq -r --arg contains "$$contains" \
+$$ 	    '.assets[].browser_download_url | select(. | contains($$contains))' \
+$$ 	 | head -n 1
+$$ 
+EOF
+$ sudo make
+$ cd -
+$ 
+$ sudo mkdir -p "$LOCAL_FONTS/inter-custom" && cd "$LOCAL_FONTS/inter-custom"
+$ sudo tee Makefile >/dev/null <<'EOF'
+$$ src := ../inter/Inter Desktop
+$$ 
+$$ all:
+$$ 	@set -ex && trap 'rm -rf ./new' EXIT INT QUIT TERM && \
+$$ 	 rm -rf new && mkdir new && \
+$$  	 (for i in $$(cd "${src}" && ls *.otf); do \
+$$ 	  pyftfeatfreeze \
+$$  	   -f 'cpsp,tnum,ss01,ss04' \
+$$  	   -S -U 'Custom' \
+$$  	   "${src}/$$i" "new/$$(printf '%s\n' "$$i" | sed -e 's/Inter/InterCustom/g')" \
+$$  	   || exit; \
+$$  	 done) && \
+$$ 	 rm -f ./*.otf && mv new/* .
+$$ 
+EOF
+$ sudo make
+$ cd -
+#%endif
+
+
+# TwemojiMozilla.ttf  #{{{2
+#%if %GUI
+$ sudo mkdir -p "$LOCAL_FONTS"
+$ curl -L "$(gh-release-url 'mozilla/twemoji-colr' latest '.ttf')"
+  | sudo tee "$LOCAL_FONTS/TwemojiMozilla.ttf" >/dev/null
+#%endif
+
+
+# Ubuntu fonts  # non-free (DFSG section 4; see <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=603157#30>)  #{{{2
+#%if %GUI
+$ ubuntu_fonts_zip=0cef8205-ubuntu-font-family-0.83.zip
+$ sudo mkdir -p "$LOCAL_FONTS/ubuntu" && cd "$LOCAL_FONTS/ubuntu"
+$ curl -L "https://assets.ubuntu.com/v1/$ubuntu_fonts_zip"
+  -o "/dev/shm/$ubuntu_fonts_zip"
+$ unzip -j "/dev/shm/$ubuntu_fonts_zip" -x '__MACOSX/*' && rm -f "/dev/shm/$ubuntu_fonts_zip"
+$ cd -
+#%endif
+
+
+# Enable and start services  #{{{1
+
+$ sudo sh -c 'for i; do (rc-update add "$i" || exit; rc-service -S "$i" start || true); done' --
+
+#%if !%PMOS
+# already enabled
+nftables
+networkmanager
+modemmanager
+wpa_supplicant
+#%endif
+
+zerotier-one
+
+#%if %RPI
+lightdm
+#%endif
+
+#%if %PMOS
+anbox-container-manager
+#%endif
+
+
+# Configuration  #{{{1
+
+# fontconfig - Exclude files ending in `.disabled`  #{{{2
+#%if %GUI
+$ sudo mkdir -p '/etc/fonts/conf.d'
+$ sudo tee '/etc/fonts/conf.d/9970-exclude-disabled.conf' >/dev/null <<'EOF'
+$$ <?xml version="1.0"?>
+$$ <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+$$ <fontconfig>
+$$  <description>Exclude files ending in `.disabled`</description>
+$$  <selectfont>
+$$   <rejectfont>
+$$    <glob>*.disabled</glob>
+$$   </rejectfont>
+$$  </selectfont>
+$$ </fontconfig>
+$$ 
+EOF
+#%endif
+
+
+# fontconfig - Fix Ubuntu Light #{{{2
+#%if %GUI
+$ sudo mkdir -p '/etc/fonts/conf.d'
+$ sudo tee '/etc/fonts/conf.d/9980-ubuntu-light.conf' >/dev/null <<'EOF'
+$$ <?xml version="1.0"?>
+$$ <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+$$ <fontconfig>
+$$  <description>Allow Ubuntu Light to be selected as its own font family</description>
+$$  <match target="pattern">
+$$   <test name="family">
+$$    <string>Ubuntu Light</string>
+$$   </test>
+$$   <edit name="family" binding="same">
+$$    <string>Ubuntu</string>
+$$   </edit>
+$$   <edit name="weight" binding="same">
+$$    <const>light</const>
+$$   </edit>
+$$  </match>
+$$  <match target="pattern">
+$$   <test name="family">
+$$    <string>Ubuntu Light Italic</string>
+$$   </test>
+$$   <edit name="family" binding="same">
+$$    <string>Ubuntu</string>
+$$   </edit>
+$$   <edit name="weight" binding="same">
+$$    <const>light</const>
+$$   </edit>
+$$   <edit name="slant" binding="same">
+$$    <const>italic</const>
+$$   </edit>
+$$  </match>
+$$ </fontconfig>
+$$ 
+EOF
+#%endif
+
+
+# pulseaudio - Raspberry Pi configuration  #{{{2
+#%if %RPI
+$ if [ -f /etc/pulse/default.pa ]; then
+$  sudo sed -i -e \
+$   '/^load-module module-udev-detect\( .*\)\?$/ { s/\stsched=[^ ]*//g;s/$/ tsched=0/g }' \
+$   /etc/pulse/default.pa
+$ fi
+#%endif
+
+
+# vim - minimal color scheme adjustments for root  #{{{2
+$ sudo tee '/root/.vimrc' >/dev/null <<'EOF'
+$$ syntax on
+$$ hi FoldColumn  cterm=NONE ctermbg=NONE guibg=NONE guifg=fg
+$$ hi Folded      ctermfg=Blue ctermbg=242 guifg=#aaaaff guibg=#6c6c6c
+$$ hi LineNr      ctermfg=130 guifg=#c0795f
+$$ hi Visual      ctermbg=242 guibg=#6c6c6c
+$$ 
+$$ runtime /root/.vimrc.local
+$$ 
+EOF
+
+
+# Extra addresses script  #{{{1
+
+$ if [ -d "/etc/NetworkManager" ]; then
+$  sudo mkdir -p "/etc/NetworkManager/dispatcher.d/up.d"
+$  sudo tee "/etc/NetworkManager/dispatcher.d/up.d/addresses" >/dev/null <<'EOF'
+$$ #!/bin/sh
+$$ export IFACE="$1"
+$$ exec /etc/network/if-up.d/addresses
+$$
+EOF
+$  sudo chmod +x "/etc/NetworkManager/dispatcher.d/up.d/addresses"
+$ fi
+
+$ sudo mkdir -p "/etc/network/if-up.d"
+$ sudo tee "/etc/network/if-up.d/addresses" >/dev/null <<'EOF'
+$$ #!/bin/sh
+$$ 
+$$ ADDRESSES='
+$$  eth0=2001:db8::2 eth0=2001:db8:2::1
+$$  eth0=192.0.2.2 eth0=198.51.100.2 eth0=203.0.113.2 eth0=233.252.0.2
+$$ '
+$$ 
+$$ ################################################################################
+$$ 
+$$ set -e
+$$ 
+$$ EXAMPLE_PREFIXES=''
+$$ EXAMPLE_PREFIXES="$EXAMPLE_PREFIXES"'^2001:0\?[dD][bB]8:'
+$$ EXAMPLE_PREFIXES="$EXAMPLE_PREFIXES"'\|192\.0\?0\?0\.0\?0\?2\.'
+$$ EXAMPLE_PREFIXES="$EXAMPLE_PREFIXES"'\|198\.0\?51\.100\.'
+$$ EXAMPLE_PREFIXES="$EXAMPLE_PREFIXES"'\|203\.0\?0\?0\.113\.'
+$$ EXAMPLE_PREFIXES="$EXAMPLE_PREFIXES"'\|233\.252\.0\?0\?0\.'
+$$ 
+$$ for spec in $ADDRESSES; do
+$$  if (printf '%s\n' "$spec" | grep -q -e '='); then
+$$   interface=${spec%%=*}
+$$   address=${spec#*=}
+$$   if [ x"$IFACE" = x"$interface" ]; then
+$$    if ! (printf '%s\n' "$address" | grep -q -e "$EXAMPLE_PREFIXES"); then
+$$     /sbin/ip addr add dev "$interface" "$address" || true
+$$    fi
+$$   fi
+$$  fi
+$$ done
+$$ 
+$$ exit 0
+$$
+EOF
+$ sudo chmod +x "/etc/network/if-up.d/addresses"
+
+
+$ sudo python2 -m easy_install -U  #{{{1
+
+'mutagen<1.44.0'
+'PyYAML<5.5.0'  # <https://github.com/yaml/pyyaml/issues/476>
+
+
+$ pip3 install --user -U  #{{{1
+
+astral
+awscli
+ntplib
+
+
+# Install user config files  #{{{1
+
+$ [ -d ~/etc ] && true || git clone https://gitlab.com/scottywz/etc.git ~/etc
+$ (cd ~/etc && make install)
+
+
+# Set default shell  #{{{1
+
+$ old_shell=$(cut -d: -f3,7 /etc/passwd | grep -e "^$(id -u):" | cut -d: -f2)
+$ new_shell=/bin/zsh
+$ if ! awk -v string="$old_shell" -v ends_with="$new_shell" \
+$  'BEGIN { exit index(string, ends_with) != (length(string) - length(ends_with) + 1) }'
+$ then
+$  chsh -s "$new_shell"
+$ fi

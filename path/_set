@@ -1,0 +1,34 @@
+# add sane defaults
+PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin"
+
+
+# load path files
+if [ -d "$HOME/.path" ]; then
+ for __i in \
+  $(cd "$HOME/.path"; find . -type f -name '*.sh' | sort)
+ do
+  . "$HOME/.path/$__i"
+ done
+fi
+
+
+# deduplicate and export
+__path_lines=
+__orig_ifs=$IFS; IFS=:
+for __i in $(printf '%s' "$PATH"); do
+ if ! printf '%s\n' "$__path_lines" | grep -q -F -x -e "$__i"; then
+  __path_lines="$__path_lines
+$__i"
+ fi
+done
+
+export PATH="$(printf '%s' "$__path_lines" | tr '\n' ':' \
+               | sed -e 's/^://g; s/:$//g; s/::*/:/g')"
+
+
+# cleanup
+IFS=$__orig_ifs
+unset __i __orig_ifs __path_lines
+
+
+# vim: set ft=sh:

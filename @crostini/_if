@@ -1,0 +1,2 @@
+#!/bin/sh
+test -e /dev/.cros_milestone
