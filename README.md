@@ -79,3 +79,6 @@ If multiple roles contain the same file, then the last matching role will be
 used.  Matching role directories, relative to the repository root, will be
 sorted with `sort`, which will result in the deepest matching sub-role, if any,
 being matched.
+
+To get a list of all matching role directories, one per line and relative to
+the repository root, run `make find-role-dirs` from the repository root.

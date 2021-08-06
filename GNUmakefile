@@ -15,10 +15,11 @@ help:
 	@printf '%s\n' \
 	"Usage: $(notdir ${MAKE}) {TARGET}" \
 	"Targets:" \
-	"  install       Installs symlinks to the configuration files/directories" \
-	"                to \$$HOME" \
-	"  dry-run, dry  Lists which commands would be run by \`install\`" \
-	"  list, ls      Lists which symlinks would be installed to an empty \$$HOME" \
+	"  install         Installs symlinks to the configuration files/directories" \
+	"                  to \$$HOME" \
+	"  dry-run, dry    Lists which commands would be run by \`install\`" \
+	"  list, ls        Lists which symlinks would be installed to an empty \$$HOME" \
+	"  find-role-dirs  Lists all matching role directories relative to this Makefile" \
 	;
 
 
@@ -56,6 +57,88 @@ list:
 
 .PHONY: ls  # {{{1
 ls: list
+
+
+.PHONY: find-role-dirs  # {{{1
+find-role-dirs: absolute := 0
+find-role-dirs: suffix := 
+find-role-dirs: _ancestors := 
+find-role-dirs:
+	@set -e
+	NEWLINE='
+	'
+	
+	root=$(if $(filter-out 0,${absolute}),$$(cd "$$(dirname -- "${_MAKEFILE}")" && pwd)/,)
+	role_dirs=
+	for i in @*; do
+	 if [ -d "$$i" ]; then
+	  _role_name=$$(printf '%s\n' "$$(basename -- "$$i")" | sed -e '1,1s/^@//')
+	  if [ -x "$$i/_if" ]; then
+	   _test_cmd=
+	  elif [ -f "$$i/_if" ]; then
+	   _test_cmd=sh
+	  else
+	   _test_cmd=true
+	  fi
+	  if env \
+	   ETC_ROLE_DIR="$(if ${_ancestors},${_ancestors}/,)$$i" \
+	   ETC_ROLE_NAME="$$_role_name" \
+	   $$_test_cmd "./$$i/_if" 1>&2
+	  then
+	   role_dirs="$$role_dirs$$NEWLINE$$root$(if ${_ancestors},${_ancestors}/,)$$i$(if ${suffix},/${suffix},)"
+	   role_dirs="$$role_dirs$$NEWLINE$$(make -s -f "${_MAKEFILE}" \
+	    -C "$$(pwd)/$$i" find-role-dirs _ancestors="$$i")"
+	  fi
+	 fi
+	done
+	
+	role_dirs=$$(printf '%s\n' "$$role_dirs" | sed -e '/^$$/d' | sort)
+	printf '%s\n' "$$role_dirs"
+
+
+.PHONY: _find_targets  #{{{1
+_find_targets: _dirs := $(patsubst ./*,*,$(addsuffix /*,${_include_dirs}))
+_find_targets: _do_roles := 1
+_find_targets: _role_dir := 
+_find_targets:
+	@set -e
+	NEWLINE='
+	'
+	
+	all_reversed=
+	for i in ${_dirs}; do
+	 if ! printf '%s\n' "$$(basename "$$i")" | egrep -q -e ${_exclude_ere}; then
+	  if [ -e "$$i" ]; then
+	   all_reversed="$(if ${_role_dir},${_role_dir}/,)$$i$$NEWLINE$$all_reversed"
+	  fi
+	 fi
+	done
+	if [ ${_do_roles} -ne 0 ]; then
+	 for role_dir in $$(make -s -f "${_MAKEFILE}" find-role-dirs); do
+	  role_targets="$$(make -s -f "${_MAKEFILE}" \
+	   -C "$$(cd "$$(dirname -- "${_MAKEFILE}")" && pwd)/$$role_dir" \
+	   _find_targets \
+	    _do_roles=0 \
+	    _role_dir="$$role_dir")"
+	  all_reversed="$$role_targets$$NEWLINE$$all_reversed"
+	 done
+	fi
+	all_reversed=$$(printf '%s\n' "$$all_reversed" | sed -e '/^$$/d')
+	
+	targets=
+	seen_base_targets=
+	old_ifs=$$IFS
+	IFS=$$NEWLINE
+	for target in $$all_reversed; do
+	 base_target=$$(printf '%s\n' "$$target" | sed -e '1,1s|^\(@[^/]*/\)\+||')
+	 if ! printf '%s\n' "$$seen_base_targets" | fgrep -q -x -e "$$base_target"; then
+	  seen_base_targets="$$seen_base_targets$$NEWLINE$$base_target"
+	  targets="$$target$$NEWLINE$$targets"
+	 fi
+	done
+	IFS=$$old_ifs
+	targets=$$(printf '%s\n' "$$targets" | sed -e '/^$$/d')
+	printf '%s\n' "$$targets"
 
 
 .PHONY: _install_link  # {{{1
@@ -105,88 +188,6 @@ _install_link:
 	  true
 	 fi
 	fi
-
-
-.PHONY: _find_role_dirs  # {{{1
-_find_role_dirs: absolute := 0
-_find_role_dirs: suffix := 
-_find_role_dirs: _ancestors := 
-_find_role_dirs:
-	@set -e
-	NEWLINE='
-	'
-	
-	root=$(if $(filter-out 0,${absolute}),$$(cd "$$(dirname -- "${_MAKEFILE}")" && pwd)/,)
-	role_dirs=
-	for i in @*; do
-	 if [ -d "$$i" ]; then
-	  _role_name=$$(printf '%s\n' "$$(basename -- "$$i")" | sed -e '1,1s/^@//')
-	  if [ -x "$$i/_if" ]; then
-	   _test_cmd=
-	  elif [ -f "$$i/_if" ]; then
-	   _test_cmd=sh
-	  else
-	   _test_cmd=true
-	  fi
-	  if env \
-	   ETC_ROLE_DIR="$(if ${_ancestors},${_ancestors}/,)$$i" \
-	   ETC_ROLE_NAME="$$_role_name" \
-	   $$_test_cmd "./$$i/_if" 1>&2
-	  then
-	   role_dirs="$$role_dirs$$NEWLINE$$root$(if ${_ancestors},${_ancestors}/,)$$i$(if ${suffix},/${suffix},)"
-	   role_dirs="$$role_dirs$$NEWLINE$$(make -s -f "${_MAKEFILE}" \
-	    -C "$$(pwd)/$$i" _find_role_dirs _ancestors="$$i")"
-	  fi
-	 fi
-	done
-	
-	role_dirs=$$(printf '%s\n' "$$role_dirs" | sed -e '/^$$/d' | sort)
-	printf '%s\n' "$$role_dirs"
-
-
-.PHONY: _find_targets  #{{{1
-_find_targets: _dirs := $(patsubst ./*,*,$(addsuffix /*,${_include_dirs}))
-_find_targets: _do_roles := 1
-_find_targets: _role_dir := 
-_find_targets:
-	@set -e
-	NEWLINE='
-	'
-	
-	all_reversed=
-	for i in ${_dirs}; do
-	 if ! printf '%s\n' "$$(basename "$$i")" | egrep -q -e ${_exclude_ere}; then
-	  if [ -e "$$i" ]; then
-	   all_reversed="$(if ${_role_dir},${_role_dir}/,)$$i$$NEWLINE$$all_reversed"
-	  fi
-	 fi
-	done
-	if [ ${_do_roles} -ne 0 ]; then
-	 for role_dir in $$(make -s -f "${_MAKEFILE}" _find_role_dirs); do
-	  role_targets="$$(make -s -f "${_MAKEFILE}" \
-	   -C "$$(cd "$$(dirname -- "${_MAKEFILE}")" && pwd)/$$role_dir" \
-	   _find_targets \
-	    _do_roles=0 \
-	    _role_dir="$$role_dir")"
-	  all_reversed="$$role_targets$$NEWLINE$$all_reversed"
-	 done
-	fi
-	all_reversed=$$(printf '%s\n' "$$all_reversed" | sed -e '/^$$/d')
-	
-	targets=
-	seen_base_targets=
-	old_ifs=$$IFS
-	IFS=$$NEWLINE
-	for target in $$all_reversed; do
-	 base_target=$$(printf '%s\n' "$$target" | sed -e '1,1s|^\(@[^/]*/\)\+||')
-	 if ! printf '%s\n' "$$seen_base_targets" | fgrep -q -x -e "$$base_target"; then
-	  seen_base_targets="$$seen_base_targets$$NEWLINE$$base_target"
-	  targets="$$target$$NEWLINE$$targets"
-	 fi
-	done
-	IFS=$$old_ifs
-	targets=$$(printf '%s\n' "$$targets" | sed -e '/^$$/d')
-	printf '%s\n' "$$targets"
 
 
 .PHONY: _starts_with  #{{{1

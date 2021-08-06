@@ -3,7 +3,7 @@ if [ -z "$PATH" ]; then
 fi
 
 __etc="$(cd "$(dirname -- "$(readlink "${ZDOTDIR:-$HOME}/.zshrc")")" && pwd)"
-__role_dirs=$({ cd "$__etc" && make _find_role_dirs absolute=1 suffix=_zsh; } 2>/dev/null)
+__role_dirs=$({ cd "$__etc" && make find-role-dirs absolute=1 suffix=_zsh; } 2>/dev/null)
 for __dir in "$HOME/.zsh" $__role_dirs; do
  if [ -d "$__dir" ]; then
   for __script in \
