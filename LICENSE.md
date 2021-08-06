@@ -11,7 +11,7 @@
 
 ## X11 License
 
-Copyright (c) 2021- S. Zeid.  
+Copyright (c) 2021- S. Zeid.  
 <https://code.s.zeid.me/etc>
 
 ```
