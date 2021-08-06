@@ -67,7 +67,7 @@ if they were in the repository root, after the files in the root directory.
 If the `_if` file is missing or not a regular file (or a symlink to one), then
 the role will unconditionally be installed.
 
-The following environment variable is available to `_if`:
+The following environment variables are available to `_if`:
 
 * `ETC_ROLE_DIR` - the path to the role directory, relative to the repository
                    root
