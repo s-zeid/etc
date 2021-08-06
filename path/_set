@@ -3,22 +3,25 @@ PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin"
 
 
 # load path files
-if [ -d "$HOME/.path" ]; then
- for __i in \
-  $(cd "$HOME/.path"; find . -type f -name '*.sh' | sort)
- do
-  . "$HOME/.path/$__i"
- done
-fi
+__role_dirs=$({ cd "$HOME/etc" && make _find_role_dirs absolute=1 suffix=_path; } 2>/dev/null)
+for __dir in "$HOME/.path" $__role_dirs; do
+ if [ -d "$__dir" ]; then
+  for __script in \
+   $(find "$__dir/" -type f -name '*.sh' | sort)
+  do
+   . "$__script"
+  done
+ fi
+done
 
 
 # deduplicate and export
 __path_lines=
 __orig_ifs=$IFS; IFS=:
-for __i in $(printf '%s' "$PATH"); do
- if ! printf '%s\n' "$__path_lines" | grep -q -F -x -e "$__i"; then
+for __entry in $(printf '%s' "$PATH"); do
+ if ! printf '%s\n' "$__path_lines" | grep -q -F -x -e "$__entry"; then
   __path_lines="$__path_lines
-$__i"
+$__entry"
  fi
 done
 
@@ -28,7 +31,7 @@ export PATH="$(printf '%s' "$__path_lines" | tr '\n' ':' \
 
 # cleanup
 IFS=$__orig_ifs
-unset __i __orig_ifs __path_lines
+unset __role_dirs __dir __script __entry __orig_ifs __path_lines
 
 
 # vim: set ft=sh:
