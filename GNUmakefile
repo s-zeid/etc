@@ -108,12 +108,15 @@ _install_link:
 
 
 .PHONY: _find_role_dirs  # {{{1
+_find_role_dirs: absolute := 0
+_find_role_dirs: suffix := 
 _find_role_dirs: _ancestors := 
 _find_role_dirs:
 	@set -e
 	NEWLINE='
 	'
 	
+	root=$(if $(filter-out 0,${absolute}),$$(cd "$$(dirname -- "${_MAKEFILE}")" && pwd)/,)
 	role_dirs=
 	for i in @*; do
 	 if [ -d "$$i" ]; then
@@ -130,7 +133,7 @@ _find_role_dirs:
 	   ETC_ROLE_NAME="$$_role_name" \
 	   $$_test_cmd "./$$i/_if" 1>&2
 	  then
-	   role_dirs="$$role_dirs$$NEWLINE$(if ${_ancestors},${_ancestors}/,)$$i"
+	   role_dirs="$$role_dirs$$NEWLINE$$root$(if ${_ancestors},${_ancestors}/,)$$i$(if ${suffix},/${suffix},)"
 	   role_dirs="$$role_dirs$$NEWLINE$$(make -s -f "${_MAKEFILE}" \
 	    -C "$$(pwd)/$$i" _find_role_dirs _ancestors="$$i")"
 	  fi
