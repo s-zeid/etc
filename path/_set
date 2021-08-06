@@ -3,7 +3,8 @@ PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin"
 
 
 # load path files
-__role_dirs=$({ cd "$HOME/etc" && make _find_role_dirs absolute=1 suffix=_path; } 2>/dev/null)
+__etc="$(cd "$(dirname -- "$(readlink "$HOME/.path")")" && pwd)"
+__role_dirs=$({ cd "$__etc" && make _find_role_dirs absolute=1 suffix=_path; } 2>/dev/null)
 for __dir in "$HOME/.path" $__role_dirs; do
  if [ -d "$__dir" ]; then
   for __script in \
@@ -31,7 +32,7 @@ export PATH="$(printf '%s' "$__path_lines" | tr '\n' ':' \
 
 # cleanup
 IFS=$__orig_ifs
-unset __role_dirs __dir __script __entry __orig_ifs __path_lines
+unset __etc __role_dirs __dir __script __entry __orig_ifs __path_lines
 
 
 # vim: set ft=sh:
