@@ -5,6 +5,8 @@ PS1_COLOR_BASIC='DARK_MAGENTA'
 PS1_USER="${PS1_USER-%n}"
 PS1_USER="$PS1_USER${PS1_USER:+@}"
 PS1_MACHINE="${PS1_MACHINE-%m}"
+PS1_SIGIL="${PS1_SIGIL-\$(pwd=\$(pwd); ([ x\"\$pwd\" = x\"/\" ]) && true || echo /)}"
+#PS1_SIGIL='%(!.#.$)'  # like `\$` in bash
 
 
 # setup basic color variables
@@ -58,8 +60,7 @@ fi
 
 # set PS1 and RPS1
 
-#PS1="$PS1_COLOR$PS1_USER$PS1_MACHINE:%~%(!.#.$) $_COLOR_NONE"
-PS1="$PS1_COLOR$PS1_USER$PS1_MACHINE:%~\$(pwd=\$(pwd); ([ x\"\$pwd\" = x\"/\" ]) && true || echo /) %{$(printf "$_COLOR_NONE")%}"
+PS1="$PS1_COLOR$PS1_USER$PS1_MACHINE:%~$PS1_SIGIL %{$(printf "$_COLOR_NONE")%}"
 RPS1="%{ %}$RPS1_COLOR_DATE%D{%Y-%m-%d} $RPS1_COLOR_TIME%D{%H:%M:%S}%{$(printf "$_COLOR_NONE"'\x08')%}"
 setopt PROMPT_SUBST
 
@@ -68,7 +69,7 @@ setopt PROMPT_SUBST
 
 unset \
  PS1_COLOR_24bit PS1_COLOR_256 PS1_COLOR_BASIC \
- PS1_USER PS1_MACHINE \
+ PS1_USER PS1_MACHINE PS1_SIGIL \
  PS1_COLOR RPS1_COLOR_DATE RPS1_COLOR_TIME \
  _COLOR_NONE
 
