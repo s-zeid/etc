@@ -27,6 +27,10 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 #% define EDGE
 #%fi
 
+#%if grep -q -e '/edge/' /etc/apk/repositories && [ x"$ARCH" != x"aarch64" ]
+#% define EDGE_NOT_AARCH64
+#%fi
+
 #%if grep -q -e 'postmarketos' /etc/apk/repositories
 #% define PMOS
 #% define GUI
@@ -127,11 +131,13 @@ sqlite,-
 units,-
  doc
 #%if %EDGE
-util-linux-misc,-
+util-linux-,
+ misc
 #%else
 util-linux,-
 #%endif
  doc
+ openrc
 uuidgen,-
 # doc
 vim,-
@@ -186,6 +192,9 @@ skopeo,-
 #TODO: only in edge right now
 proot,-
  doc
+#%endif
+#%if %EDGE_NOT_AARCH64
+#TODO: only in edge right now, and not on aarch64
 singularity,-
  doc
 #%endif
@@ -412,7 +421,7 @@ postmarketos-anbox
 epiphany,-
  doc
 evince
-gnome-
+gnome-,
  usage
  weather
 lollypop
