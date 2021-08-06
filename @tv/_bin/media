@@ -1,0 +1,55 @@
+#!/bin/sh
+
+NAME=media
+ACCENT_COLOR='#cc0022'
+
+if [ -e "$(dirname -- "$0")/.$(basename -- "$0").local" ]; then
+ . "$(dirname -- "$0")/.$(basename -- "$0").local"
+fi
+
+
+pane_cmd() { echo "echo '\$' $@; $@; PS1='\$ ' exec bash --posix"; }
+
+
+setup_tmux() {
+ tmux bind-key -n BTab select-pane -t '*.+'
+ tmux bind-key -n C-Up select-pane -t '*.-'
+ tmux bind-key -n C-Down select-pane -t '*.+'
+ tmux bind-key -n C-S-Up select-pane -t '*.-'
+ tmux bind-key -n C-S-Down select-pane -t '*.+'
+ 
+ tmux split-window -v "$(pane_cmd fauxcon -C)"  # <https://github.com/scottywz/fauxcon>
+ tmux resize-pane -t ':.1' -y $((3 + 1 + 9))
+ 
+ tmux split-window -v "$(pane_cmd pulsemixer)"  # available in PyPI and Debian
+ tmux resize-pane -t ':.2' -y $((9))
+ 
+ tmux select-pane -t ':.0'
+ exec "${SHELL:-/bin/sh}"
+}
+
+
+main() {
+ if [ x"$1" != x"__setup_tmux" ]; then
+  parent_tmux rename-window "$NAME"
+  parent_tmux set-window-option monitor-activity off
+  export __PANE_BORDER="$(parent_tmux show-window-options -gv pane-active-border-style)"
+  exec tmux-name "$NAME" "$0" __setup_tmux
+ else
+  if [ x"$ACCENT_COLOR" != x"" ]; then
+   local pane_border="fg=$ACCENT_COLOR"
+  else
+   local pane_border="${__PANE_BORDER:-'fg=green'}"
+  fi
+  unset __PANE_BORDER
+  
+  tmux set-window-option -g pane-active-border-style "$pane_border,bg=default"
+  setup_tmux
+ fi
+}
+
+
+parent_tmux() { [ x"$TMUX" != x"" ] && command tmux "$@" || true; }
+
+
+main "$@"
