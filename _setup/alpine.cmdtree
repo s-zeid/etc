@@ -74,6 +74,7 @@ $ sudo sh -c 'set -ex; apk upgrade && apk add "$@"' --
 
 # Base
 apk-tools-doc
+busybox-doc
 fuse,-
  doc
 #%if [ x"$ARCH" != x"x86_64" ]
