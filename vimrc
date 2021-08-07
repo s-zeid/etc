@@ -145,6 +145,13 @@ augroup filetype_aliases
 augroup END
 
 
+" Treat BusyBox's `/bin/sh` as a POSIX shell  #{{{1
+
+if executable("/bin/sh") && resolve("/bin/sh") =~ '\<busybox\>'
+ let g:is_posix = 1
+endif
+
+
 " Enable HTML/CSS syntax inside ES6 tagged templates  {{{1
 " (for <https://github.com/cdata/vim-tagged-template>)
 
