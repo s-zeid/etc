@@ -5,5 +5,5 @@ set -e
 exec "$("$(dirname -- "$0")/../../_bin/which-after" "$0")" \
  --width 960 \
  --height 540 \
- --ntp="$(cat "$(dirname -- "$0")/.ora.local.ntp-server")" \
+ --ntp="$(sh "$(dirname -- "$0")/.ora.local.ntp-server")" \
  "$@"
