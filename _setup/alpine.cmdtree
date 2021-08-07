@@ -325,7 +325,7 @@ libarchive-dev  # for mpv
 # Language libraries
 python3-,
  tkinter
-py3-
+py3-,
  xlib
 
 # Media
