@@ -1,7 +1,7 @@
 export PAGER='less'
 export EDITOR='vim'
 
-export LESS="-R"
+export LESS='-R'
 
 if [ -d /dev/shm ] && [ -w /dev/shm ]; then
  TMPPREFIX=/dev/shm/zsh
