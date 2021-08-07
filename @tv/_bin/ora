@@ -2,5 +2,6 @@
 set -e
 
 exec "$("$(dirname -- "$0")/../../_bin/which-after" "$0")" \
+ --profile="wallpaper" \
  --kiosk \
  "$@"
