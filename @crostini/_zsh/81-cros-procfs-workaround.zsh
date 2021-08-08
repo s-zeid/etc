@@ -1,6 +1,6 @@
 #!/bin/sh
 
-WORKAROUND="$HOME/bin/private/cros-procfs-workaround"
+WORKAROUND="$(cd "$(dirname -- "$__script")/../_bin" && pwd)/cros-procfs-workaround"
 
 
 if [ -e /dev/.cros_milestone ]; then
@@ -14,3 +14,6 @@ if [ -e /dev/.cros_milestone ]; then
   command "$WORKAROUND"
  fi
 fi
+
+
+unset WORKAROUND
