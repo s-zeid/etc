@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SILENCE="$HOME/bin/private/silence"
+SILENCE="$(cd "$(dirname -- "$__script")/../_bin" && pwd)/silence"
 
 
 if [ -f "/usr/lib/systemd/user/cros-pulse-config.service" ]; then
@@ -12,3 +12,6 @@ fi
 if ! (pgrep -f "$SILENCE" >/dev/null 2>&1); then
  setsid "$SILENCE"
 fi
+
+
+unset SILENCE

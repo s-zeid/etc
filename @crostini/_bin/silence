@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# no exec in order to allow checking if the script is running
+
+paplay --raw /dev/zero >/dev/null 2>&1
