@@ -1,4 +1,4 @@
-etc="$(cd "$(dirname -- "$(readlink "$HOME/.path")")" && pwd)"
+etc="$(cd "$HOME" && cd "$(dirname -- "$(readlink "$HOME/.path")")" && pwd)"
 
 if [ -d "$etc/_bin" ]; then
  PATH="$etc/_bin:$PATH"

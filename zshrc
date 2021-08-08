@@ -2,7 +2,8 @@ if [ -z "$PATH" ]; then
  PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin"
 fi
 
-__etc="$(cd "$(dirname -- "$(readlink "${ZDOTDIR:-$HOME}/.zshrc")")" && pwd)"
+__home=${ZDOTDIR:-$HOME}
+__etc="$(cd "$__home" && cd "$(dirname -- "$(readlink "$__home/.zshrc")")" && pwd)"
 __role_dirs=$({ cd "$__etc" && make find-role-dirs absolute=1 suffix=_zsh; } 2>/dev/null)
 for __dir in "$HOME/.zsh" $__role_dirs; do
  if [ -d "$__dir" ]; then
@@ -14,7 +15,7 @@ for __dir in "$HOME/.zsh" $__role_dirs; do
   unset __script
  fi
 done
-unset __etc __role_dirs __dir
+unset __home __etc __role_dirs __dir
 
 
 export PATH HOSTNAME
