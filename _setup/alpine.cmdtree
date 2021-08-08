@@ -131,6 +131,8 @@ sqlite,-
  doc
 units,-
  doc
+usbutils,-
+ doc
 #%if %EDGE
 util-linux-,
  misc
@@ -419,6 +421,7 @@ omxplayer,-
 postmarketos-anbox
 
 # GUI apps
+dconf-editor
 epiphany,-
  doc
 evince
