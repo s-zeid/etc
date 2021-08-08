@@ -10,6 +10,7 @@ for __dir in "$HOME/.zsh" $__role_dirs; do
   for __script in \
    $(find "$__dir/" -type f \( -name '*.local.zsh' -o -name '*.zsh' \) | sort)
   do
+   export __script
    . "$__script"
   done
   unset __script
