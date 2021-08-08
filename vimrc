@@ -109,7 +109,7 @@ hi link jsThis jsGlobalObjects
 
 " GUI colors {{{2
 
-if exists("*execute")
+if has("gui_running") && exists("*execute")
  let colors = [ "#3f3f3f", "#9ab8d7", "#60b48a", "#8cd0d3", "#c07887", "#dc8cc3", "#dfaf8f", "#dcdcdb", "#606060", "#94bff3", "#72d5a4", "#93e0e4", "#e08c9e", "#ec93d4", "#f0dfaf", "#ffffff" ]
  
  let default_scheme = split(execute("highlight"), "\n")
