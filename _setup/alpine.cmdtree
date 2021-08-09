@@ -420,6 +420,8 @@ omxplayer,-
 # Mobile  #{{{2
 #%if %PMOS
 
+flatpak
+gnome-software-plugin-flatpak
 postmarketos-anbox
 
 # GUI apps
@@ -585,6 +587,13 @@ anbox-container-manager
 
 
 # Configuration  #{{{1
+
+# flatpak - Repositories  #{{{2
+#%if %PMOS
+$ sudo flatpak remote-add --if-not-exists
+  'flathub' 'https://flathub.org/repo/flathub.flatpakrepo'
+#%endif
+
 
 # fontconfig - Exclude files ending in `.disabled`  #{{{2
 #%if %GUI
