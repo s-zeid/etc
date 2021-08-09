@@ -4,7 +4,7 @@ fi
 
 __home=${ZDOTDIR:-$HOME}
 __etc="$(cd "$__home" && cd "$(dirname -- "$(readlink "$__home/.zshrc")")" && pwd)"
-__role_dirs=$({ cd "$__etc" && make find-role-dirs absolute=1 suffix=_zsh; } 2>/dev/null)
+__role_dirs=$({ cd "$__etc" && make find-role-dirs absolute=1 suffix=/_zsh; } 2>/dev/null)
 for __dir in "$HOME/.zsh" $__role_dirs; do
  if [ -d "$__dir" ]; then
   for __script in \

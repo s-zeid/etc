@@ -85,7 +85,7 @@ find-role-dirs:
 	   ETC_ROLE_NAME="$$_role_name" \
 	   $$_test_cmd "./$$i/_if" 1>&2
 	  then
-	   role_dirs="$$role_dirs$$NEWLINE$$root$(if ${_ancestors},${_ancestors}/,)$$i$(if ${suffix},/${suffix},)"
+	   role_dirs="$$role_dirs$$NEWLINE$$root$(if ${_ancestors},${_ancestors}/,)$${i}${suffix}"
 	   role_dirs="$$role_dirs$$NEWLINE$$(make -s -f "${_MAKEFILE}" \
 	    -C "$$(pwd)/$$i" find-role-dirs _ancestors="$$i")"
 	  fi

@@ -4,7 +4,7 @@ PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin"
 
 # load path files
 __etc="$(cd "$HOME" && cd "$(dirname -- "$(readlink "$HOME/.path")")" && pwd)"
-__role_dirs=$({ cd "$__etc" && make find-role-dirs absolute=1 suffix=_path; } 2>/dev/null)
+__role_dirs=$({ cd "$__etc" && make find-role-dirs absolute=1 suffix=/_path; } 2>/dev/null)
 for __dir in "$HOME/.path" $__role_dirs; do
  if [ -d "$__dir" ]; then
   for __script in \
