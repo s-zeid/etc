@@ -92,6 +92,8 @@ sudo,-
  doc
 tzdata,-
  doc
+zlib,-
+ dev
 
 # Command line utils
 acl,-
