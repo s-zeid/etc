@@ -81,4 +81,8 @@ sorted with `sort`, which will result in the deepest matching sub-role, if any,
 being matched.
 
 To get a list of all matching role directories, one per line and relative to
-the repository root, run `make find-role-dirs` from the repository root.
+the repository root, run `make find-role-dirs` from the repository root.  This
+target takes two optional variables:
+
+* `absolute=1` - print absolute paths instead of relative paths
+* `suffix=SUFFIX` - add `SUFFIX` to the end of each path
