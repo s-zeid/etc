@@ -341,6 +341,9 @@ mpv
 # Networking
 firewall-config
 
+# Utilities
+gucharmap
+
 # X.org utilities
 scrot
 x11-,
