@@ -424,6 +424,10 @@ flatpak
 gnome-software-plugin-flatpak
 postmarketos-anbox
 
+# Wayland utilities
+grim,-
+ doc
+
 # GUI apps
 dconf-editor
 epiphany,-
