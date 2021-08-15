@@ -339,6 +339,8 @@ mpv,-
 
 # Utilities
 gucharmap
+xdg-utils,-
+ doc
 
 # X.org utilities
 scrot,-

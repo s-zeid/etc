@@ -343,6 +343,7 @@ firewall-config
 
 # Utilities
 gucharmap
+xdg-utils
 
 # X.org utilities
 scrot
