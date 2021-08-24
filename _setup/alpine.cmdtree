@@ -112,6 +112,9 @@ git,-
  doc
 jq,-
  doc
+#%if %EDGE
+libfaketime
+#%endif
 lsof,-
  doc
 lzip,-
