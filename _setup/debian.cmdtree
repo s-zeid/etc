@@ -336,6 +336,11 @@ python3-,
  xlib
 
 # Media
+gstreamer1.0-plugins-,
+ base
+ good
+ bad
+ ugly
 mpv
 
 # Networking

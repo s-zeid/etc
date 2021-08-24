@@ -334,6 +334,11 @@ py3-,
  xlib
 
 # Media
+gst-plugins-,
+ base
+ good
+ bad
+ ugly
 mpv,-
  doc
 
