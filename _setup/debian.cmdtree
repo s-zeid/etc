@@ -309,6 +309,7 @@ libopencv-dev
 optipng
 
 # Networking
+curl
 dnsmasq
 dnsutils
 firewalld
@@ -319,6 +320,7 @@ modemmanager,-
 ncat
 network-manager
 socat
+wget
 whois
 zerotier-one  # non-free but source available (BUSL-1.1; change license: Apache-2.0)
 

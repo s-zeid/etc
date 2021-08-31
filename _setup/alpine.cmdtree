@@ -292,6 +292,8 @@ optipng,-
 
 # Networking
 bind-tools
+curl,-
+ doc
 dnsmasq,-
  doc
 libmbim,-
@@ -310,6 +312,8 @@ nftables,-
  doc
  openrc
 socat,-
+ doc
+wget,-
  doc
 whois,-
  doc
