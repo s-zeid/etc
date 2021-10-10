@@ -133,6 +133,7 @@ include "%L"
 <Multi_key> <r> <n>                     : "🗞" U1F5DE  # ROLLED-UP NEWSPAPER
 <Multi_key> <f> <c>                     : "🤞" U1F91E  # HAND WITH INDEX AND MIDDLE FINGERS CROSSED
 <Multi_key> <F> <C>                     : "🤞" U1F91E  # HAND WITH INDEX AND MIDDLE FINGERS CROSSED
+<Multi_key> <Multi_key> <c> <l> <o> <w> <n> : "🤡" U1F921  # CLOWN FACE
 <Multi_key> <F> <P>                     : "🤦" U1F926  # FACE PALM
 <Multi_key> <f> <p>                     : "🤦" U1F926  # FACE PALM
 <Multi_key> <P> <F> <P>                 : "🤦" U1F926  # FACE PALM
