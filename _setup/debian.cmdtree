@@ -453,6 +453,17 @@ $ cd -
 #%endif
 
 
+# Source Code Pro fonts  #{{{2
+
+#%if %GUI
+$ sudo mkdir -p "$LOCAL_FONTS/source-code-pro" && cd "$LOCAL_FONTS/source-code-pro"
+$ curl -L "$(gh-release-url 'adobe-fonts/source-code-pro' latest 'OTF-')"
+  -o "/dev/shm/source-code-pro.zip"
+$ sudo unzip -j "/dev/shm/source-code-pro.zip" -x '__MACOSX/*' && rm -f "/dev/shm/source-code-pro.zip"
+$ cd -
+#%endif
+
+
 # TwemojiMozilla.ttf  #{{{2
 
 #%if %GUI

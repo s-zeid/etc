@@ -389,6 +389,9 @@ xprop,-
 xwininfo,-
  doc
 
+# Fonts
+font-adobe-source-code-pro
+
 #%endif
 
 
