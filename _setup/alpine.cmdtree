@@ -580,7 +580,7 @@ $ ubuntu_fonts_zip=0cef8205-ubuntu-font-family-0.83.zip
 $ sudo mkdir -p "$LOCAL_FONTS/ubuntu" && cd "$LOCAL_FONTS/ubuntu"
 $ curl -L "https://assets.ubuntu.com/v1/$ubuntu_fonts_zip"
   -o "/dev/shm/$ubuntu_fonts_zip"
-$ unzip -j "/dev/shm/$ubuntu_fonts_zip" -x '__MACOSX/*' && rm -f "/dev/shm/$ubuntu_fonts_zip"
+$ sudo unzip -j "/dev/shm/$ubuntu_fonts_zip" -x '__MACOSX/*' && rm -f "/dev/shm/$ubuntu_fonts_zip"
 $ cd -
 #%endif
 
