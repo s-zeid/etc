@@ -47,7 +47,7 @@ The following files and directories will be excluded from installation:
 * `*.txt`
 * `.*` (hidden files or directories)
 * `_*` (special files or directories; see above for `_config`)
-* `@*` (role directories; see "Conditional configuration" below)
+* `+*` (role directories; see "Conditional configuration" below)
 
 as well as these backup/cache files:
 
@@ -59,7 +59,7 @@ Conditional configuration
 -------------------------
 
 Conditional configuration is supported by creating _role_ directories with
-names starting with `@`.  The file `_if` in each role directory will be
+names starting with `+`.  The file `_if` in each role directory will be
 executed (if it is executable, or interpreted with `sh` otherwise), and if it
 exits successfully, then the files in that role directory will be processed as
 if they were in the repository root, after the files in the root directory.
@@ -71,7 +71,7 @@ The following environment variables are available to `_if`:
 
 * `ETC_ROLE_DIR` - the path to the role directory, relative to the repository
                    root
-* `ETC_ROLE_NAME` - the basename of the role directory without the leading `@`
+* `ETC_ROLE_NAME` - the basename of the role directory without the leading `+`
 
 Role directories may be nested, but not within non-role subdirectories.
 

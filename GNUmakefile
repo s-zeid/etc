@@ -7,7 +7,7 @@ _MAKEFILE := $(abspath $(lastword $(MAKEFILE_LIST)))
 # Configuration  {{{1
 
 _include_dirs := . _config
-_exclude_ere := '(^(_|@|\.)|([Mm]akefile|\.md|\.txt|\.swp|~)$$)'
+_exclude_ere := '(^(_|\+|\.)|([Mm]akefile|\.md|\.txt|\.swp|~)$$)'
 
 
 .PHONY: help  # {{{1
@@ -70,9 +70,9 @@ find-role-dirs:
 	
 	root=$(if $(filter-out 0,${absolute}),$$(cd "$$(dirname -- "${_MAKEFILE}")" && pwd)/,)
 	role_dirs=
-	for i in @*; do
+	for i in +*; do
 	 if [ -d "$$i" ]; then
-	  _role_name=$$(printf '%s\n' "$$(basename -- "$$i")" | sed -e '1,1s/^@//')
+	  _role_name=$$(printf '%s\n' "$$(basename -- "$$i")" | sed -e '1,1s/^+//')
 	  if [ -x "$$i/_if" ]; then
 	   _test_cmd=
 	  elif [ -f "$$i/_if" ]; then
@@ -130,7 +130,7 @@ _find_targets:
 	old_ifs=$$IFS
 	IFS=$$NEWLINE
 	for target in $$all_reversed; do
-	 base_target=$$(printf '%s\n' "$$target" | sed -e '1,1s|^\(@[^/]*/\)\+||')
+	 base_target=$$(printf '%s\n' "$$target" | sed -e '1,1s|^\(+[^/]*/\)\+||')
 	 if ! printf '%s\n' "$$seen_base_targets" | fgrep -q -x -e "$$base_target"; then
 	  seen_base_targets="$$seen_base_targets$$NEWLINE$$base_target"
 	  targets="$$target$$NEWLINE$$targets"
@@ -149,7 +149,7 @@ _install_link: list := 0
 _install_link:
 	@set -e
 	
-	_base_src=$$(printf '%s\n' "${src}" | sed -e '1,1s|^\(@[^/]*/\)\+||')
+	_base_src=$$(printf '%s\n' "${src}" | sed -e '1,1s|^\(+[^/]*/\)\+||')
 	_dest_prefix=$$({ printf '%s\n' "$$_base_src" | grep -q -e '^_'; } && echo || echo .)
 	_link_relpath="$$_dest_prefix$$(printf '%s\n' "$$_base_src" | sed -e '1,1s/^_/./')"
 	_link_path="${dest}/$$_link_relpath"
