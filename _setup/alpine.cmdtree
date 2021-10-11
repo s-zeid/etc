@@ -110,6 +110,8 @@ file,-
  doc
 git,-
  doc
+hdparm,-
+ doc
 jq,-
  doc
 #%if %EDGE
@@ -132,6 +134,9 @@ py3-fonttools,-
 rsync,-
  doc
 sl
+smartmontools,-
+ doc
+ openrc
 sqlite,-
  doc
 units,-

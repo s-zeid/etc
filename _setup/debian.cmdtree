@@ -195,7 +195,7 @@ $ sudo apt update  #{{{1
 # Upgrade and install packages  #{{{1
 
 $ sudo sh -c 'opts=$1; shift; set -ex; apt upgrade $opts && apt install $opts "$@"' -- \
-$ '-t stable-backports --auto-remove'
+$ '-t stable-backports --auto-remove --no-install-recommends'
 
 # All environments  #{{{2
 
@@ -211,6 +211,7 @@ faketime
 file
 fonttools
 git
+hdparm
 jq
 lsof
 ncdu
@@ -220,6 +221,7 @@ rename
 renameutils
 rsync
 sl
+smartmontools
 sqlite3
 units
 uuid-runtime
