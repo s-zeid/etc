@@ -323,9 +323,15 @@ modemmanager,-
  doc
  openrc
 nmap-ncat
-networkmanager,-
+networkmanager-,
  doc
+#%if apk list -I elogind networkmanager-elogind >/dev/null 2>&1
+networkmanager-elogind,-
  openrc
+#%else
+networkmanager,-
+ openrc
+#%fi
 nftables,-
  doc
  openrc
