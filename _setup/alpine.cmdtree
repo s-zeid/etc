@@ -519,7 +519,7 @@ $ LOCAL_FONTS=/usr/share/fonts/local
 
 # sgerrand/alpine-pkg-glibc  #{{{2
 #%if [ x"$ARCH" = x"x86_64" ]
-$ curl -L "$(gh-release-url sgerrand/alpine-pkg-glibc latest '.apk')"
+$ curl -L "$(~/bin/gh-release-url sgerrand/alpine-pkg-glibc latest '.apk')"
   -o /dev/shm/glibc.apk
 $ sudo apk add /dev/shm/glibc.apk
 $ rm -f /dev/shm/glibc.apk
@@ -613,7 +613,7 @@ $ cd -
 # TwemojiMozilla.ttf  #{{{2
 #%if %GUI
 $ sudo mkdir -p "$LOCAL_FONTS"
-$ curl -L "$(gh-release-url 'mozilla/twemoji-colr' latest '.ttf')"
+$ curl -L "$(~/bin/gh-release-url 'mozilla/twemoji-colr' latest '.ttf')"
   | sudo tee "$LOCAL_FONTS/TwemojiMozilla.ttf" >/dev/null
 #%endif
 

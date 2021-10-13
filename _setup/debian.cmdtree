@@ -461,7 +461,7 @@ $ cd -
 
 #%if %GUI
 $ sudo mkdir -p "$LOCAL_FONTS/source-code-pro" && cd "$LOCAL_FONTS/source-code-pro"
-$ curl -L "$(gh-release-url 'adobe-fonts/source-code-pro' latest 'OTF-')"
+$ curl -L "$(~/bin/gh-release-url 'adobe-fonts/source-code-pro' latest 'OTF-')"
   -o "/dev/shm/source-code-pro.zip"
 $ sudo unzip -j "/dev/shm/source-code-pro.zip" -x '__MACOSX/*' && rm -f "/dev/shm/source-code-pro.zip"
 $ cd -
@@ -472,7 +472,7 @@ $ cd -
 
 #%if %GUI
 $ sudo mkdir -p "$LOCAL_FONTS"
-$ sudo curl -L "$(gh-release-url 'mozilla/twemoji-colr' latest '.ttf')"
+$ sudo curl -L "$(~/bin/gh-release-url 'mozilla/twemoji-colr' latest '.ttf')"
   -o "$LOCAL_FONTS/TwemojiMozilla.ttf"
 #%endif
 
