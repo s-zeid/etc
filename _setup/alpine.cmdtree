@@ -152,6 +152,8 @@ smartmontools,-
  openrc
 sqlite,-
  doc
+tmux,-
+ doc
 units,-
  doc
 usbutils,-

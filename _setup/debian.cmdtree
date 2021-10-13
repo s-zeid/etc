@@ -224,6 +224,7 @@ rsync
 sl
 smartmontools
 sqlite3
+tmux
 units
 uuid-runtime
 vim
