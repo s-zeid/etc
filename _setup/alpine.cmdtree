@@ -125,6 +125,9 @@ ncdu,-
  doc
 openssl,-
  doc
+poppler,-
+ utils
+ doc
 pv,-
  doc
 py3-fonttools,-

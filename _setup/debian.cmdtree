@@ -216,6 +216,7 @@ jq
 lsof
 ncdu
 openssl
+poppler-utils
 pv
 rename
 renameutils
