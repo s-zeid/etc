@@ -349,6 +349,8 @@ py3-,
  xlib
 
 # Media
+alsa-utils,-
+ doc
 gst-plugins-,
  base
  good
@@ -454,6 +456,14 @@ postmarketos-anbox
 
 # Wayland utilities
 grim,-
+ doc
+
+# Media
+pipewire-,
+ tools
+ doc
+pulseaudio-,
+ utils
  doc
 
 # GUI apps

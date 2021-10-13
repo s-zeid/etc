@@ -341,6 +341,7 @@ python3-,
  xlib
 
 # Media
+alsa-utils
 gstreamer1.0-plugins-,
  base
  good
