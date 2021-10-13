@@ -366,7 +366,14 @@ x11-,
 xdotool
 
 # Fonts
-fonts-ubuntu  # non-free (DFSG section 4; see <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=603157#30>)
+fonts-,
+ croscore
+ crosextra-,
+  caladea
+  carlito
+ noto
+ roboto
+ ubuntu  # non-free (DFSG section 4; see <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=603157#30>)
 
 #%endif
 

@@ -418,7 +418,13 @@ xwininfo,-
  doc
 
 # Fonts
-font-adobe-source-code-pro
+font-,
+ adobe-source-code-pro
+ croscore
+ crosextra-carlito,-
+  doc
+ noto-all
+ roboto
 
 #%endif
 
