@@ -50,6 +50,16 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 #% define GUI
 #%fi
 
+#%if [ x"$XDG_CURRENT_DESKTOP" = x"GNOME" ]; then
+#% define GNOME_OR_PHOSH
+#% define GUI
+#%fi
+
+#%if grep -q -e '/edge/' /etc/apk/repositories && [ x"$XDG_CURRENT_DESKTOP" = x"GNOME" ]
+#% define GNOME_OR_PHOSH_EDGE
+#% define GUI
+#%fi
+
 
 # Sources  #{{{1
 
@@ -447,12 +457,11 @@ omxplayer,-
 #%endif
 
 
-# Mobile  #{{{2
-#%if %PMOS
+# GNOME/Phosh  #{{{2
+#%if %GNOME_OR_PHOSH
 
 flatpak
 gnome-software-plugin-flatpak
-postmarketos-anbox
 
 # Wayland utilities
 grim,-
@@ -475,15 +484,23 @@ gnome-,
  screenshot
  usage
  weather
-lollypop
 seahorse
 
 #%endif
 
-#%if %PMOS_EDGE
+#%if %GNOME_OR_PHOSH_EDGE
 geary
 numberstation
 #%endif
+
+
+# Mobile  #{{{2
+#%if %PMOS
+
+postmarketos-anbox
+
+# GUI apps
+lollypop
 
 #%if %PINEPHONE
 powersupply
@@ -610,7 +627,7 @@ $ cd -
 
 $ sudo sh -c 'for i; do (rc-update add "$i" || exit; rc-service -S "$i" start || true); done' --
 
-#%if !%PMOS
+#%if !%GNOME_OR_PHOSH
 # already enabled
 nftables
 networkmanager
@@ -632,7 +649,7 @@ anbox-container-manager
 # Configuration  #{{{1
 
 # flatpak - Repositories  #{{{2
-#%if %PMOS
+#%if %GNOME_OR_PHOSH
 $ sudo flatpak remote-add --if-not-exists
   'flathub' 'https://flathub.org/repo/flathub.flatpakrepo'
 #%endif
