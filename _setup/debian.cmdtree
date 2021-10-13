@@ -371,7 +371,12 @@ fonts-,
  crosextra-,
   caladea
   carlito
- noto
+ noto-,
+  core
+  extra
+  ui-core
+  ui-extra
+  unhinted
  roboto
  ubuntu  # non-free (DFSG section 4; see <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=603157#30>)
 
