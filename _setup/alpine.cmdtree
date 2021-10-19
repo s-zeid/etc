@@ -423,7 +423,9 @@ font-,
  croscore
  crosextra-carlito,-
   doc
- noto-all
+ noto-,
+  all
+  cjk
  roboto
 
 #%endif
