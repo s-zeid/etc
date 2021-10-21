@@ -651,6 +651,7 @@ modemmanager
 wpa_supplicant
 #%endif
 
+crond
 zerotier-one
 
 #%if %RPI
