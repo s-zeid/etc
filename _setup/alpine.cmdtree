@@ -389,8 +389,10 @@ xdotool,-
  doc
 xterm,-
  doc
-# x11-server-utils
+# x11-xserver-utils
 xgamma,-
+ doc
+xhost,-
  doc
 xmodmap,-
  doc
