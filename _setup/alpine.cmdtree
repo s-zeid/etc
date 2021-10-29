@@ -290,6 +290,8 @@ py3-,
  setproctitle
  toml
  tz
+ wheel,-
+  doc
  yaml
 nodejs
 npm

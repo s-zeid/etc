@@ -296,6 +296,7 @@ python3,-
  setproctitle
  toml
  tz
+ wheel
  yaml
 2to3
 mypy
