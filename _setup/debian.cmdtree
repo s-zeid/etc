@@ -364,7 +364,9 @@ x11-,
  apps
  xserver-utils
  utils
+xclip
 xdotool
+xsel
 
 # Fonts
 fonts-,

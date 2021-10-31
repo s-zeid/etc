@@ -387,7 +387,11 @@ xdg-utils,-
 # X.org utilities
 scrot,-
  doc
+xclip,-
+ doc
 xdotool,-
+ doc
+xsel,-
  doc
 xterm,-
  doc
