@@ -13,3 +13,4 @@ title() {
 
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd title
+title "$TITLE"
