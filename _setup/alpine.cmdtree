@@ -391,6 +391,8 @@ xclip,-
  doc
 xdotool,-
  doc
+xinput,-
+ doc
 xsel,-
  doc
 xterm,-
