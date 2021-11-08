@@ -60,7 +60,7 @@ include "%L"
 <Multi_key> <space> <numbersign>        : " " U2007  # FIGURE SPACE †
 <Multi_key> <f> <space>                 : " " U2007  # FIGURE SPACE
 <Multi_key> <space> <f>                 : " " U2007  # FIGURE SPACE
-<Multi_key> <t> <a> <b>                 :     U0009  # CHARACTER TABULATION ⁰
+<Multi_key> <t> <a> <b>                 : "	" U0009  # CHARACTER TABULATION
 <Multi_key> <underscore> <space>        : "␣" U2423  # OPEN BOX
 <Multi_key> <space> <underscore>        : "␣" U2423  # OPEN BOX
 <Multi_key> <backslash> <minus>         : "­" U00AD  # SOFT HYPHEN †
@@ -193,11 +193,11 @@ include "%L"
 <Multi_key> <Multi_key> <d> <underscore> <d>              : "ಠ_ಠ"
 <Multi_key> <Multi_key> <o> <underscore> <o>              : "ಠ_ಠ"
 <Multi_key> <Multi_key> <9> <underscore> <9>              : "ಠ_ಠ"
-<Multi_key> <Multi_key> <colon> <slash>                   : "¯\_(ツ)_/¯"
-<Multi_key> <Multi_key> <backslash> <colon> <slash>       : "¯\_(ツ)_/¯"
-<Multi_key> <Multi_key> <s> <h> <r> <u> <g>               : "¯\_(ツ)_/¯"
-<Multi_key> <Multi_key> <backslash> <quotedbl> <slash>    : "¯\_(ツ)_/¯"
-<Multi_key> <Multi_key> <backslash> <underscore> <slash>  : "¯\_(ツ)_/¯"
+<Multi_key> <Multi_key> <colon> <slash>                   : "¯\\_(ツ)_/¯"
+<Multi_key> <Multi_key> <backslash> <colon> <slash>       : "¯\\_(ツ)_/¯"
+<Multi_key> <Multi_key> <s> <h> <r> <u> <g>               : "¯\\_(ツ)_/¯"
+<Multi_key> <Multi_key> <backslash> <quotedbl> <slash>    : "¯\\_(ツ)_/¯"
+<Multi_key> <Multi_key> <backslash> <underscore> <slash>  : "¯\\_(ツ)_/¯"
 
 
 # Additional copyright and Creative Commons symbols  #{{{1
@@ -393,7 +393,6 @@ include "%L"
 # † — from dotXcompose (<https://github.com/kragen/xcompose>)
 # * — from libX11 (<https://github.com/freedesktop/xorg-libX11/blob/master/nls/en_US.UTF-8/Compose.pre>)
 #     (included for compatibility or reference)
-# ⁰ — string version intentionally omitted to prevent copy/paste mangling
 
 
 # vim: set fdm=marker:  {{{1
