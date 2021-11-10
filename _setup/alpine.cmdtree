@@ -190,7 +190,9 @@ fuse-exfat,-
 ntfs-3g,-
  doc
  progs
-squashfs-tools
+squashfs-tools,-
+ ng,-
+  doc
 
 # Archival/compression
 dmg2img

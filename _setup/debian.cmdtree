@@ -240,6 +240,7 @@ exfat-,
 genisoimage
 ntfs-3g
 squashfs-tools
+$([ $DEBIAN_VERSION -ge 11 ] && echo squashfs-tools-ng || true)
 
 # Archival/compression
 dmg2img
