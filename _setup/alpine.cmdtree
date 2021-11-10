@@ -235,6 +235,9 @@ qemu,-
  arm
  i386
  x86_64
+ hw-,
+  display-,
+   qxl
  system-,
   aarch64
   arm
