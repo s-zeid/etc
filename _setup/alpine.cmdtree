@@ -200,6 +200,8 @@ lzip,-
  doc
 p7zip,-
  doc
+tar,-
+ doc
 #unshield,-
 # doc
 unzip,-
