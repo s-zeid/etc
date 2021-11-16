@@ -237,9 +237,6 @@ qemu,-
  arm
  i386
  x86_64
- hw-,
-  display-,
-   qxl
  system-,
   aarch64
   arm
@@ -250,6 +247,13 @@ qemu,-
   riscv32
   riscv64
   x86_64
+ accel-,
+  tcg-,
+   i386
+   x86_64
+ hw-,
+  display-,
+   qxl
  ui-,
   curses
   gtk
