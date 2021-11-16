@@ -252,8 +252,6 @@ qemu,-
    i386
    x86_64
  audio-,
-  alsa
-  pa
   sdl
   spice
  hw-,
