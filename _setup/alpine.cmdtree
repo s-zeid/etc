@@ -63,16 +63,6 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 
 # Sources  #{{{1
 
-# sgerrand (for alpine-pkg-glibc)  #{{{2
-
-#%if [ x"$ARCH" = x"x86_64" ]
-$ if ! [ -f '/etc/apk/keys/sgerrand.rsa.pub' ]; then
-$  wget -nv 'https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub' -O-
-   | sudo tee '/etc/apk/keys/sgerrand.rsa.pub' >/dev/null
-$ fi
-#%fi
-
-
 $ sudo apk update  #{{{1
 
 
@@ -87,9 +77,7 @@ apk-tools-doc
 busybox-doc
 fuse,-
  doc
-#%if [ x"$ARCH" != x"x86_64" ]
 gcompat  # TODO: does not work with AppImages?
-#%fi
 man-db,-
  doc
 openrc,-
@@ -550,15 +538,6 @@ powersupply
 # Manual packages  #{{{1
 
 $ LOCAL_FONTS=/usr/share/fonts/local
-
-# sgerrand/alpine-pkg-glibc  #{{{2
-#%if [ x"$ARCH" = x"x86_64" ]
-$ curl -L "$(~/bin/gh-release-url sgerrand/alpine-pkg-glibc latest '.apk')"
-  -o /dev/shm/glibc.apk
-$ sudo apk add /dev/shm/glibc.apk
-$ rm -f /dev/shm/glibc.apk
-#%fi
-
 
 # pyftfeatfreeze  #{{{2
 $ sudo pip3 install -U opentype-feature-freezer
