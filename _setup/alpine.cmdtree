@@ -235,10 +235,6 @@ qemu,-
   riscv32
   riscv64
   x86_64
- accel-,
-  tcg-,
-   i386
-   x86_64
  audio-,
   sdl
   spice
