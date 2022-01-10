@@ -254,11 +254,12 @@ qemu,-
 android-tools
 
 # Miscellaneous
-man-pages  # non-free in part:  POSIX man pages (section 1p) limit modifications; see:
-           # * <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=234205#15>
-           # * <http://lists.debian.org/debian-legal/2004/06/msg00173.html>
-           #     * <https://lists.debian.org/debian-legal/2004/06/msg00176.html>
-           #     * <https://lists.debian.org/debian-legal/2004/06/msg00182.html>
+man-pages,-
+ posix  # non-free:  POSIX man pages (section 1p) limit modifications; see:
+        # * <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=234205#15>
+        # * <http://lists.debian.org/debian-legal/2004/06/msg00173.html>
+        #     * <https://lists.debian.org/debian-legal/2004/06/msg00176.html>
+        #     * <https://lists.debian.org/debian-legal/2004/06/msg00182.html>
 
 # Development
 alpine-sdk
