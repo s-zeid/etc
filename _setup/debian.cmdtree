@@ -336,10 +336,18 @@ zerotier-one  # non-free but source available (BUSL-1.1; change license: Apache-
 
 # Libraries
 libarchive-dev  # for mpv
+libsdl2-,
+ dev
+ gfx-dev
+ image-dev
+ mixer-dev
+ net-dev
+ ttf-dev
 
 # Language libraries
 python3-,
  pil.imagetk
+ sdl2
  tk
  xlib
 

@@ -359,6 +359,11 @@ readline-dev  # for renameutils
 
 # Libraries
 libarchive-dev  # for mpv
+sdl2,_
+ image
+ mixer
+ net
+ ttf
 
 # Language libraries
 python3-,
@@ -814,6 +819,7 @@ $ pip3 install --user -U  #{{{1
 astral
 awscli
 ntplib
+PySDL2
 
 
 # Install user config files  #{{{1
