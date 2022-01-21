@@ -128,6 +128,7 @@ include "%L"
 <Multi_key> <equal> <comma>             : "👎" U1F44E  # THUMBS DOWN SIGN
 <Multi_key> <comma> <equal>             : "👎" U1F44E  # THUMBS DOWN SIGN
 <Multi_key> <Multi_key> <c> <l> <a> <p> : "👏" U1F44F  # CLAPPING HANDS SIGN
+<Multi_key> <Multi_key> <f> <i> <r> <e> : "🔥" U1F525  # FIRE
 <Multi_key> <h> <5>                     : "🖐" U1F590  # RAISED HAND WITH FINGERS SPLAYED
 <Multi_key> <F> <U>                     : "🖕" U1F595  # REVERSED HAND WITH MIDDLE FINGER EXTENDED *
 <Multi_key> <r> <n>                     : "🗞" U1F5DE  # ROLLED-UP NEWSPAPER
