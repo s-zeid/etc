@@ -189,6 +189,10 @@ include "%L"
 <Multi_key> <colon> <exclam>            : "🤬" U1F92C  # SERIOUS FACE WITH SYMBOLS COVERING MOUTH
 <Multi_key> <greater> <colon> <exclam>  : "🤬" U1F92C  # SERIOUS FACE WITH SYMBOLS COVERING MOUTH
 <Multi_key> <Multi_key> <v> <o> <m> <i> <t> : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
+<Multi_key> <greater> <x>               : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
+<Multi_key> <greater> <X>               : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
+<Multi_key> <greater> <colon> <x>       : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
+<Multi_key> <greater> <colon> <X>       : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
 <Multi_key> <colon> <colon> <x>         : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
 <Multi_key> <colon> <colon> <X>         : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
 <Multi_key> <asterisk> <colon> <o>      : "🤯" U1F92F  # SHOCKED FACE WITH EXPLODING HEAD
