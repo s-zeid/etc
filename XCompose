@@ -178,6 +178,9 @@ include "%L"
 <Multi_key> <colon> <space>             : "😶" U1F636  # FACE WITHOUT MOUTH
 <Multi_key> <colon> <dollar>            : "🤑" U1F911  # MONEY-MOUTH FACE
 <Multi_key> <h> <m> <m>                 : "🤔" U1F914  # THINKING FACE
+<Multi_key> <Multi_key> <g> <a> <g>     : "🤢" U1F922  # NAUSEATED FACE
+<Multi_key> <colon> <x>                 : "🤢" U1F922  # NAUSEATED FACE
+<Multi_key> <colon> <X>                 : "🤢" U1F922  # NAUSEATED FACE
 <Multi_key> <r> <o> <f> <l>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
 <Multi_key> <slash> <x> <d>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
 <Multi_key> <slash> <x> <D>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
@@ -185,6 +188,9 @@ include "%L"
 <Multi_key> <slash> <X> <D>             : "🤣" U1F923  # ROLLING ON THE FLOOR LAUGHING
 <Multi_key> <colon> <exclam>            : "🤬" U1F92C  # SERIOUS FACE WITH SYMBOLS COVERING MOUTH
 <Multi_key> <greater> <colon> <exclam>  : "🤬" U1F92C  # SERIOUS FACE WITH SYMBOLS COVERING MOUTH
+<Multi_key> <Multi_key> <v> <o> <m> <i> <t> : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
+<Multi_key> <colon> <colon> <x>         : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
+<Multi_key> <colon> <colon> <X>         : "🤮" U1F92E  # FACE WITH OPEN MOUTH VOMITING
 <Multi_key> <asterisk> <colon> <o>      : "🤯" U1F92F  # SHOCKED FACE WITH EXPLODING HEAD
 <Multi_key> <asterisk> <colon> <O>      : "🤯" U1F92F  # SHOCKED FACE WITH EXPLODING HEAD
 <Multi_key> <colon> <colon> <parenleft> : "🥺" U1F97A  # FACE WITH PLEADING EYES
