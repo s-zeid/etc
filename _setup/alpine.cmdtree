@@ -92,7 +92,7 @@ doas,-
 #%endif
 fuse,-
  doc
-gcompat  # TODO: does not work with AppImages?
+gcompat
 man-db,-
  doc
 openrc,-
