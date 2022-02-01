@@ -13,9 +13,14 @@ exec "$bin/cmdtree" "$0" "$@"
 
 # Dependencies for setup  #{{{1
 
-$ if ! which sudo >/dev/null 2>&1; then
-$  su -c 'apk update && apk add sudo'
-$ fi
+$$ if ! which sudo >/dev/null 2>&1; then
+$$  su -c '
+$$   apk update && apk add doas doas-sudo-shim &&
+$$   mkdir -p -m 700 /etc/doas.d &&
+$$   echo "permit persist :wheel" > /etc/doas.d/wheel.conf &&
+$$   chmod 600 /etc/doas.d/wheel.conf
+$$  '
+$$ fi
 
 
 # Constants  #{{{1
@@ -60,6 +65,10 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 #% define GUI
 #%fi
 
+#%if apk list -i doas-sudo-shim >/dev/null 2>&1
+#% define DOAS_SUDO_SHIM
+#%fi
+
 
 # Sources  #{{{1
 
@@ -75,6 +84,12 @@ $ sudo sh -c 'set -ex; apk upgrade && apk add "$@"' --
 # Base
 apk-tools-doc
 busybox-doc
+doas,-
+ doc
+#%if %DOAS_SUDO_SHIM
+ sudo-shim,-
+  doc
+#%endif
 fuse,-
  doc
 gcompat  # TODO: does not work with AppImages?
@@ -86,8 +101,10 @@ openssh,-
  doc
 shadow,-
  doc
+#%if !%DOAS_SUDO_SHIM
 sudo,-
  doc
+#%endif
 tzdata,-
  doc
 zlib,-
@@ -669,6 +686,14 @@ anbox-container-manager
 
 
 # Configuration  #{{{1
+
+# doas - permit wheel group  #{{{2
+$$ sudo sh -c '
+$$  mkdir -p -m 700 /etc/doas.d &&
+$$  echo "permit persist :wheel" > /etc/doas.d/wheel.conf &&
+$$  chmod 600 /etc/doas.d/wheel.conf
+$$ '
+
 
 # flatpak - Repositories  #{{{2
 #%if %GNOME_OR_PHOSH
