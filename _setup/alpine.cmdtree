@@ -136,6 +136,8 @@ lsof,-
  doc
 lzip,-
  doc
+moreutils,-
+ doc
 ncdu,-
  doc
 openssl,-

@@ -214,6 +214,7 @@ git
 hdparm
 jq
 lsof
+moreutils
 ncdu
 openssl
 poppler-utils
