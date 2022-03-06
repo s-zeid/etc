@@ -6,7 +6,7 @@
 set -ex; bin="$HOME/bin"
 (which sudo >/dev/null 2>&1) && sudo apk update || su -c 'apk update && apk add sudo'
 which git >/dev/null 2>&1 || (sudo apk add git)
-[ -d "$bin" ] || git clone 'https://gitlab.com/scottywz/bin.git' "$bin"
+[ -d "$bin" ] || git clone 'https://gitlab.com/s-zeid/bin.git' "$bin"
 exec "$bin/cmdtree" "$0" "$@"
 #*/
 
@@ -854,7 +854,7 @@ PySDL2
 
 # Install user config files  #{{{1
 
-$ [ -d ~/etc ] && true || git clone https://gitlab.com/scottywz/etc.git ~/etc
+$ [ -d ~/etc ] && true || git clone https://gitlab.com/s-zeid/etc.git ~/etc
 $ (cd ~/etc && make install)
 
 
