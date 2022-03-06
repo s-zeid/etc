@@ -93,6 +93,8 @@ doas,-
 fuse,-
  doc
 gcompat
+ifupdown-ng-,
+ doc
 man-db,-
  doc
 openrc,-
