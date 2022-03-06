@@ -151,6 +151,8 @@ openssl,-
 poppler,-
  utils
  doc
+procps,-
+ doc
 pv,-
  doc
 py3-fonttools,-
