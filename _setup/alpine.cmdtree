@@ -30,10 +30,12 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 
 #%if grep -q -e '/edge/' /etc/apk/repositories
 #% define EDGE
+#% define TESTING
 #%fi
 
 #%if grep -q -e '/edge/' /etc/apk/repositories && [ x"$ARCH" != x"aarch64" ]
 #% define EDGE_NOT_AARCH64
+#% define TESTING_NOT_AARCH64
 #%fi
 
 #%if grep -q -e 'postmarketos' /etc/apk/repositories
@@ -65,7 +67,7 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 #% define GUI
 #%fi
 
-#%if apk list -i doas-sudo-shim >/dev/null 2>&1
+#%if apk list -I doas-sudo-shim >/dev/null 2>&1 | grep -q -e 'doas-sudo-shim'
 #% define DOAS_SUDO_SHIM
 #%fi
 
@@ -131,7 +133,7 @@ hdparm,-
  doc
 jq,-
  doc
-#%if %EDGE
+#%if %TESTING
 libfaketime
 #%endif
 lsof,-
@@ -143,7 +145,9 @@ moreutils,-
 ncdu,-
  doc
 openssl,-
+#%if %EDGE
  doc
+#%endif
 poppler,-
  utils
  doc
@@ -179,7 +183,9 @@ uuidgen,-
 # doc
 vim,-
  doc
+#%if %EDGE
  help
+#%endif
 zsh,-
  doc
 
@@ -200,11 +206,15 @@ ntfs-3g,-
  doc
  progs
 squashfs-tools,-
+#%if %TESTING
  ng,-
   doc
+#%endif
 
 # Archival/compression
+#%if %TESTING
 dmg2img
+#%endif
 lzip,-
  doc
 p7zip,-
@@ -229,13 +239,11 @@ runc,-
  doc
 skopeo,-
  doc
-#%if %EDGE
-#TODO: only in edge right now
+#%if %TESTING
 proot,-
  doc
 #%endif
-#%if %EDGE_NOT_AARCH64
-#TODO: only in edge right now, and not on aarch64
+#%if %TESTING_NOT_AARCH64
 singularity,-
  doc
 #%endif
@@ -275,12 +283,14 @@ qemu,-
 android-tools
 
 # Miscellaneous
-man-pages,-
+man-pages,-  # on v3.15, also contains non-free POSIX man pages; see below
+#%if %EDGE
  posix  # non-free:  POSIX man pages (section 1p) limit modifications; see:
         # * <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=234205#15>
         # * <http://lists.debian.org/debian-legal/2004/06/msg00173.html>
         #     * <https://lists.debian.org/debian-legal/2004/06/msg00176.html>
         #     * <https://lists.debian.org/debian-legal/2004/06/msg00182.html>
+#%endif
 
 # Development
 alpine-sdk
