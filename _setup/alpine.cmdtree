@@ -28,22 +28,22 @@ $$ fi
 $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
    | head -n 1 | sed -e "s/^[^=]*=//g; s/[\"']//g")
 
-#%if grep -q -e '/edge/' /etc/apk/repositories
+#%if (grep -v '^#' /etc/apk/repositories | grep -q -e '/edge/')
 #% define EDGE
 #% define TESTING
 #%fi
 
-#%if grep -q -e '/edge/' /etc/apk/repositories && [ x"$ARCH" != x"aarch64" ]
+#%if (grep -v '^#' /etc/apk/repositories | grep -q -e '/edge/') && [ x"$ARCH" != x"aarch64" ]
 #% define EDGE_NOT_AARCH64
 #% define TESTING_NOT_AARCH64
 #%fi
 
-#%if grep -q -e 'postmarketos' /etc/apk/repositories
+#%if (grep -v '^#' /etc/apk/repositories | grep -q -e 'postmarketos')
 #% define PMOS
 #% define GUI
 #%fi
 
-#%if grep -q -e '/edge/' /etc/apk/repositories && grep -q -e 'postmarketos' /etc/apk/repositories
+#%if (grep -v '^#' /etc/apk/repositories | grep -q -e '/edge/') && (grep -v '^#' /etc/apk/repositories | grep -q -e 'postmarketos')
 #% define PMOS_EDGE
 #%fi
 
@@ -62,7 +62,7 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 #% define GUI
 #%fi
 
-#%if grep -q -e '/edge/' /etc/apk/repositories && [ x"$XDG_CURRENT_DESKTOP" = x"GNOME" ]
+#%if (grep -v '^#' /etc/apk/repositories | grep -q -e '/edge/') && [ x"$XDG_CURRENT_DESKTOP" = x"GNOME" ]
 #% define GNOME_OR_PHOSH_EDGE
 #% define GUI
 #%fi
