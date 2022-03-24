@@ -319,6 +319,7 @@ py3-,
  mypy
  pillow
  pip
+ psutil
  setproctitle
  toml
  tz

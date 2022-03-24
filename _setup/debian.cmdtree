@@ -295,6 +295,7 @@ python3,-
  ntplib
  pil
  pip
+ psutil
  setproctitle
  toml
  tz
