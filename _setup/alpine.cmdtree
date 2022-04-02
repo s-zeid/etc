@@ -185,9 +185,6 @@ uuidgen,-
 # doc
 vim,-
  doc
-#%if %EDGE
- help
-#%endif
 zsh,-
  doc
 
