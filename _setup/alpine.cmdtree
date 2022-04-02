@@ -57,7 +57,7 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 #% define GUI
 #%fi
 
-#%if [ x"$XDG_CURRENT_DESKTOP" = x"GNOME" ]; then
+#%if [ x"$XDG_CURRENT_DESKTOP" = x"GNOME" ]
 #% define GNOME_OR_PHOSH
 #% define GUI
 #%fi
@@ -67,7 +67,7 @@ $ ALPINE_VERSION=$(grep '^VERSION=' /etc/os-release
 #% define GUI
 #%fi
 
-#%if apk list -I doas-sudo-shim >/dev/null 2>&1 | grep -q -e 'doas-sudo-shim'
+#%if apk list -I doas-sudo-shim 2>/dev/null | grep -q -e 'doas-sudo-shim'
 #% define DOAS_SUDO_SHIM
 #%fi
 
