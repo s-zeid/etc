@@ -795,6 +795,10 @@ $$ hi Folded      ctermfg=Blue ctermbg=242 guifg=#aaaaff guibg=#6c6c6c
 $$ hi LineNr      ctermfg=130 guifg=#c0795f
 $$ hi Visual      ctermbg=242 guibg=#6c6c6c
 $$ 
+$$ if executable("/bin/sh") && resolve("/bin/sh") =~ '\<busybox\>'
+$$  let g:is_posix = 1
+$$ endif
+$$ 
 $$ runtime /root/.vimrc.local
 $$ 
 EOF
