@@ -346,7 +346,12 @@ optipng,-
 bind-tools
 curl,-
  doc
+#%if %PMOS
 dnsmasq,-
+#%else
+dnsmasq-,
+ dnssec
+#%endif
  doc
 libmbim,-
  doc
