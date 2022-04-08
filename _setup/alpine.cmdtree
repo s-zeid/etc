@@ -314,6 +314,7 @@ py3-,
  dateutil
  lz4
  mypy
+ pbkdf2
  pillow
  pip
  psutil

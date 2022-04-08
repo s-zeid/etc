@@ -293,6 +293,7 @@ python3,-
  dateutil
  lz4
  ntplib
+ pbkdf2
  pil
  pip
  psutil
