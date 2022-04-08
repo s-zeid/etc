@@ -1,0 +1,4 @@
+cleanup: --user-install
+install: --user-install
+uninstall: --user-install
+update: --user-install
