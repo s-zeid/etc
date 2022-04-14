@@ -365,6 +365,8 @@ modemmanager,-
 nmap-ncat
 networkmanager-,
  doc
+ cli
+ tui
 #%if apk list -I elogind networkmanager-elogind >/dev/null 2>&1
 networkmanager-elogind,-
  openrc
