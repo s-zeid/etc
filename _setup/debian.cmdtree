@@ -214,6 +214,7 @@ git
 hdparm
 jq
 lsof
+make
 moreutils
 ncdu
 openssl

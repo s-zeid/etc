@@ -140,6 +140,8 @@ lsof,-
  doc
 lzip,-
  doc
+make,-
+ doc
 moreutils,-
  doc
 ncdu,-
