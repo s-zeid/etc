@@ -82,6 +82,15 @@ include "%L"
 <Multi_key> <r> <l> <m>                 : "‏" U200F  # RIGHT-TO-LEFT MARK
 <Multi_key> <7> <7>                     : "⁊" U204A  # TIRONIAN SIGN ET
 <Multi_key> <C> <O>                     : "℅" U2105  # CARE OF
+<Multi_key> <w> <a> <r> <n>             : "⚠" U26A0  # WARNING SIGN
+<Multi_key> <W> <A> <R> <N>             : "⚠" U26A0  # WARNING SIGN
+<Multi_key> <slash> <exclam> <backslash> : "⚠" U26A0  # WARNING SIGN
+<Multi_key> <o> <backslash>             : "🛇" U1F6C7  # PROHIBITED SIGN
+<Multi_key> <O> <backslash>             : "🛇" U1F6C7  # PROHIBITED SIGN
+<Multi_key> <i> <n> <f> <o>             : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
+<Multi_key> <I> <N> <F> <O>             : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
+<Multi_key> <o> <i>                     : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
+<Multi_key> <O> <I>                     : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
 
 
 # Superscript ordinal suffixes  #{{{1
@@ -93,7 +102,6 @@ include "%L"
 
 # Emojis (except faces) / icons  #{{{1
 <Multi_key> <o> <period> <apostrophe>   : "ಠ" U0CA0  # KANNADA LETTER TTHA
-<Multi_key> <o> <i>                     : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
 <Multi_key> <s> <n> <o> <w>             : "☃" U2603  # SNOWMAN
 <Multi_key> <1> <m>                     : "☝" U261D  # WHITE UP POINTING INDEX
 <Multi_key> <1> <M>                     : "☝" U261D  # WHITE UP POINTING INDEX
