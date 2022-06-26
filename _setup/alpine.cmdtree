@@ -481,6 +481,7 @@ font-,
  noto-,
   all
   cjk
+  emoji
  roboto
 
 #%endif
