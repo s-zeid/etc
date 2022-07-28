@@ -199,6 +199,9 @@ $ '-t stable-backports --auto-remove --no-install-recommends'
 
 # All environments  #{{{2
 
+# Base
+ncurses-bin
+
 # Command line utils
 acl
 attr

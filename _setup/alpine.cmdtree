@@ -99,6 +99,8 @@ ifupdown-ng-,
  doc
 man-db,-
  doc
+ncurses,-
+ doc
 openrc,-
  doc
 openssh,-
