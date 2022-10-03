@@ -180,6 +180,8 @@ usbutils,-
 #%if %EDGE
 util-linux-,
  misc
+mount
+umount
 #%else
 util-linux,-
 #%endif
@@ -371,6 +373,11 @@ networkmanager-,
  doc
  cli
  tui
+#%if %EDGE
+ bluetooth
+ wifi
+ wwan
+#%endif
 #%if apk list -I elogind networkmanager-elogind >/dev/null 2>&1
 networkmanager-elogind,-
  openrc
