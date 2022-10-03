@@ -425,13 +425,17 @@ py3-,
 # Media
 alsa-utils,-
  doc
-gst-plugins-,
- base
- good
- bad
- ugly
+gstreamer,-
+ tools
+gst-,
+ plugins-,
+  base
+  good
+  bad
+  ugly
 mpv,-
  doc
+v4l2loopback-src
 
 # Utilities
 gucharmap
@@ -624,6 +628,23 @@ $  sudo sed -i -e 's/(\$bindir)/$(bindir)/g' src/Makefile.in
 $  sudo ./configure
 $  sudo make
 $  sudo make install
+$  sudo touch _installed
+$  cd -
+$ fi
+
+
+# v4l2loopback-utils  #{{{2
+$ v4l2loopback_version=0.12.7; v4l2loopback_src=v4l2loopback-$v4l2loopback_version
+$ if ! [ -e "/usr/local/src/$v4l2loopback_src/_installed" ]; then
+$  sudo mkdir -p /usr/local/src && cd /usr/local/src
+$  sudo curl -o "/dev/shm/$v4l2loopback_src.tar.gz"
+   -L "https://github.com/umlaeute/v4l2loopback/archive/refs/tags/v$v4l2loopback_version.tar.gz" &&
+   [ x"$(sha256sum "/dev/shm/$v4l2loopback_src.tar.gz" | sed -e 's/[^0-9a-fA-F].*$//g')"
+   = x"e0782b8abe8f2235e2734f725dc1533a0729e674c4b7834921ade43b9f04939b" ]
+$  sudo tar -xzf "/dev/shm/$v4l2loopback_src.tar.gz" && sudo rm -f "/dev/shm/$v4l2loopback_src.tar.gz"
+$  cd "$v4l2loopback_src"
+$  sudo make utils
+$  sudo make install-utils
 $  sudo touch _installed
 $  cd -
 $ fi
