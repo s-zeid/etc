@@ -439,6 +439,8 @@ v4l2loopback-src
 
 # Utilities
 gucharmap
+udiskie,-
+ doc
 xdg-utils,-
  doc
 

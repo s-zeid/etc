@@ -377,6 +377,7 @@ firewall-config
 
 # Utilities
 gucharmap
+udiskie
 xdg-utils
 
 # X.org utilities
