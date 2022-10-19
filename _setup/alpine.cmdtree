@@ -435,7 +435,9 @@ gst-,
   ugly
 mpv,-
  doc
+#%if %TESTING
 v4l2loopback-src
+#%endif
 
 # Utilities
 gucharmap
