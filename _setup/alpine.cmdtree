@@ -326,6 +326,7 @@ py3-,
  psutil
  setproctitle
  toml
+ typing-extensions
  tz
  wheel,-
   doc
