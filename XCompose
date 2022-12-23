@@ -182,6 +182,7 @@ include "%L"
 <Multi_key> <colon> <Z>                 : "😴" U1F634  # SLEEPING FACE
 <Multi_key> <colon> <parenleft>         : "🙁" U1F641  # SLIGHTLY FROWNING FACE
 <Multi_key> <colon> <parenright>        : "🙂" U1F642  # SLIGHTLY SMILING FACE
+<Multi_key> <parenleft> <colon>         : "🙃" U1F643  # UPSIDE-DOWN FACE
 <Multi_key> <colon> <E>                 : "😬" U1F62C  # GRIMACING FACE
 <Multi_key> <colon> <H>                 : "😬" U1F62C  # GRIMACING FACE
 <Multi_key> <colon> <space>             : "😶" U1F636  # FACE WITHOUT MOUTH
