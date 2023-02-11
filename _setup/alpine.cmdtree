@@ -238,7 +238,13 @@ zstd,-
 # Containers
 buildah,-
  doc
+cni-plugins,-
+ doc
+containers-common,-
+ doc
 debootstrap,-
+ doc
+podman,-
  doc
 runc,-
  doc

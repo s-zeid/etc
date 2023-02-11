@@ -261,6 +261,7 @@ zstd
 # Containers
 buildah
 debootstrap
+podman
 proot
 runc
 skopeo
