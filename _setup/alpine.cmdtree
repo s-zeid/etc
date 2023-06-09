@@ -281,6 +281,9 @@ qemu,-
  hw-,
   display-,
    qxl
+  usb-,
+   host
+   redirect
  ui-,
   curses
   gtk
