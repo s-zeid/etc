@@ -294,7 +294,9 @@ qemu,-
  img
 
 # Android tools
-android-tools
+android-,
+ tools
+ udev-rules
 
 # Miscellaneous
 man-pages,-  # on v3.15, also contains non-free POSIX man pages; see below
