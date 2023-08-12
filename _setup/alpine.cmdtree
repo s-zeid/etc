@@ -127,6 +127,11 @@ dateutils,-
  doc
 expect,-
  doc
+#%if %TESTING
+f3,-
+ doc
+ extra
+#%endif
 file,-
  doc
 git,-
