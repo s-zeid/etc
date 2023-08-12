@@ -689,7 +689,7 @@ $ sudo python2 -m easy_install -U  #{{{1
 'PyYAML<5.5.0'  # <https://github.com/yaml/pyyaml/issues/476>
 
 
-$ pip3 install --user -U  #{{{1
+$ PIP_BREAK_SYSTEM_PACKAGES=true pip3 install --user -U  #{{{1
 
 awscli
 

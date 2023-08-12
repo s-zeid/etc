@@ -875,7 +875,7 @@ EOF
 $ sudo chmod +x "/etc/network/if-up.d/addresses"
 
 
-$ pip3 install --user -U  #{{{1
+$ PIP_BREAK_SYSTEM_PACKAGES=true pip3 install --user -U  #{{{1
 
 astral
 awscli
