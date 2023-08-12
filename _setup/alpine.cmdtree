@@ -328,6 +328,7 @@ python3,-
  dev
  doc
 py3-,
+ argcomplete
  dateutil
  lz4
  mypy

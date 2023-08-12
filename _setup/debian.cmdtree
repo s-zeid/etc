@@ -294,6 +294,7 @@ pkg-config
 python2
 python-setuptools
 python3,-
+ argcomplete
  astral
  dateutil
  lz4
