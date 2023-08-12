@@ -318,6 +318,7 @@ pkgconf
 # Languages
 dash,-
  doc
+pipx
 python3,-
  dev
  doc

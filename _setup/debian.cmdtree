@@ -294,6 +294,7 @@ pkg-config
 # Languages
 python2
 python-setuptools
+pipx
 python3,-
  argcomplete
  astral
