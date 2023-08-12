@@ -516,6 +516,7 @@ font-,
  croscore
  crosextra-carlito,-
   doc
+ inter
  noto-,
   all
   cjk
@@ -675,34 +676,11 @@ $  cd -
 $ fi
 
 
-# Inter fonts  #{{{2
+# Inter Custom fonts  #{{{2
 #%if %GUI
-$ sudo mkdir -p "$LOCAL_FONTS/inter" && cd "$LOCAL_FONTS/inter"
-$ sudo tee Makefile >/dev/null <<'EOF'
-$$ MAKEFILE := $(lastword ${MAKEFILE_LIST})
-$$ 
-$$ all:
-$$ 	@set -ex && trap 'rm -rf /dev/shm/inter.zip ./new' EXIT INT QUIT TERM && \
-$$ 	 curl -L "$$(make -s -f "${MAKEFILE}" url)" -o /dev/shm/inter.zip && \
-$$ 	 rm -rf new && mkdir new && \
-$$ 	 unzip -d new /dev/shm/inter.zip && find new/"Inter Hinted"*/Desktop -type f \
-$$ 	  -exec sh -c 'mv "$$1" "$$1".disabled' -- {} \; && \
-$$ 	 rm -rf ./'Inter '* ./*.txt && mv new/* .
-$$ 
-$$ url:
-$$ 	@set -ex && repo=rsms/inter; tag=latest; contains='.zip' && \
-$$ 	curl -f "https://api.github.com/repos/$$repo/releases/$$tag" \
-$$ 	 | jq -r --arg contains "$$contains" \
-$$ 	    '.assets[].browser_download_url | select(. | contains($$contains))' \
-$$ 	 | head -n 1
-$$ 
-EOF
-$ sudo make
-$ cd -
-$ 
 $ sudo mkdir -p "$LOCAL_FONTS/inter-custom" && cd "$LOCAL_FONTS/inter-custom"
 $ sudo tee Makefile >/dev/null <<'EOF'
-$$ src := ../inter/Inter Desktop
+$$ src := /usr/share/fonts/inter
 $$ 
 $$ all:
 $$ 	@set -ex && trap 'rm -rf ./new' EXIT INT QUIT TERM && \
