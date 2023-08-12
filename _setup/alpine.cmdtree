@@ -154,13 +154,11 @@ moreutils,-
 ncdu,-
  doc
 openssl,-
-#%if %EDGE
  doc
-#%endif
 poppler,-
  utils
  doc
-procps,-
+procps-ng,-
  doc
 pv,-
  doc
@@ -182,16 +180,12 @@ units,-
  doc
 usbutils,-
  doc
-#%if %EDGE
 util-linux-,
+ doc
  misc
+ openrc
 mount
 umount
-#%else
-util-linux,-
-#%endif
- doc
- openrc
 uuidgen,-
 # doc
 vim,-
@@ -222,12 +216,12 @@ squashfs-tools,-
 #%endif
 
 # Archival/compression
+7zip,-
+ doc
 #%if %TESTING
 dmg2img
 #%endif
 lzip,-
- doc
-p7zip,-
  doc
 tar,-
  doc
@@ -305,13 +299,11 @@ android-,
 
 # Miscellaneous
 man-pages,-  # on v3.15, also contains non-free POSIX man pages; see below
-#%if %EDGE
  posix  # non-free:  POSIX man pages (section 1p) limit modifications; see:
         # * <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=234205#15>
         # * <http://lists.debian.org/debian-legal/2004/06/msg00173.html>
         #     * <https://lists.debian.org/debian-legal/2004/06/msg00176.html>
         #     * <https://lists.debian.org/debian-legal/2004/06/msg00182.html>
-#%endif
 
 # Development
 alpine-sdk
@@ -326,9 +318,6 @@ pkgconf
 # Languages
 dash,-
  doc
-python2
-py2-,
- setuptools
 python3,-
  dev
  doc
@@ -345,8 +334,7 @@ py3-,
  toml
  typing-extensions
  tz
- wheel,-
-  doc
+ wheel
  yaml
 nodejs
 npm
@@ -393,18 +381,13 @@ nmap-ncat
 networkmanager-,
  doc
  cli
+ openrc
  tui
-#%if %EDGE
  bluetooth
  wifi
  wwan
-#%endif
 #%if apk list -I elogind networkmanager-elogind >/dev/null 2>&1
-networkmanager-elogind,-
- openrc
-#%else
-networkmanager,-
- openrc
+networkmanager-elogind
 #%fi
 nftables,-
  doc
@@ -416,9 +399,6 @@ wget,-
 whois,-
  doc
 wpa_supplicant,-
- doc
- openrc
-zerotier-one,-  # non-free but source available (BUSL-1.1; change license: Apache-2.0)
  doc
  openrc
 
@@ -513,9 +493,8 @@ xwininfo,-
 # Fonts
 font-,
  adobe-source-code-pro
+ carlito
  croscore
- crosextra-carlito,-
-  doc
  inter
  noto-,
   all
@@ -732,7 +711,6 @@ wpa_supplicant
 #%endif
 
 crond
-zerotier-one
 
 #%if %RPI
 lightdm
@@ -894,12 +872,6 @@ $$ exit 0
 $$
 EOF
 $ sudo chmod +x "/etc/network/if-up.d/addresses"
-
-
-$ sudo python2 -m easy_install -U  #{{{1
-
-'mutagen<1.44.0'
-'PyYAML<5.5.0'  # <https://github.com/yaml/pyyaml/issues/476>
 
 
 $ pip3 install --user -U  #{{{1
