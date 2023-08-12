@@ -39,3 +39,6 @@ else
  zstyle ':completion:*:processes' command 'ps w'
 fi
 unset _ps_completion_cmd
+
+autoload bashcompinit
+bashcompinit
