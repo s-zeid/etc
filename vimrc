@@ -1,8 +1,9 @@
-" Pathogen {{{1
+" Plugins {{{1
 
 try
  call pathogen#infect()
 catch | endtry
+set loadplugins
 
 
 " General settings {{{1
