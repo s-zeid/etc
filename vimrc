@@ -15,7 +15,7 @@ set number
 set showtabline=2
 
 set tabstop=8
-set shiftwidth=1
+set shiftwidth=2
 
 set noexpandtab
 set noautoindent
