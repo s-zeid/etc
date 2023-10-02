@@ -331,6 +331,7 @@ py3-,
  pillow
  pip
  psutil
+ requests
  setproctitle
  toml
  typing-extensions

@@ -305,6 +305,7 @@ python3,-
  pil
  pip
  psutil
+ requests
  setproctitle
  toml
  typing-extensions
