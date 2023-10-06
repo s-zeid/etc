@@ -343,6 +343,8 @@ npm
 rust  # TODO: use rustup
 cargo,-
  doc
+shellcheck,-
+ doc
 
 # Media
 fbida-exiftran

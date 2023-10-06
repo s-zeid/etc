@@ -317,6 +317,7 @@ mypy
 nodejs
 npm
 rustc
+shellcheck
 
 # Media
 exiftran
