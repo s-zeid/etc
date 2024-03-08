@@ -1,7 +1,7 @@
 " Plugins {{{1
 
 try
- call pathogen#infect()
+  call pathogen#infect()
 catch | endtry
 set loadplugins
 
@@ -80,11 +80,11 @@ set background=light
 syn on
 
 if has("gui_running")
- hi Normal      cterm=NONE ctermbg=NONE gui=NONE guifg=White guibg=#3b3b3b
- hi Statement   term=bold ctermfg=Brown gui=bold guifg=Brown
+  hi Normal      cterm=NONE ctermbg=NONE gui=NONE guifg=White guibg=#3b3b3b
+  hi Statement   term=bold ctermfg=Brown gui=bold guifg=Brown
 else
- hi Normal      cterm=NONE ctermbg=NONE gui=NONE
- hi Statement   term=bold ctermfg=3 gui=bold guifg=Brown
+  hi Normal      cterm=NONE ctermbg=NONE gui=NONE
+  hi Statement   term=bold ctermfg=3 gui=bold guifg=Brown
 endif
 hi Comment     cterm=Bold ctermfg=Blue gui=Bold guifg=#aaaaff
 hi Constant    ctermfg=Red guifg=LightRed
@@ -111,45 +111,45 @@ hi link jsThis jsGlobalObjects
 " GUI colors {{{2
 
 if has("gui_running") && exists("*execute")
- let colors = [ "#3f3f3f", "#9ab8d7", "#60b48a", "#8cd0d3", "#c07887", "#dc8cc3", "#dfaf8f", "#dcdcdb", "#606060", "#94bff3", "#72d5a4", "#93e0e4", "#e08c9e", "#ec93d4", "#f0dfaf", "#ffffff" ]
- 
- let default_scheme = split(execute("highlight"), "\n")
- for group in default_scheme
-  if stridx(group, "=") > -1
-   let group = substitute(group, "xxx", "", "g")
-   let group = substitute(group, "gui[bf]g=[#0-9a-zA-Z]*", "", "g")
-   if stridx(group, "=") > -1
-    let group = substitute(group,  "\\(cterm\\([bf]g\\)=\\(0\\|1\\|2\\|3\\|4\\|5\\|6\\|7\\|8\\|9\\|10\\|11\\|12\\|13\\|14\\|15\\)\\) ", "\\1 gui\\2=__\\3__ ", "g")
-    if has("gui_running")
-     let i_range = range(len(colors))
-    else
-     let i_range = [0, 4, 2, 6, 1, 5, 3, 7, 8, 12, 10, 14, 9, 13, 11, 15]
+  let colors = [ "#3f3f3f", "#9ab8d7", "#60b48a", "#8cd0d3", "#c07887", "#dc8cc3", "#dfaf8f", "#dcdcdb", "#606060", "#94bff3", "#72d5a4", "#93e0e4", "#e08c9e", "#ec93d4", "#f0dfaf", "#ffffff" ]
+
+  let default_scheme = split(execute("highlight"), "\n")
+  for group in default_scheme
+    if stridx(group, "=") > -1
+      let group = substitute(group, "xxx", "", "g")
+      let group = substitute(group, "gui[bf]g=[#0-9a-zA-Z]*", "", "g")
+      if stridx(group, "=") > -1
+        let group = substitute(group,  "\\(cterm\\([bf]g\\)=\\(0\\|1\\|2\\|3\\|4\\|5\\|6\\|7\\|8\\|9\\|10\\|11\\|12\\|13\\|14\\|15\\)\\) ", "\\1 gui\\2=__\\3__ ", "g")
+        if has("gui_running")
+          let i_range = range(len(colors))
+        else
+          let i_range = [0, 4, 2, 6, 1, 5, 3, 7, 8, 12, 10, 14, 9, 13, 11, 15]
+        endif
+        for i in range(len(i_range))
+          let group = substitute(group, "__".i."__", colors[i_range[i]], "g")
+        endfor
+        execute("highlight " . group)
+      endif
     endif
-    for i in range(len(i_range))
-     let group = substitute(group, "__".i."__", colors[i_range[i]], "g")
-    endfor
-    execute("highlight " . group)
-   endif
-  endif
- endfor
+  endfor
 endif  " }}}
 
 
 " File type aliases {{{1
 
 augroup filetype_aliases
- au BufRead,BufNewFile *.gv   set filetype=dot
- au BufRead,BufNewFile *.md   set filetype=markdown
- au BufRead,BufNewFile *.bsh  set filetype=java
- au BufRead,BufNewFile *.phps set filetype=php
- au BufRead,BufNewFile *.v    set filetype=vlang
+  au BufRead,BufNewFile *.gv   set filetype=dot
+  au BufRead,BufNewFile *.md   set filetype=markdown
+  au BufRead,BufNewFile *.bsh  set filetype=java
+  au BufRead,BufNewFile *.phps set filetype=php
+  au BufRead,BufNewFile *.v    set filetype=vlang
 augroup END
 
 
 " Treat BusyBox's `/bin/sh` as a POSIX shell  #{{{1
 
 if executable("/bin/sh") && resolve("/bin/sh") =~ '\<busybox\>'
- let g:is_posix = 1
+  let g:is_posix = 1
 endif
 
 
@@ -162,11 +162,11 @@ autocmd FileType javascript,typescript : call taggedtemplate#applySyntaxMap()
 " Spell check {{{1
 
 function ToggleSpellCheck()
- if &spell == 0
-  setlocal spell
- else
-  setlocal nospell 
- endif
+  if &spell == 0
+    setlocal spell
+  else
+    setlocal nospell
+  endif
 endfunction
 
 set spelllang=en_us
@@ -179,12 +179,12 @@ hi SpellLocal term=underline ctermbg=4 gui=undercurl guisp=DarkCyan
 " Fixes Page(Up|Down) and delete keys and possibly other issues.
 
 if match($VIM, "/net\.momodalo\.app\.vimtouch/") > -1
- " Not on Vim Touch (https://github.com/momodalo/vimtouch)
- " because it will lock up
+  " Not on Vim Touch (https://github.com/momodalo/vimtouch)
+  " because it will lock up
 elseif &term == "screen-256color"
- set term=xterm-256color
+  set term=xterm-256color
 elseif &term == "screen" || match(&term, "^screen[.-].*$") > -1
- set term=xterm
+  set term=xterm
 endif
 
 
@@ -192,24 +192,24 @@ endif
 
 set bs=2
 if !has("nvim")
- fixdel
+  fixdel
 endif
 
 
 " GUI options {{{1
 
 if has("gui_running")
- set guioptions=gmLt
- 
- " Font selection
- if has("gui_gtk2")
-  set guifont=Ubuntu\ Mono\ 12,DejaVu\ Sans\ Mono\ 10,Bitstream\ Vera\ Sans\ Mono\ 10,Monospace\ 10
- elseif has("gui_win32")
-  set guifont=Ubuntu\ Mono:h12,Consolas:h11,Courier\ New:h11
- endif
- 
- " Window size
- :set columns=96 lines=29
+  set guioptions=gmLt
+
+  " Font selection
+  if has("gui_gtk2")
+    set guifont=Ubuntu\ Mono\ 12,DejaVu\ Sans\ Mono\ 10,Bitstream\ Vera\ Sans\ Mono\ 10,Monospace\ 10
+  elseif has("gui_win32")
+    set guifont=Ubuntu\ Mono:h12,Consolas:h11,Courier\ New:h11
+  endif
+
+  " Window size
+  :set columns=96 lines=29
 endif
 
 
