@@ -27,7 +27,7 @@ set indentexpr=
 set wildmenu
 
 filetype plugin indent on
-au BufRead,BufNewFile *.py set sw=1 noexpandtab
+au BufRead,BufNewFile *.py setlocal expandtab< tabstop< softtabstop< shiftwidth<
 
 
 " Custom mappings {{{1
