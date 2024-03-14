@@ -14,6 +14,7 @@ set showtabline=2
 set number
 set foldcolumn=1
 set wildmenu
+set wildoptions=pum
 
 
 " Format settings  {{{1
