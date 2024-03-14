@@ -21,12 +21,15 @@ set wildoptions=pum
 
 set shiftwidth=2
 set tabstop=8
-set noexpandtab
-set nosmartindent
-set nocindent
-set indentexpr=
+set expandtab
+" Insert real tabs on <Tab> without modifiers
+" (but not all terminals support binding <C-Tab> and <C-i>)
+inoremap <silent> <S-Tab> <Tab>
+inoremap <silent> <C-Tab> <Tab>
+inoremap <silent> <S-C-i> <Tab>
+imap <silent> <Tab> <C-v><Tab>
 
-set noautoindent
+set autoindent
 filetype plugin indent on
 au BufRead,BufNewFile *.py setlocal expandtab< tabstop< softtabstop< shiftwidth<
 
