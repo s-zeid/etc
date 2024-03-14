@@ -10,22 +10,22 @@ set loadplugins
 
 set nocompatible
 
-set foldcolumn=1
-set number
-
 set showtabline=2
+set number
+set foldcolumn=1
+set wildmenu
 
-set tabstop=8
+
+" Format settings  {{{1
+
 set shiftwidth=2
-
+set tabstop=8
 set noexpandtab
-set noautoindent
 set nosmartindent
 set nocindent
 set indentexpr=
 
-set wildmenu
-
+set noautoindent
 filetype plugin indent on
 au BufRead,BufNewFile *.py setlocal expandtab< tabstop< softtabstop< shiftwidth<
 
