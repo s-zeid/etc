@@ -158,9 +158,14 @@ endif
 
 
 " Enable HTML/CSS syntax inside ES6 tagged templates  {{{1
-" (for <https://github.com/cdata/vim-tagged-template>)
+" (for <https://github.com/Quramy/vim-js-pretty-template.git>)
 
-autocmd FileType javascript,typescript : call taggedtemplate#applySyntaxMap()
+try
+  call jspretmpl#register_tag("html", "html")
+  call jspretmpl#register_tag("css", "css")
+  autocmd FileType javascript,typescript JsPreTmpl
+catch /^Vim\%((\a\+)\)\=:E117:/
+endtry
 
 
 " Spell check {{{1
