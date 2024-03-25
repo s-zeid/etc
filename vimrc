@@ -106,7 +106,8 @@ function SyntaxConfig()
   hi LineNr      ctermfg=130 guifg=#c0795f
   hi PreProc     ctermfg=DarkCyan guifg=DarkCyan
   hi Search      ctermfg=Black ctermbg=LightCyan guifg=Black guibg=Yellow
-  hi Special     cterm=bold,underline ctermfg=Red gui=bold guifg=Red
+  hi Special     term=NONE ctermfg=141 gui=NONE guifg=#af87ff
+  hi SpecialChar cterm=bold,underline ctermfg=Red gui=bold guifg=Red
   hi SpellBad    term=reverse ctermbg=224 ctermfg=Black gui=undercurl guisp=Red
   hi SpellLocal  term=underline ctermbg=DarkBlue gui=undercurl guisp=DarkCyan
   hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=Magenta
@@ -114,7 +115,72 @@ function SyntaxConfig()
   hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray guibg=NONE
   hi TabLineFill cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE
   hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse
+  hi Title       term=NONE ctermfg=141 gui=NONE guifg=#af87ff
+  hi Underlined  term=underline cterm=underline ctermfg=141 gui=underline guifg=#af87ff
   hi Visual      ctermbg=242 guibg=#6c6c6c
+
+  " These groups use Special by default, which is semantically incorrect
+  hi link cssUnicodeEscape SpecialChar
+  hi link htmlSpecialChar SpecialChar
+  hi link javaScriptSpecial SpecialChar
+  hi link jsonEscape SpecialChar
+  hi link pythonEscape SpecialChar
+  hi link rubyStringEscape SpecialChar
+  hi link rustEscape SpecialChar
+  hi link shSpecial SpecialChar
+  hi link typeScriptSpecial SpecialChar
+  hi link vimEscape SpecialChar
+
+  " Don't highlight string delimiters separately
+  hi link jsonQuote jsonString
+  hi link rubyStringDelimiter rubyString
+  hi link shQuote shString
+
+  " JavaScript/TypeScript {{{2
+
+  " Use TypeScript syntax for JavaScript files
+  if &syntax == "javascript"
+    set syntax=typescript
+  endif
+
+  " Use correct semantics for special JavaScript names
+  hi link javaScriptFunction Operator
+  hi link javaScriptMessage Special
+  hi link javaScriptGlobal Special
+  hi link javaScriptIdentifier Special
+  hi link javaScriptMember Special
+  hi link javaScriptDeprecated Error
+  hi link typescriptGlobalMethod Special
+  hi link typescriptIdentifier Special
+  hi link typescriptBOMWindowProp Identifier
+  hi link typescriptBOMWindowMethod Identifier
+  hi link typescriptVariable Operator
+  if &syntax == "javascript"
+    syn clear javaScriptIdentifier
+    syn keyword javaScriptOperator var let
+    syn keyword javaScriptIdentifier globalThis this super arguments
+  elseif &syntax == "html"
+    syn clear javaScriptIdentifier
+    syn keyword javaScriptOperator contained var let
+    syn keyword javaScriptIdentifier contained globalThis this super arguments
+  elseif &syntax == "typescript"
+    syn keyword typescriptIdentifier
+    \ globalThis arguments console self document event history location navigator window
+  endif
+
+  " Use Identifier for TypeScript DOM attributes
+  for group in hlget()
+    if group->has_key("linksto") && group["name"]->stridx("typescript") == 0
+      if group["linksto"] == "Keyword" && group["name"] =~ '\(Prop\|Method\)$'
+        execute "hi link " . group["name"] . " Identifier"
+      endif
+    endif
+  endfor
+
+  " Don't default to Special for JavaScript in HTML
+  if &syntax == "html"
+    hi link javaScript NONE
+  endif
 
   " For <https://github.com/jonsmithers/vim-html-template-literals>
   hi link jsThis jsGlobalObjects
