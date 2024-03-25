@@ -81,6 +81,7 @@ command! Pdf execute "!pdf \"%\""
 let s:colorscheme = "default"
 set background=light
 syn on
+autocmd BufRead,BufNewFile * syn sync minlines=200 maxlines=200
 
 execute "colorscheme " . s:colorscheme
 autocmd VimEnter,BufNew,BufRead,BufNewFile,FileType,Syntax,ColorScheme * SyntaxConfig
