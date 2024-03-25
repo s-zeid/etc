@@ -97,12 +97,13 @@ function SyntaxConfig()
     hi Normal      cterm=NONE ctermbg=NONE gui=NONE
     hi Statement   term=bold ctermfg=DarkYellow gui=bold guifg=Brown
   endif
-  hi Comment     cterm=bold ctermfg=Blue gui=bold guifg=#aaaaff
+  hi Comment     term=italic cterm=italic ctermfg=Gray gui=italic guifg=#c0c0c0
   hi Constant    ctermfg=Red guifg=LightRed
   hi DiffChange  ctermbg=DarkMagenta guibg=DarkMagenta
   hi Directory   cterm=bold ctermfg=Blue gui=bold guifg=Blue
   hi FoldColumn  cterm=NONE ctermbg=NONE guibg=NONE guifg=fg
-  hi Folded      ctermfg=Blue ctermbg=242 guifg=#aaaaff guibg=#6c6c6c
+  hi Folded      term=italic cterm=italic ctermfg=Gray ctermbg=237 gui=italic guifg=#c0c0c0 guibg=#3a3a3a
+  hi Identifier  term=bold ctermfg=Blue guifg=Blue
   hi Ignore      ctermfg=Black
   hi LineNr      ctermfg=130 guifg=#c0795f
   hi PreProc     ctermfg=DarkCyan guifg=DarkCyan
@@ -118,7 +119,7 @@ function SyntaxConfig()
   hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse
   hi Title       term=NONE ctermfg=141 gui=NONE guifg=#af87ff
   hi Underlined  term=underline cterm=underline ctermfg=141 gui=underline guifg=#af87ff
-  hi Visual      ctermbg=242 guibg=#6c6c6c
+  hi Visual      ctermbg=238 guibg=#444444
 
   " These groups use Special by default, which is semantically incorrect
   hi link cssUnicodeEscape SpecialChar
