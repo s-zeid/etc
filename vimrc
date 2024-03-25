@@ -78,65 +78,73 @@ command! Pdf execute "!pdf \"%\""
 
 " Color scheme & overrides {{{1
 
-colorscheme default
-
+let s:colorscheme = "default"
 set background=light
 syn on
 
-if has("gui_running")
-  hi Normal      cterm=NONE ctermbg=NONE gui=NONE guifg=White guibg=#3b3b3b
-  hi Statement   term=bold ctermfg=Brown gui=bold guifg=Brown
-else
-  hi Normal      cterm=NONE ctermbg=NONE gui=NONE
-  hi Statement   term=bold ctermfg=3 gui=bold guifg=Brown
-endif
-hi Comment     cterm=Bold ctermfg=Blue gui=Bold guifg=#aaaaff
-hi Constant    ctermfg=Red guifg=LightRed
-hi DiffChange  ctermbg=DarkMagenta guibg=DarkMagenta
-hi Directory   cterm=Bold ctermfg=Blue gui=Bold guifg=Blue
-hi FoldColumn  cterm=NONE ctermbg=NONE guibg=NONE guifg=fg
-hi Folded      ctermfg=Blue ctermbg=242 guifg=#aaaaff guibg=#6c6c6c
-hi Ignore      ctermfg=Black
-hi LineNr      ctermfg=130 guifg=#c0795f
-hi PreProc     ctermfg=DarkCyan guifg=DarkCyan
-hi Search      ctermfg=Black ctermbg=LightCyan guifg=Black guibg=Yellow
-hi Special     cterm=Bold,Underline ctermfg=Red gui=Bold guifg=Red
-hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=Magenta
-hi SpecialKey  cterm=Bold ctermfg=Blue gui=Bold guifg=Blue
-hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray guibg=NONE
-hi TabLineFill cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE
-hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse
-hi Visual      ctermbg=242 guibg=#6c6c6c
+execute "colorscheme " . s:colorscheme
+autocmd VimEnter,BufNew,BufRead,BufNewFile,FileType,Syntax,ColorScheme * SyntaxConfig
+command SyntaxConfig : call SyntaxConfig()
+function SyntaxConfig()
+  if g:colors_name != "default"
+    return
+  endif
+  if has("gui_running")
+    hi Normal      cterm=NONE ctermbg=NONE gui=NONE guifg=White guibg=#3b3b3b
+    hi Statement   term=bold ctermfg=Brown gui=bold guifg=Brown
+  else
+    hi Normal      cterm=NONE ctermbg=NONE gui=NONE
+    hi Statement   term=bold ctermfg=DarkYellow gui=bold guifg=Brown
+  endif
+  hi Comment     cterm=bold ctermfg=Blue gui=bold guifg=#aaaaff
+  hi Constant    ctermfg=Red guifg=LightRed
+  hi DiffChange  ctermbg=DarkMagenta guibg=DarkMagenta
+  hi Directory   cterm=bold ctermfg=Blue gui=bold guifg=Blue
+  hi FoldColumn  cterm=NONE ctermbg=NONE guibg=NONE guifg=fg
+  hi Folded      ctermfg=Blue ctermbg=242 guifg=#aaaaff guibg=#6c6c6c
+  hi Ignore      ctermfg=Black
+  hi LineNr      ctermfg=130 guifg=#c0795f
+  hi PreProc     ctermfg=DarkCyan guifg=DarkCyan
+  hi Search      ctermfg=Black ctermbg=LightCyan guifg=Black guibg=Yellow
+  hi Special     cterm=bold,underline ctermfg=Red gui=bold guifg=Red
+  hi SpellBad    term=reverse ctermbg=224 ctermfg=Black gui=undercurl guisp=Red
+  hi SpellLocal  term=underline ctermbg=DarkBlue gui=undercurl guisp=DarkCyan
+  hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=Magenta
+  hi SpecialKey  cterm=bold ctermfg=Blue gui=bold guifg=Blue
+  hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray guibg=NONE
+  hi TabLineFill cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE
+  hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse
+  hi Visual      ctermbg=242 guibg=#6c6c6c
 
-" For <https://github.com/jonsmithers/vim-html-template-literals>
-hi link jsThis jsGlobalObjects
+  " For <https://github.com/jonsmithers/vim-html-template-literals>
+  hi link jsThis jsGlobalObjects
 
+  " GUI colors {{{2
 
-" GUI colors {{{2
+  if has("gui_running") && exists("*execute")
+    let colors = [ "#3f3f3f", "#9ab8d7", "#60b48a", "#8cd0d3", "#c07887", "#dc8cc3", "#dfaf8f", "#dcdcdb", "#606060", "#94bff3", "#72d5a4", "#93e0e4", "#e08c9e", "#ec93d4", "#f0dfaf", "#ffffff" ]
 
-if has("gui_running") && exists("*execute")
-  let colors = [ "#3f3f3f", "#9ab8d7", "#60b48a", "#8cd0d3", "#c07887", "#dc8cc3", "#dfaf8f", "#dcdcdb", "#606060", "#94bff3", "#72d5a4", "#93e0e4", "#e08c9e", "#ec93d4", "#f0dfaf", "#ffffff" ]
-
-  let default_scheme = split(execute("highlight"), "\n")
-  for group in default_scheme
-    if stridx(group, "=") > -1
-      let group = substitute(group, "xxx", "", "g")
-      let group = substitute(group, "gui[bf]g=[#0-9a-zA-Z]*", "", "g")
+    let default_scheme = split(execute("highlight"), "\n")
+    for group in default_scheme
       if stridx(group, "=") > -1
-        let group = substitute(group,  "\\(cterm\\([bf]g\\)=\\(0\\|1\\|2\\|3\\|4\\|5\\|6\\|7\\|8\\|9\\|10\\|11\\|12\\|13\\|14\\|15\\)\\) ", "\\1 gui\\2=__\\3__ ", "g")
-        if has("gui_running")
-          let i_range = range(len(colors))
-        else
-          let i_range = [0, 4, 2, 6, 1, 5, 3, 7, 8, 12, 10, 14, 9, 13, 11, 15]
+        let group = substitute(group, "xxx", "", "g")
+        let group = substitute(group, "gui[bf]g=[#0-9a-zA-Z]*", "", "g")
+        if stridx(group, "=") > -1
+          let group = substitute(group,  "\\(cterm\\([bf]g\\)=\\(0\\|1\\|2\\|3\\|4\\|5\\|6\\|7\\|8\\|9\\|10\\|11\\|12\\|13\\|14\\|15\\)\\) ", "\\1 gui\\2=__\\3__ ", "g")
+          if has("gui_running")
+            let i_range = range(len(colors))
+          else
+            let i_range = [0, 4, 2, 6, 1, 5, 3, 7, 8, 12, 10, 14, 9, 13, 11, 15]
+          endif
+          for i in range(len(i_range))
+            let group = substitute(group, "__".i."__", colors[i_range[i]], "g")
+          endfor
+          execute("highlight " . group)
         endif
-        for i in range(len(i_range))
-          let group = substitute(group, "__".i."__", colors[i_range[i]], "g")
-        endfor
-        execute("highlight " . group)
       endif
-    endif
-  endfor
-endif  " }}}
+    endfor
+  endif  " }}}
+endfunction
 
 
 " File type aliases {{{1
@@ -180,8 +188,6 @@ endfunction
 
 set spelllang=en_us
 nmap <silent> zs :call ToggleSpellCheck()<CR>
-hi SpellBad term=reverse ctermbg=224 ctermfg=0 gui=undercurl guisp=Red
-hi SpellLocal term=underline ctermbg=4 gui=undercurl guisp=DarkCyan
 
 
 " Set term to xterm when running under GNU screen. {{{1
