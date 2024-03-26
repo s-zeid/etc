@@ -70,6 +70,10 @@ nmap <silent> <C-End>  gt
 vmap <silent> <C-End>  gt
 imap <silent> <C-End>  <C-o>gt<Esc>
 
+" Fix command mode popup menu arrow keys in Neovim (cannot use <silent> here)
+cnoremap <Up> <C-p>
+cnoremap <Down> <C-n>
+
 
 " Custom commands {{{1
 
@@ -86,26 +90,9 @@ autocmd BufRead,BufNewFile * syn sync minlines=200 maxlines=200
 " GUI color palette {{{2
 
 " Adwaita Dark
-  " "black", "red", "green", "yellow", "blue", "magenta", "cyan", "lightgray",
-  " "darkgray", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
 let g:PaletteANSI = [
-\ "#241F31",
-\ "#C01C28",
-\ "#2EC27E",
-\ "#F5C211",
-\ "#1E78E4",
-\ "#9841BB",
-\ "#0AB9DC",
-\ "#C0BFBC",
-\
-\ "#5E5C64",
-\ "#ED333B",
-\ "#57E389",
-\ "#F8E45C",
-\ "#51A1FF",
-\ "#C061CB",
-\ "#4FD2FD",
-\ "#F6F5F4",
+\ "#241F31", "#C01C28", "#2EC27E", "#F5C211", "#1E78E4", "#9841BB", "#0AB9DC", "#C0BFBC",
+\ "#5E5C64", "#ED333B", "#57E389", "#F8E45C", "#51A1FF", "#C061CB", "#4FD2FD", "#F6F5F4",
 \]
 let g:PaletteNormal = {
 \ "Background": "#1E1E1E",
@@ -123,51 +110,55 @@ let g:PaletteExtras = {
 
 command SyntaxColors : call SyntaxColors()
 function SyntaxColors()
-  if g:colors_name != "default"
+  if execute("colorscheme")->trim() != "default"
     return
   endif
 
-  " This defines the GUI color `:ColorName` for each of the above palette
-  " colors and `!ColorName` for each original value.  It then rewrites existing
-  " highlight groups using `ColorName` (with no `:` or `!`) to use `:ColorName`.
-  " (`g:PaletteNormal` corresponds to `:Background` and `:Foreground`.)
-  call PaletteApply()
-
   " Default background/foreground colors {{{2
+  hi Normal cterm=NONE ctermbg=NONE gui=NONE
   if has("gui_running")
-    hi Normal    cterm=NONE ctermbg=NONE gui=NONE guifg=:Foreground guibg=:Background
-  else
-    hi Normal    cterm=NONE ctermbg=NONE gui=NONE
+    execute "highlight Normal guibg=" . g:PaletteNormal["Background"]
+    execute "highlight Normal guifg=" . g:PaletteNormal["Foreground"]
   endif
 
   " Highlight groups {{{2
-  hi Comment     term=italic cterm=italic ctermfg=Gray gui=italic guifg=:Gray
-  hi Constant    ctermfg=Red guifg=:Red
-  hi DiffChange  ctermbg=DarkMagenta guibg=:DarkMagenta
-  hi Directory   cterm=bold ctermfg=Blue gui=bold guifg=:Blue
-  hi FoldColumn  cterm=NONE ctermbg=NONE guibg=NONE guifg=fg
-  hi Folded      term=italic cterm=italic ctermfg=Gray ctermbg=237 gui=italic guifg=:Gray guibg=#3a3a3a
-  hi Identifier  term=bold ctermfg=Blue guifg=:Blue
+  hi Comment     term=italic cterm=italic ctermfg=Gray gui=italic guifg=Gray66
+  hi Constant    ctermfg=Red guifg=Red
+  hi DiffChange  ctermbg=DarkMagenta guibg=DarkMagenta
+  hi Directory   cterm=bold ctermfg=Blue gui=bold guifg=Blue
+  hi FoldColumn  cterm=NONE ctermfg=DarkBlue ctermbg=NONE guibg=NONE guifg=DarkBlue
+  hi Folded      term=italic cterm=italic ctermfg=Gray ctermbg=237 gui=italic guifg=Gray66 guibg=Gray23
+  hi Identifier  term=bold ctermfg=Blue guifg=Blue
   hi Ignore      ctermfg=Black
   hi LineNr      ctermfg=130 guifg=#af5f00
-  hi PreProc     ctermfg=DarkCyan guifg=:DarkCyan
-  hi Search      ctermfg=Black ctermbg=LightCyan guifg=:Black guibg=:LightCyan
-  hi Special     term=NONE ctermfg=141 guifg=:Violet
-  hi SpecialChar cterm=bold,underline ctermfg=Red gui=bold guifg=:Red
-  hi SpellBad    term=reverse ctermbg=224 ctermfg=Black gui=undercurl guisp=:Red
-  hi SpellLocal  term=underline ctermbg=DarkBlue gui=undercurl guisp=:DarkCyan
-  hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=:Magenta
-  hi SpecialKey  cterm=bold ctermfg=Blue gui=bold guifg=:Blue
-  hi Statement   term=bold cterm=NONE ctermfg=DarkYellow gui=NONE guifg=:DarkYellow
-  hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE guibg=NONE guifg=:Gray
-  hi TabLineFill cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE guibg=NONE guifg=:Gray
+  hi Pmenu       ctermfg=Black ctermbg=225 guifg=Black guibg=#ffd7ff
+  hi PreProc     ctermfg=DarkCyan guifg=DarkCyan
+  hi Search      ctermfg=Black ctermbg=LightCyan guifg=Black guibg=LightCyan
+  hi Special     term=NONE ctermfg=141 guifg=Violet
+  hi SpecialChar cterm=bold,underline ctermfg=Red gui=bold guifg=Red
+  hi SpellBad    term=reverse ctermbg=224 ctermfg=Black gui=undercurl guisp=Red
+  hi SpellLocal  term=underline ctermbg=DarkBlue gui=undercurl guisp=DarkCyan
+  hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=Magenta
+  hi SpecialKey  cterm=bold ctermfg=Blue gui=bold guifg=Blue
+  hi Statement   term=bold cterm=NONE ctermfg=DarkYellow gui=NONE guifg=DarkYellow
+  hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE guibg=NONE guifg=Gray66
   hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse guibg=NONE
-  hi Title       term=NONE cterm=NONE ctermfg=141 gui=NONE guifg=:Violet
-  hi Type        term=NONE cterm=NONE ctermfg=DarkGreen gui=NONE guifg=:DarkGreen
+  hi Title       term=NONE cterm=NONE ctermfg=141 gui=NONE guifg=Violet
+  hi Type        term=NONE cterm=NONE ctermfg=DarkGreen gui=NONE guifg=DarkGreen
   hi Underlined  term=underline cterm=underline ctermfg=141 gui=underline guifg=#af87ff
-  hi Visual      ctermbg=238 guibg=#444444
+  hi Visual      ctermbg=238 guibg=Gray27
+
+  hi! link StatusLine Normal
+  hi! link TabLineFill TabLine
 
   " }}}
+
+  " In Vim, this defines the GUI color `:ColorName` for each of the palette
+  " colors and `!ColorName` for each original value.  It then rewrites existing
+  " highlight groups using `ColorName` (with no `:` or `!`) to use `:ColorName`.
+  " (`g:PaletteNormal` corresponds to `:Background` and `:Foreground`.)
+  " In Neovim, it rewrites the highlight groups to use the color value directly.
+  call PaletteApply()
 endfunction
 
 command SyntaxFixes : call SyntaxFixes()
@@ -224,13 +215,7 @@ function SyntaxFixes()
   endif
 
   " Use Identifier for TypeScript DOM attributes
-  for group in hlget()
-    if group->has_key("linksto") && group["name"]->stridx("typescript") == 0
-      if group["linksto"] == "Keyword" && group["name"] =~ '\(Prop\|Method\)$'
-        execute "hi link " . group["name"] . " Identifier"
-      endif
-    endif
-  endfor
+  call SyntaxLinkMatch('^typescript.*\(Prop\|Method\)$', '^Keyword$', "Identifier")
 
   " Don't default to Special for JavaScript in HTML
   if &syntax == "html"
@@ -251,12 +236,28 @@ function SyntaxConfig()
   call SyntaxFixes()
 endfunction
 
+function SyntaxLinkMatch(name_match, group_match, new_group)  " {{{2
+  if has("nvim")
+    let groups = nvim_get_hl(0, [])->items()
+  else
+    let groups = hlget()->mapnew("[v:val['name'], v:val]")
+  endif
+  for [name, group] in groups
+    let link_group = group->get("link", group->get("linksto", ""))
+    if !empty(link_group)
+      if link_group =~ a:group_match && name =~ a:name_match
+        execute ["hi", "link", name, a:new_group]->join(" ")
+      endif
+    endif
+  endfor
+endfunction
+
 command PaletteApply : call PaletteApply()  " {{{2
 function PaletteApply(
-  palette_ansi = v:null,
-  palette_normal = v:null,
-  palette_extras = v:null,
-)
+\ palette_ansi = v:null,
+\ palette_normal = v:null,
+\ palette_extras = v:null,
+\)
   let color_names_canonical = [
   \ "black", "darkred", "darkgreen", "darkyellow", "darkblue", "darkmagenta", "darkcyan",
   \ "lightgray", "darkgray", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
@@ -265,13 +266,12 @@ function PaletteApply(
 
   " color_names_canonical => { name: aliases, ... }
   let color_name_aliases = {}
-  for [index, name] in color_names_canonical->items()
+  for index in range(len(color_names_canonical))
+    let name = color_names_canonical[index]
     let color_name_aliases[name] = []
     let color_name_aliases[name] += [name->substitute("gray", "grey", "")]
     if name == "darkgreen"
       let color_name_aliases[name] += ["seagreen"]
-    elseif name == "lightgray"
-      let color_name_aliases[name] += ["gray", "grey"]
     elseif index >= 9 && index <= 14
       let color_name_aliases[name] += ["light" . name]
       if name == "magenta"
@@ -317,7 +317,8 @@ function PaletteApply(
 
   let palette_list = palette_parts.ansi + palette_parts.normal + palette_parts.extras
   let palette_dict = {}
-  for [index, name] in color_names_canonical->items()
+  for index in range(len(color_names_canonical))
+    let name = color_names_canonical[index]
     let value = palette_list[index]
     let palette_dict[name] = value
     for alias in color_name_aliases[name]
@@ -325,22 +326,47 @@ function PaletteApply(
     endfor
   endfor
 
-  for [name, value] in palette_dict->items()
-    let v:colornames["!" . name] = v:colornames->get(name, value)
-    let v:colornames[":" . name] = value
-  endfor
-
   " Rewrite existing highlight groups which use the built-in GUI color names
-  for group in hlget()
-    for key in ["guifg", "guibg", "guisp"]
-      if group->has_key(key)
-        let color_name = group[key]->tolower()
-        if palette_dict->has_key(color_name)
-          call hlset([{ "name": group["name"], key: ":" . color_name }])
+  if !has("nvim")
+    " Vim allows defining new color names, so define ":ColorName" for the new
+    " value and "!ColorName" for the original value.
+    for [name, value] in palette_dict->items()
+      let v:colornames["!" . name] = v:colornames->get(name, value)
+      let v:colornames[":" . name] = value
+    endfor
+    for group in hlget()
+      for key in ["guifg", "guibg", "guisp"]
+        if group->has_key(key)
+          let value = group[key]->tolower()
+          if palette_dict->has_key(value)
+            call hlset([{ "name": group["name"], key: ":" . value }])
+          endif
+        endif
+      endfor
+    endfor
+  else
+    " Neovim does not allow defining new color names, so the new value must
+    " be used directly.  Neovim also does not support hlget() and does not
+    " return color names in its equivalent function, so we must use the
+    " `highlight` command instead, in order to override _only_ named colors.
+    for line in execute("highlight")->trim()->split('\r\?\n\s\@!')
+      let parts = line->trim()->split('\s\+')
+      if len(parts) >= 3
+        let [name, example; spec] = parts
+        if ["cleared", "links"]->index(spec[0]) == -1 && spec->index("links") == -1
+          for index in range(len(spec))
+            if spec[index]->stridx("=") > -1
+              let [key, value] = spec[index]->split("=")->map("v:val->tolower()")
+              if ["guifg", "guibg", "guisp"]->index(key) > -1
+                let spec[index] = [key, palette_dict->get(value, value)]->join("=")
+              endif
+            endif
+          endfor
+          call execute(["highlight", name, spec->join(" ")]->join(" "), "")
         endif
       endif
     endfor
-  endfor
+  endif
 
   let g:PaletteAsDict = palette_dict
   let g:PaletteAsList = palette_list
