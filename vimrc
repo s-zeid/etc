@@ -16,6 +16,20 @@ set foldcolumn=1
 set wildmenu
 set wildoptions=pum
 
+" Cursor shape
+try
+  let s:blink = "-blinkwait800-blinkon800-blinkoff800"
+  let &guicursor = "n-v-c-sm:block-blinkon0"  " Normal: block, not blinking
+  let &guicursor .= ",i-ci-ve:ver10" . s:blink  " Insert: vertical bar
+  let &guicursor .= ",r-cr-o:block" . s:blink  " Replace: block
+catch /^Vim\%((\a\+)\)\=:E\(355\|518\):/
+endtry
+if &term =~ 'xterm\|rxvt\|tmux\|screen' && !has("nvim")
+  let &t_SI .= "\e[5 q"
+  let &t_SR .= "\e[1 q"
+  let &t_EI .= "\e[2 q"
+endif
+
 
 " Format settings  {{{1
 
