@@ -70,6 +70,9 @@ nmap <silent> <C-End>  gt
 vmap <silent> <C-End>  gt
 imap <silent> <C-End>  <C-o>gt<Esc>
 
+" End search highlighting
+noremap <silent> <Esc> :nohlsearch<CR><Esc>
+
 " Fix command mode popup menu arrow keys in Neovim (cannot use <silent> here)
 cnoremap <Up> <C-p>
 cnoremap <Down> <C-n>
