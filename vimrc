@@ -78,48 +78,101 @@ command! Pdf execute "!pdf \"%\""
 
 " Color scheme & overrides {{{1
 
-let s:colorscheme = "default"
+colorscheme default
 set background=light
 syn on
 autocmd BufRead,BufNewFile * syn sync minlines=200 maxlines=200
 
-execute "colorscheme " . s:colorscheme
-autocmd VimEnter,BufNew,BufRead,BufNewFile,FileType,Syntax,ColorScheme * SyntaxConfig
-command SyntaxConfig : call SyntaxConfig()
-function SyntaxConfig()
+" GUI color palette {{{2
+
+" Adwaita Dark
+  " "black", "red", "green", "yellow", "blue", "magenta", "cyan", "lightgray",
+  " "darkgray", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
+let g:PaletteANSI = [
+\ "#241F31",
+\ "#C01C28",
+\ "#2EC27E",
+\ "#F5C211",
+\ "#1E78E4",
+\ "#9841BB",
+\ "#0AB9DC",
+\ "#C0BFBC",
+\
+\ "#5E5C64",
+\ "#ED333B",
+\ "#57E389",
+\ "#F8E45C",
+\ "#51A1FF",
+\ "#C061CB",
+\ "#4FD2FD",
+\ "#F6F5F4",
+\]
+let g:PaletteNormal = {
+\ "Background": "#1E1E1E",
+\ "Foreground": "#FFFFFF",
+\}
+
+" XTerm
+let g:PaletteExtras = {
+\ "Brown": "#AF5F00",
+\ "Orange": "#FF8700",
+\ "Violet": "#AF87FF",
+\}
+
+" }}}
+
+command SyntaxColors : call SyntaxColors()
+function SyntaxColors()
   if g:colors_name != "default"
     return
   endif
+
+  " This defines the GUI color `:ColorName` for each of the above palette
+  " colors and `!ColorName` for each original value.  It then rewrites existing
+  " highlight groups using `ColorName` (with no `:` or `!`) to use `:ColorName`.
+  " (`g:PaletteNormal` corresponds to `:Background` and `:Foreground`.)
+  call PaletteApply()
+
+  " Default background/foreground colors {{{2
   if has("gui_running")
-    hi Normal      cterm=NONE ctermbg=NONE gui=NONE guifg=White guibg=#3b3b3b
-    hi Statement   term=bold ctermfg=Brown gui=bold guifg=Brown
+    hi Normal    cterm=NONE ctermbg=NONE gui=NONE guifg=:Foreground guibg=:Background
   else
-    hi Normal      cterm=NONE ctermbg=NONE gui=NONE
-    hi Statement   term=bold ctermfg=DarkYellow gui=bold guifg=Brown
+    hi Normal    cterm=NONE ctermbg=NONE gui=NONE
   endif
-  hi Comment     term=italic cterm=italic ctermfg=Gray gui=italic guifg=#c0c0c0
-  hi Constant    ctermfg=Red guifg=LightRed
-  hi DiffChange  ctermbg=DarkMagenta guibg=DarkMagenta
-  hi Directory   cterm=bold ctermfg=Blue gui=bold guifg=Blue
+
+  " Highlight groups {{{2
+  hi Comment     term=italic cterm=italic ctermfg=Gray gui=italic guifg=:Gray
+  hi Constant    ctermfg=Red guifg=:Red
+  hi DiffChange  ctermbg=DarkMagenta guibg=:DarkMagenta
+  hi Directory   cterm=bold ctermfg=Blue gui=bold guifg=:Blue
   hi FoldColumn  cterm=NONE ctermbg=NONE guibg=NONE guifg=fg
-  hi Folded      term=italic cterm=italic ctermfg=Gray ctermbg=237 gui=italic guifg=#c0c0c0 guibg=#3a3a3a
-  hi Identifier  term=bold ctermfg=Blue guifg=Blue
+  hi Folded      term=italic cterm=italic ctermfg=Gray ctermbg=237 gui=italic guifg=:Gray guibg=#3a3a3a
+  hi Identifier  term=bold ctermfg=Blue guifg=:Blue
   hi Ignore      ctermfg=Black
-  hi LineNr      ctermfg=130 guifg=#c0795f
-  hi PreProc     ctermfg=DarkCyan guifg=DarkCyan
-  hi Search      ctermfg=Black ctermbg=LightCyan guifg=Black guibg=Yellow
-  hi Special     term=NONE ctermfg=141 gui=NONE guifg=#af87ff
-  hi SpecialChar cterm=bold,underline ctermfg=Red gui=bold guifg=Red
-  hi SpellBad    term=reverse ctermbg=224 ctermfg=Black gui=undercurl guisp=Red
-  hi SpellLocal  term=underline ctermbg=DarkBlue gui=undercurl guisp=DarkCyan
-  hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=Magenta
-  hi SpecialKey  cterm=bold ctermfg=Blue gui=bold guifg=Blue
-  hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray guibg=NONE
-  hi TabLineFill cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE
-  hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse
-  hi Title       term=NONE ctermfg=141 gui=NONE guifg=#af87ff
+  hi LineNr      ctermfg=130 guifg=#af5f00
+  hi PreProc     ctermfg=DarkCyan guifg=:DarkCyan
+  hi Search      ctermfg=Black ctermbg=LightCyan guifg=:Black guibg=:LightCyan
+  hi Special     term=NONE ctermfg=141 guifg=:Violet
+  hi SpecialChar cterm=bold,underline ctermfg=Red gui=bold guifg=:Red
+  hi SpellBad    term=reverse ctermbg=224 ctermfg=Black gui=undercurl guisp=:Red
+  hi SpellLocal  term=underline ctermbg=DarkBlue gui=undercurl guisp=:DarkCyan
+  hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=:Magenta
+  hi SpecialKey  cterm=bold ctermfg=Blue gui=bold guifg=:Blue
+  hi Statement   term=bold cterm=NONE ctermfg=DarkYellow gui=NONE guifg=:DarkYellow
+  hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE guibg=NONE guifg=:Gray
+  hi TabLineFill cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE guibg=NONE guifg=:Gray
+  hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse guibg=NONE
+  hi Title       term=NONE cterm=NONE ctermfg=141 gui=NONE guifg=:Violet
+  hi Type        term=NONE cterm=NONE ctermfg=DarkGreen gui=NONE guifg=:DarkGreen
   hi Underlined  term=underline cterm=underline ctermfg=141 gui=underline guifg=#af87ff
   hi Visual      ctermbg=238 guibg=#444444
+
+  " }}}
+endfunction
+
+command SyntaxFixes : call SyntaxFixes()
+function SyntaxFixes()
+  " General fixes {{{2
 
   " These groups use Special by default, which is semantically incorrect
   hi link cssUnicodeEscape SpecialChar
@@ -187,32 +240,114 @@ function SyntaxConfig()
   " For <https://github.com/jonsmithers/vim-html-template-literals>
   hi link jsThis jsGlobalObjects
 
-  " GUI colors {{{2
+  " }}}
+endfunction
 
-  if has("gui_running") && exists("*execute")
-    let colors = [ "#3f3f3f", "#9ab8d7", "#60b48a", "#8cd0d3", "#c07887", "#dc8cc3", "#dfaf8f", "#dcdcdb", "#606060", "#94bff3", "#72d5a4", "#93e0e4", "#e08c9e", "#ec93d4", "#f0dfaf", "#ffffff" ]
+" Add autocmd to apply the above syntax settings
+autocmd VimEnter,BufNew,BufRead,BufNewFile,FileType,Syntax,ColorScheme * SyntaxConfig
+command SyntaxConfig : call SyntaxConfig()
+function SyntaxConfig()
+  call SyntaxColors()
+  call SyntaxFixes()
+endfunction
 
-    let default_scheme = split(execute("highlight"), "\n")
-    for group in default_scheme
-      if stridx(group, "=") > -1
-        let group = substitute(group, "xxx", "", "g")
-        let group = substitute(group, "gui[bf]g=[#0-9a-zA-Z]*", "", "g")
-        if stridx(group, "=") > -1
-          let group = substitute(group,  "\\(cterm\\([bf]g\\)=\\(0\\|1\\|2\\|3\\|4\\|5\\|6\\|7\\|8\\|9\\|10\\|11\\|12\\|13\\|14\\|15\\)\\) ", "\\1 gui\\2=__\\3__ ", "g")
-          if has("gui_running")
-            let i_range = range(len(colors))
-          else
-            let i_range = [0, 4, 2, 6, 1, 5, 3, 7, 8, 12, 10, 14, 9, 13, 11, 15]
+command PaletteApply : call PaletteApply()  " {{{2
+function PaletteApply(
+  palette_ansi = v:null,
+  palette_normal = v:null,
+  palette_extras = v:null,
+)
+  let color_names_canonical = [
+  \ "black", "darkred", "darkgreen", "darkyellow", "darkblue", "darkmagenta", "darkcyan",
+  \ "lightgray", "darkgray", "red", "green", "yellow", "blue", "magenta", "cyan", "white",
+  \ "background", "foreground", "brown", "orange", "violet",
+  \]
+
+  " color_names_canonical => { name: aliases, ... }
+  let color_name_aliases = {}
+  for [index, name] in color_names_canonical->items()
+    let color_name_aliases[name] = []
+    let color_name_aliases[name] += [name->substitute("gray", "grey", "")]
+    if name == "darkgreen"
+      let color_name_aliases[name] += ["seagreen"]
+    elseif name == "lightgray"
+      let color_name_aliases[name] += ["gray", "grey"]
+    elseif index >= 9 && index <= 14
+      let color_name_aliases[name] += ["light" . name]
+      if name == "magenta"
+        let color_name_aliases[name] += ["purple"]
+      endif
+    elseif name == "violet"
+      let color_name_aliases[name] += ["slateblue"]
+    endif
+  endfor
+
+  let palette_parts = #{
+  \ ansi: !empty(a:palette_ansi) ? a:palette_ansi
+  \ : (exists("g:PaletteANSI") ? g:PaletteANSI : []),
+  \ normal: !empty(a:palette_normal) ? a:palette_normal
+  \ : (exists("g:PaletteNormal") ? g:PaletteNormal : []),
+  \ extras: !empty(a:palette_extras) ? a:palette_extras
+  \ : (exists("g:PaletteExtras") ? g:PaletteExtras : []),
+  \}
+
+  " Convert palette dictionaries to lists,
+  " sorted by the order given in color_names_canonical
+  for [name, part] in palette_parts->items()
+    if type(part) == v:t_dict
+      let part_lower = {}
+      for [key, value] in part->items()
+        let key_index = color_names_canonical->index(key->tolower()->trim(":", 1))
+        if key_index > -1
+          let part_lower[color_names_canonical[key_index]] = value
+        endif
+      endfor
+      let part_list = []
+      for key in color_names_canonical
+        for alias in [key] + color_name_aliases[key]
+          if part_lower->has_key(alias)
+            let part_list += [part_lower[key]]
+            break
           endif
-          for i in range(len(i_range))
-            let group = substitute(group, "__".i."__", colors[i_range[i]], "g")
-          endfor
-          execute("highlight " . group)
+        endfor
+      endfor
+      let palette_parts[name] = part_list
+    endif
+  endfor
+
+  let palette_list = palette_parts.ansi + palette_parts.normal + palette_parts.extras
+  let palette_dict = {}
+  for [index, name] in color_names_canonical->items()
+    let value = palette_list[index]
+    let palette_dict[name] = value
+    for alias in color_name_aliases[name]
+      let palette_dict[alias] = value
+    endfor
+  endfor
+
+  for [name, value] in palette_dict->items()
+    let v:colornames["!" . name] = v:colornames->get(name, value)
+    let v:colornames[":" . name] = value
+  endfor
+
+  " Rewrite existing highlight groups which use the built-in GUI color names
+  for group in hlget()
+    for key in ["guifg", "guibg", "guisp"]
+      if group->has_key(key)
+        let color_name = group[key]->tolower()
+        if palette_dict->has_key(color_name)
+          call hlset([{ "name": group["name"], key: ":" . color_name }])
         endif
       endif
     endfor
-  endif  " }}}
-endfunction
+  endfor
+
+  let g:PaletteAsDict = palette_dict
+  let g:PaletteAsList = palette_list
+  let g:PaletteNames = color_name_aliases
+  let g:PaletteNamesCanonical = color_names_canonical
+  return palette_dict
+endfunction  " }}}
 
 
 " File type aliases {{{1
