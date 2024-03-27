@@ -246,7 +246,7 @@ function SyntaxFixes()
 endfunction
 
 " Add autocmd to apply the above syntax settings
-autocmd VimEnter,BufNew,BufRead,BufNewFile,FileType,Syntax,ColorScheme * SyntaxConfig
+autocmd VimEnter,Syntax,ColorScheme * SyntaxConfig
 command SyntaxConfig : call SyntaxConfig()
 function SyntaxConfig()
   call SyntaxColors()
