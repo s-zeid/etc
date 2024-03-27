@@ -102,7 +102,7 @@ command! Pdf execute "!pdf \"%\""
 colorscheme default
 set background=light
 syn on
-autocmd BufRead,BufNewFile * syn sync minlines=200 maxlines=200
+autocmd BufRead,BufNewFile,Syntax * syn sync fromstart
 
 " GUI color palette {{{2
 
