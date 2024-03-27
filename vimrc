@@ -242,6 +242,17 @@ function SyntaxFixes()
   " For <https://github.com/jonsmithers/vim-html-template-literals>
   hi link jsThis jsGlobalObjects
 
+  " PHP {{{2
+
+  " echo, print; should not be used with function syntax
+  hi link phpDefine Statement
+  " Language constructs normally used with function syntax,
+  " but also magic class methods (starting with `__`)
+  hi link phpSpecialFunction Special
+  hi link phpExit Special
+  syn keyword phpExit contained exit die
+  syn cluster phpClConst add=phpExit
+
   " }}}
 endfunction
 
