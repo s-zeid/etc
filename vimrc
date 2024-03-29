@@ -297,8 +297,9 @@ function PaletteApply(
   for index in range(len(color_names_canonical))
     let name = color_names_canonical[index]
     let color_name_aliases[name] = []
-    let color_name_aliases[name] += [name->substitute("gray", "grey", "")]
-    if name == "darkgreen"
+    if name =~ "gray"
+      let color_name_aliases[name] += [name->substitute("gray", "grey", "")]
+    elseif name == "darkgreen"
       let color_name_aliases[name] += ["seagreen"]
     elseif index >= 9 && index <= 14
       let color_name_aliases[name] += ["light" . name]
@@ -319,45 +320,39 @@ function PaletteApply(
   \ : (exists("g:PaletteExtras") ? g:PaletteExtras : []),
   \}
 
-  " Convert palette dictionaries to lists,
-  " sorted by the order given in color_names_canonical
+  " Convert ANSI palette to a dictionary if it is a list
+  if type(palette_parts["ansi"]) == v:t_list
+    let part_dict = {}
+    for index in range(16)
+      let part_dict[color_names_canonical[index]] = palette_parts["ansi"][index]
+    endfor
+    let palette_parts["ansi"] = part_dict
+  endif
+
+  " Rewrite palette parts and build palette dictionary using canonical names
+  let palette_dict = {}
   for [name, part] in palette_parts->items()
     if type(part) == v:t_dict
       let part_lower = {}
       for [key, value] in part->items()
-        let key_index = color_names_canonical->index(key->tolower()->trim(":", 1))
-        if key_index > -1
-          let part_lower[color_names_canonical[key_index]] = value
+        let key_canonical = key->tolower()->trim(":", 1)
+        if color_names_canonical->index(key_canonical)
+          let part_lower[key_canonical] = value
+          let palette_dict[key_canonical] = value
+          for alias in color_name_aliases[key_canonical]
+            let palette_dict[alias] = value
+          endfor
         endif
       endfor
-      let part_list = []
-      for key in color_names_canonical
-        for alias in [key] + color_name_aliases[key]
-          if part_lower->has_key(alias)
-            let part_list += [part_lower[key]]
-            break
-          endif
-        endfor
-      endfor
-      let palette_parts[name] = part_list
+      let palette_parts[name] = part_lower
     endif
-  endfor
-
-  let palette_list = palette_parts.ansi + palette_parts.normal + palette_parts.extras
-  let palette_dict = {}
-  for index in range(len(color_names_canonical))
-    let name = color_names_canonical[index]
-    let value = palette_list[index]
-    let palette_dict[name] = value
-    for alias in color_name_aliases[name]
-      let palette_dict[alias] = value
-    endfor
   endfor
 
   " Rewrite existing highlight groups which use the built-in GUI color names
   if !has("nvim")
     " Vim allows defining new color names, so define ":ColorName" for the new
-    " value and "!ColorName" for the original value.
+    " value and "!ColorName" for the original value.  We cannot parse the
+    " output of `highlight` because Vim color names may contain spaces.
     for [name, value] in palette_dict->items()
       let v:colornames["!" . name] = v:colornames->get(name, value)
       let v:colornames[":" . name] = value
@@ -396,10 +391,12 @@ function PaletteApply(
     endfor
   endif
 
-  let g:PaletteAsDict = palette_dict
-  let g:PaletteAsList = palette_list
-  let g:PaletteNames = color_name_aliases
-  let g:PaletteNamesCanonical = color_names_canonical
+  let g:PaletteInfo = {
+  \ "dict": palette_dict,
+  \ "parts": palette_parts,
+  \ "names": color_name_aliases,
+  \ "canonical": color_names_canonical,
+  \}
   return palette_dict
 endfunction  " }}}
 
