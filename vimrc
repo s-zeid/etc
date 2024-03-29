@@ -2,7 +2,7 @@
 
 try
   call pathogen#infect()
-catch | endtry
+catch /^Vim\%((\a\+)\)\=:E117:/ | endtry
 set loadplugins
 
 
@@ -13,8 +13,17 @@ set nocompatible
 set showtabline=2
 set number
 set foldcolumn=1
+set laststatus=1
 set wildmenu
 set wildoptions=pum
+
+set backspace=indent,eol,start
+if !has("nvim")
+  fixdel
+endif
+
+set spelllang=en_us
+nmap <silent> zs :set spell!<CR>
 
 " Cursor shape
 try
@@ -36,19 +45,20 @@ endif
 set shiftwidth=2
 set tabstop=8
 set expandtab
-" Insert real tabs on <Tab> without modifiers
+" Insert real tabs on <Tab> without Ctrl/Shift modifiers
 " (but not all terminals support binding <C-Tab> and <C-i>)
 inoremap <silent> <S-Tab> <Tab>
 inoremap <silent> <C-Tab> <Tab>
 inoremap <silent> <S-C-i> <Tab>
-imap <silent> <Tab> <C-v><Tab>
+inoremap <silent> <Tab> <C-v><Tab>
 
 set autoindent
 filetype plugin indent on
+
 au BufRead,BufNewFile *.py setlocal expandtab< tabstop< softtabstop< shiftwidth<
 
 
-" Custom mappings {{{1
+" Key mappings {{{1
 
 " Cut to clipboard
 vmap <silent> <C-d> "+d
@@ -62,37 +72,36 @@ vmap <silent> <C-p> "+p
 nmap <silent> <C-P> "+P
 vmap <silent> <C-P> "+P
 
-" Super-{Left,Right} - move to {left,right} tab
-nmap <silent> <Esc>[1;1D gT
-vmap <silent> <Esc>[1;1D gT
-imap <silent> <Esc>[1;1D <C-o>gT<Esc>
-nmap <silent> <Esc>[1;1C gt
-vmap <silent> <Esc>[1;1C gt
-imap <silent> <Esc>[1;1C <C-o>gt<Esc>
+" [Ctrl-][Shift-]Page{Up,Down} - move to {left,right} tab
+" This leaves insert mode when changing from there, unlike the defaults
+nmap <silent> <C-PageUp> gT
+vmap <silent> <C-PageUp> gT
+imap <silent> <C-PageUp> <C-o>gT<Esc>
+nmap <silent> <S-PageUp> gT
+vmap <silent> <S-PageUp> gT
+imap <silent> <S-PageUp> <C-o>gT<Esc>
+nmap <silent> <C-S-PageUp> gT
+vmap <silent> <C-S-PageUp> gT
+imap <silent> <C-S-PageUp> <C-o>gT<Esc>
+nmap <silent> <C-PageDown> gt
+vmap <silent> <C-PageDown> gt
+imap <silent> <C-PageDown> <C-o>gt<Esc>
+nmap <silent> <S-PageDown> gt
+vmap <silent> <S-PageDown> gt
+imap <silent> <S-PageDown> <C-o>gt<Esc>
+nmap <silent> <C-S-PageDown> gt
+vmap <silent> <C-S-PageDown> gt
+imap <silent> <C-S-PageDown> <C-o>gt<Esc>
 
-" {Ctrl,Alt}-{Home,End} ({C,A}-Fn-{Left,Right}) - move to {left,right} tab
-nmap <silent> <M-Home> gT
-vmap <silent> <M-Home> gT
-imap <silent> <M-Home> <C-o>gT<Esc>
-nmap <silent> <C-Home> gT
-vmap <silent> <C-Home> gT
-imap <silent> <C-Home> <C-o>gT<Esc>
-nmap <silent> <M-End>  gt
-vmap <silent> <M-End>  gt
-imap <silent> <M-End>  <C-o>gt<Esc>
-nmap <silent> <C-End>  gt
-vmap <silent> <C-End>  gt
-imap <silent> <C-End>  <C-o>gt<Esc>
-
-" End search highlighting
-noremap <silent> <Esc> :nohlsearch<CR><Esc>
+" End search highlighting and clear message from bottom line
+noremap <silent> <Esc> :echo<CR>:nohlsearch<CR><Esc>
 
 " Fix command mode popup menu arrow keys in Neovim (cannot use <silent> here)
 cnoremap <Up> <C-p>
 cnoremap <Down> <C-n>
 
 
-" Custom commands {{{1
+" Commands {{{1
 
 command! Pdf execute "!pdf \"%\""
 
@@ -158,6 +167,8 @@ function SyntaxColors()
   hi SpellRare   ctermbg=LightMagenta gui=undercurl guisp=Magenta
   hi SpecialKey  cterm=bold ctermfg=Blue gui=bold guifg=Blue
   hi Statement   term=bold cterm=NONE ctermfg=DarkYellow gui=NONE guifg=DarkYellow
+  hi StatusLine  term=bold,reverse cterm=bold,reverse ctermfg=White ctermbg=Black gui=bold,reverse guifg=White guibg=Black
+  hi StatusLineNC  term=reverse cterm=reverse ctermfg=LightGray ctermbg=Black gui=reverse guifg=LightGray guibg=Black
   hi TabLine     cterm=NONE ctermbg=NONE ctermfg=Gray gui=NONE guibg=NONE guifg=Gray66
   hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse guibg=NONE
   hi Title       term=NONE cterm=NONE ctermfg=141 gui=NONE guifg=Violet
@@ -165,7 +176,6 @@ function SyntaxColors()
   hi Underlined  term=underline cterm=underline ctermfg=141 gui=underline guifg=#af87ff
   hi Visual      ctermbg=238 guibg=Gray27
 
-  hi! link StatusLine Normal
   hi! link TabLineFill TabLine
 
   " }}}
@@ -175,7 +185,9 @@ function SyntaxColors()
   " highlight groups using `ColorName` (with no `:` or `!`) to use `:ColorName`.
   " (`g:PaletteNormal` corresponds to `:Background` and `:Foreground`.)
   " In Neovim, it rewrites the highlight groups to use the color value directly.
-  call PaletteApply()
+  if !exists("g:PaletteInfo")
+    call PaletteApply()
+  endif
 endfunction
 
 command SyntaxFixes : call SyntaxFixes()
@@ -232,7 +244,9 @@ function SyntaxFixes()
   endif
 
   " Use Identifier for TypeScript DOM attributes
-  call SyntaxLinkMatch('^typescript.*\(Prop\|Method\)$', '^Keyword$', "Identifier")
+  if &syntax == "typescript"
+    call SyntaxLinkMatch('^typescript.*\(Prop\|Method\)$', '^Keyword$', "Identifier")
+  endif
 
   " Don't default to Special for JavaScript in HTML
   if &syntax == "html"
@@ -412,7 +426,7 @@ augroup filetype_aliases
 augroup END
 
 
-" Treat BusyBox's `/bin/sh` as a POSIX shell  #{{{1
+" Treat BusyBox's `/bin/sh` as a POSIX shell  {{{1
 
 if executable("/bin/sh") && resolve("/bin/sh") =~ '\<busybox\>'
   let g:is_posix = 1
@@ -426,42 +440,16 @@ try
   call jspretmpl#register_tag("html", "html")
   call jspretmpl#register_tag("css", "css")
   autocmd FileType javascript,typescript JsPreTmpl
-catch /^Vim\%((\a\+)\)\=:E117:/
-endtry
+catch /^Vim\%((\a\+)\)\=:E117:/ | endtry
 
 
-" Spell check {{{1
+" Set term to xterm when running under GNU screen {{{1
+" (fixes Page(Up|Down) and delete keys and possibly other issues)
 
-function ToggleSpellCheck()
-  if &spell == 0
-    setlocal spell
-  else
-    setlocal nospell
-  endif
-endfunction
-
-set spelllang=en_us
-nmap <silent> zs :call ToggleSpellCheck()<CR>
-
-
-" Set term to xterm when running under GNU screen. {{{1
-" Fixes Page(Up|Down) and delete keys and possibly other issues.
-
-if match($VIM, "/net\.momodalo\.app\.vimtouch/") > -1
-  " Not on Vim Touch (https://github.com/momodalo/vimtouch)
-  " because it will lock up
-elseif &term == "screen-256color"
+if &term == "screen-256color"
   set term=xterm-256color
 elseif &term == "screen" || match(&term, "^screen[.-].*$") > -1
   set term=xterm
-endif
-
-
-" Because fuck Windows. {{{1
-
-set bs=2
-if !has("nvim")
-  fixdel
 endif
 
 
@@ -471,15 +459,15 @@ if has("gui_running")
   set guioptions=gmLt
 
   " Font selection
-  if has("gui_gtk2")
-    set guifont=Ubuntu\ Mono\ 12,DejaVu\ Sans\ Mono\ 10,Bitstream\ Vera\ Sans\ Mono\ 10,Monospace\ 10
+  if has("gui_gtk3") || has("gui_gtk4")  " Futureproofing
+    let &guifont="Source Code Pro 11,Monospace 11"
   elseif has("gui_win32")
-    set guifont=Ubuntu\ Mono:h12,Consolas:h11,Courier\ New:h11
+    let &guifont="Source Code Pro:h11,Consolas:h11,Courier New:h11"
   endif
 
   " Window size
-  :set columns=96 lines=29
+  set columns=96 lines=32
 endif
 
 
-" vim: set foldmethod=marker shiftwidth=1: {{{1
+" vim: set foldmethod=marker shiftwidth=2: {{{1
