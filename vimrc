@@ -185,9 +185,7 @@ function SyntaxColors()
   " highlight groups using `ColorName` (with no `:` or `!`) to use `:ColorName`.
   " (`g:PaletteNormal` corresponds to `:Background` and `:Foreground`.)
   " In Neovim, it rewrites the highlight groups to use the color value directly.
-  if !exists("g:PaletteInfo")
-    call PaletteApply()
-  endif
+  call PaletteApply()
 endfunction
 
 command SyntaxFixes : call SyntaxFixes()
@@ -313,25 +311,21 @@ function PaletteApply(
     let color_name_aliases[name] = []
     if name =~ "gray"
       let color_name_aliases[name] += [name->substitute("gray", "grey", "")]
-    elseif name == "darkgreen"
-      let color_name_aliases[name] += ["seagreen"]
     elseif index >= 9 && index <= 14
       let color_name_aliases[name] += ["light" . name]
-      if name == "magenta"
-        let color_name_aliases[name] += ["purple"]
-      endif
-    elseif name == "violet"
-      let color_name_aliases[name] += ["slateblue"]
     endif
   endfor
+  let color_name_aliases["darkgreen"] += ["seagreen"]
+  let color_name_aliases["magenta"] += ["purple"]
+  let color_name_aliases["violet"] += ["slateblue"]
 
   let palette_parts = #{
   \ ansi: !empty(a:palette_ansi) ? a:palette_ansi
-  \ : (exists("g:PaletteANSI") ? g:PaletteANSI : []),
+  \ : (exists("g:PaletteANSI") ? g:PaletteANSI : {}),
   \ normal: !empty(a:palette_normal) ? a:palette_normal
-  \ : (exists("g:PaletteNormal") ? g:PaletteNormal : []),
+  \ : (exists("g:PaletteNormal") ? g:PaletteNormal : {}),
   \ extras: !empty(a:palette_extras) ? a:palette_extras
-  \ : (exists("g:PaletteExtras") ? g:PaletteExtras : []),
+  \ : (exists("g:PaletteExtras") ? g:PaletteExtras : {}),
   \}
 
   " Convert ANSI palette to a dictionary if it is a list
@@ -347,45 +341,51 @@ function PaletteApply(
   let palette_dict = {}
   for [name, part] in palette_parts->items()
     if type(part) == v:t_dict
-      let part_lower = {}
+      let part_canonicalized = {}
       for [key, value] in part->items()
         let key_canonical = key->tolower()->trim(":", 1)
         if color_names_canonical->index(key_canonical)
-          let part_lower[key_canonical] = value
+          let part_canonicalized[key_canonical] = value
           let palette_dict[key_canonical] = value
           for alias in color_name_aliases[key_canonical]
             let palette_dict[alias] = value
           endfor
         endif
       endfor
-      let palette_parts[name] = part_lower
+      let palette_parts[name] = part_canonicalized
     endif
   endfor
 
   " Rewrite existing highlight groups which use the built-in GUI color names
-  if !has("nvim")
-    " Vim allows defining new color names, so define ":ColorName" for the new
-    " value and "!ColorName" for the original value.  We cannot parse the
-    " output of `highlight` because Vim color names may contain spaces.
-    for [name, value] in palette_dict->items()
-      let v:colornames["!" . name] = v:colornames->get(name, value)
-      let v:colornames[":" . name] = value
-    endfor
+  if exists("*hlget") && exists("*hlset")
+    let hl_values = palette_dict->deepcopy()
+    if exists("v:colornames")
+      " Vim allows defining new color names, so define ":ColorName" for the new
+      " value and "!ColorName" for the original value.  We cannot parse the
+      " output of `highlight` because Vim color names may contain spaces.
+      for [name, value] in palette_dict->items()
+        let v:colornames["!" . name] = v:colornames->get(name, value)
+        let v:colornames[":" . name] = value
+        let hl_values[name] = ":" . name
+      endfor
+    endif
+    let hl_new = []
     for group in hlget()
       for key in ["guifg", "guibg", "guisp"]
         if group->has_key(key)
           let value = group[key]->tolower()
           if palette_dict->has_key(value)
-            call hlset([{ "name": group["name"], key: ":" . value }])
+            let hl_new += [{ "name": group["name"], key: hl_values->get(value, value) }]
           endif
         endif
       endfor
     endfor
+    call hlset(hl_new)
   else
-    " Neovim does not allow defining new color names, so the new value must
-    " be used directly.  Neovim also does not support hlget() and does not
-    " return color names in its equivalent function, so we must use the
-    " `highlight` command instead, in order to override _only_ named colors.
+    " Neovim does not support hlget()/hlset() and does not return color
+    " names in its equivalent function, so we must use the `highlight` command
+    " instead, in order to override _only_ named colors.  Neovim also does not
+    " allow defining new color names, so the new value must be used directly.
     for line in execute("highlight")->trim()->split('\r\?\n\s\@!')
       let parts = line->trim()->split('\s\+')
       if len(parts) >= 3
