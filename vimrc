@@ -173,7 +173,7 @@ function SyntaxColors()
   hi TabLineSel  cterm=reverse ctermbg=NONE ctermfg=NONE gui=reverse guibg=NONE
   hi Title       term=NONE cterm=NONE ctermfg=141 gui=NONE guifg=Violet
   hi Type        term=NONE cterm=NONE ctermfg=DarkGreen gui=NONE guifg=DarkGreen
-  hi Underlined  term=underline cterm=underline ctermfg=141 gui=underline guifg=#af87ff
+  hi Underlined  term=underline cterm=underline ctermfg=141 gui=underline guifg=Violet
   hi Visual      ctermbg=238 guibg=Gray27
 
   hi! link TabLineFill TabLine
