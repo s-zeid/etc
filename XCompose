@@ -141,6 +141,9 @@ include "%L"
 <Multi_key> <h> <5>                     : "🖐" U1F590  # RAISED HAND WITH FINGERS SPLAYED
 <Multi_key> <F> <U>                     : "🖕" U1F595  # REVERSED HAND WITH MIDDLE FINGER EXTENDED *
 <Multi_key> <r> <n>                     : "🗞" U1F5DE  # ROLLED-UP NEWSPAPER
+<Multi_key> <less> <at>                 : "🤏" U1F90F  # PINCHING HAND
+<Multi_key> <at> <greater>              : "🤏" U1F90F  # PINCHING HAND
+<Multi_key> <p> <i> <n> <c> <h>         : "🤏" U1F90F  # PINCHING HAND
 <Multi_key> <f> <c>                     : "🤞" U1F91E  # HAND WITH INDEX AND MIDDLE FINGERS CROSSED
 <Multi_key> <F> <C>                     : "🤞" U1F91E  # HAND WITH INDEX AND MIDDLE FINGERS CROSSED
 <Multi_key> <Multi_key> <c> <l> <o> <w> <n> : "🤡" U1F921  # CLOWN FACE
