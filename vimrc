@@ -223,10 +223,12 @@ function SyntaxFixes()
   hi link javaScriptIdentifier Special
   hi link javaScriptMember Special
   hi link javaScriptDeprecated Error
+  hi link typescriptExceptions Exception
   hi link typescriptGlobalMethod Special
   hi link typescriptIdentifier Special
   hi link typescriptBOMWindowProp Identifier
   hi link typescriptBOMWindowMethod Identifier
+  hi link typescriptTry Exception
   hi link typescriptVariable Operator
   if &syntax == "javascript"
     syn clear javaScriptIdentifier
