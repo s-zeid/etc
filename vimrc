@@ -226,6 +226,7 @@ function SyntaxFixes()
   hi link typescriptExceptions Exception
   hi link typescriptGlobalMethod Special
   hi link typescriptIdentifier Special
+  hi link typescriptOperator Operator
   hi link typescriptBOMWindowProp Identifier
   hi link typescriptBOMWindowMethod Identifier
   hi link typescriptTry Exception
