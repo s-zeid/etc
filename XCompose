@@ -119,6 +119,8 @@ include "%L"
 <Multi_key> <t> <u> <r> <t>             : "🐢" U1F422  # TURTLE
 <Multi_key> <d> <o> <g>                 : "🐕" U1F415  # DOG
 <Multi_key> <D> <O> <G>                 : "🐶" U1F436  # DOG FACE
+<Multi_key> <l> <f> <n> <t>             : "🐘" U1F418  # ELEPHANT
+<Multi_key> <p> <h> <p>                 : "🐘" U1F418  # ELEPHANT
 <Multi_key> <p> <e> <n> <g>             : "🐧" U1F427  # PENGUIN
 <Multi_key> <t> <u> <x>                 : "🐧" U1F427  # PENGUIN
 <Multi_key> <parenleft> <quotedbl> <greater> : "🐧" U1F427  # PENGUIN
