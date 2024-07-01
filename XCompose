@@ -153,12 +153,12 @@ include "%L"
 <Multi_key> <f> <p>                     : "🤦" U1F926  # FACE PALM
 <Multi_key> <P> <F> <P>                 : "🤦" U1F926  # FACE PALM
 <Multi_key> <p> <f> <p>                 : "🤦" U1F926  # FACE PALM
-<Multi_key> <W> <F> <P>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
-<Multi_key> <w> <f> <p>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
-<Multi_key> <F> <F> <P>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
-<Multi_key> <f> <f> <p>                 : "🤦‍♀"  # FACE PALM, ZWJ, FEMALE SIGN
-<Multi_key> <M> <F> <P>                 : "🤦‍♂"  # FACE PALM, ZWJ, MALE SIGN
-<Multi_key> <m> <f> <p>                 : "🤦‍♂"  # FACE PALM, ZWJ, MALE SIGN
+<Multi_key> <W> <F> <P>                 : "🤦‍♀️"  # FACE PALM, ZWJ, FEMALE SIGN, VS16
+<Multi_key> <w> <f> <p>                 : "🤦‍♀️"  # FACE PALM, ZWJ, FEMALE SIGN, VS16
+<Multi_key> <F> <F> <P>                 : "🤦‍♀️"  # FACE PALM, ZWJ, FEMALE SIGN, VS16
+<Multi_key> <f> <f> <p>                 : "🤦‍♀️"  # FACE PALM, ZWJ, FEMALE SIGN, VS16
+<Multi_key> <M> <F> <P>                 : "🤦‍♂️"  # FACE PALM, ZWJ, MALE SIGN, VS16
+<Multi_key> <m> <f> <p>                 : "🤦‍♂️"  # FACE PALM, ZWJ, MALE SIGN, VS16
 <Multi_key> <Multi_key> <c> <r> <a> <b> : "🦀" U1F980  # CRAB
 <Multi_key> <h> <u> <g>                 : "🫂" U1FAC2  # PEOPLE HUGGING
 
@@ -412,6 +412,17 @@ include "%L"
 <Multi_key> <g> <y>                     : "ψ" U03C8  # GREEK SMALL LETTER PSI
 <Multi_key> <G> <Z>                     : "Ζ" U0396  # GREEK CAPITAL LETTER ZETA
 <Multi_key> <g> <z>                     : "ζ" U03B6  # GREEK SMALL LETTER ZETA
+
+
+# Technical  {{{1
+<Multi_key> <Multi_key> <v> <s> <t>     : "︎" UFE0E # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <V> <S> <T>     : "︎" UFE0E # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <v> <s> <1> <5> : "︎" UFE0E # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <V> <S> <1> <5> : "︎" UFE0E # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <v> <s> <e>     : "️" FE0F # VARIATION SELECTOR-16 (emoji)
+<Multi_key> <Multi_key> <V> <S> <E>     : "️" FE0F # VARIATION SELECTOR-16 (emoji)
+<Multi_key> <Multi_key> <v> <s> <1> <6> : "️" FE0F # VARIATION SELECTOR-16 (emoji)
+<Multi_key> <Multi_key> <V> <S> <1> <6> : "️" FE0F # VARIATION SELECTOR-16 (emoji)
 
 
 # Footnotes  {{{1
