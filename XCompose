@@ -91,6 +91,10 @@ include "%L"
 <Multi_key> <I> <N> <F> <O>             : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
 <Multi_key> <o> <i>                     : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
 <Multi_key> <O> <I>                     : "ⓘ" U24D8  # CIRCLED LATIN SMALL LETTER I
+<Multi_key> <r> <x>                     : "℞" U211E  # PRESCRRIPTION TAKE
+<Multi_key> <R> <x>                     : "℞" U211E  # PRESCRRIPTION TAKE
+<Multi_key> <r> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
+<Multi_key> <R> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
 
 
 # Superscript ordinal suffixes  #{{{1
