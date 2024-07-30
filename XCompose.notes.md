@@ -13,3 +13,14 @@ Implementations
 
 * [ComposeKey extension for Chrome OS](https://chrome.google.com/webstore/detail/composekey/iijdllfdmhbmlmnbcohgbfagfibpbgba/) ([source code](https://github.com/google/extra-keyboards-for-chrome-os/tree/master/composekey)) (supports custom sequences in .XCompose format)
 * [WinCompose](https://github.com/SamHocevar/wincompose#readme) ([source code](https://github.com/SamHocevar/wincompose)) (supports custom sequences in .XCompose format)
+
+
+Notes
+-----
+
+* Usually, on Linux, to apply changes to your `.XCompose` file, you must log out
+  and back in or reboot.  If your system uses ibus, you may be able to apply
+  changes without logging out or rebooting by running `ibus restart`.
+  
+  To check if your system is using ibus, run `ps x | grep ibus-daemon` and look
+  for an `ibus-daemon` process.
