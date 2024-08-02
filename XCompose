@@ -116,7 +116,9 @@ include "%L"
 <Multi_key> <r> <a> <i> <n>             : "🌧" U1F327  # CLOUD WITH RAIN
 <Multi_key> <Multi_key> <c> <a> <k> <e> : "🎂" U1F382  # BIRTHDAY CAKE
 <Multi_key> <y> <a> <y>                 : "🎉" U1F389  # PARTY POPPER
+<Multi_key> <y> <e> <y>                 : "🎉" U1F389  # PARTY POPPER
 <Multi_key> <Y> <A> <Y>                 : "🎊" U1F38A  # CONFETTI BALL
+<Multi_key> <Y> <E> <Y>                 : "🎊" U1F38A  # CONFETTI BALL
 <Multi_key> <m> <o> <o>                 : "🐄" U1F404  # COW
 <Multi_key> <M> <O> <O>                 : "🐮" U1F42E  # COW FACE
 <Multi_key> <t> <r> <t>                 : "🐢" U1F422  # TURTLE
