@@ -1,0 +1,3 @@
+export MOSH_ESCAPE_KEY='~'
+export MOSH_PREDICTION_DISPLAY='never'
+export MOSH_TITLE_NOPREFIX=1
