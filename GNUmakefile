@@ -247,7 +247,7 @@ _relpwd:
 	 export __relpath_pwd="$$pwd"
 	 export __relpath_ref="$$ref"
 	 
-	 awk -e '
+	 awk '
 	  BEGIN {
 	   home = ENVIRON["__relpath_home"]
 	   arg1 = ENVIRON["__relpath_arg1"]
