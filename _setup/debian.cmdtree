@@ -262,6 +262,7 @@ zstd
 # Containers
 buildah
 debootstrap
+passt
 podman
 proot
 runc

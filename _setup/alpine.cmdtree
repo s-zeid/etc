@@ -243,6 +243,8 @@ containers-common,-
  doc
 debootstrap,-
  doc
+passt,-
+ doc
 podman,-
  doc
 runc,-
