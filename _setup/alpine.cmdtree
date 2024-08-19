@@ -324,9 +324,15 @@ python3,-
  doc
 py3-,
  argcomplete
+#%if %TESTING
+ astral
+#%endif
  dateutil
  lz4
  mypy
+#%if %TESTING
+ ntplib
+#%endif
  pbkdf2
  pillow
  pip
@@ -881,10 +887,12 @@ $ sudo chmod +x "/etc/network/if-up.d/addresses"
 
 $ PIP_BREAK_SYSTEM_PACKAGES=true pip3 install --user -U  #{{{1
 
-astral
 awscli
-ntplib
 PySDL2
+#%if !%TESTING
+astral
+ntplib
+#%endif
 
 
 # Install user config files  #{{{1
