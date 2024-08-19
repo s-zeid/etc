@@ -383,6 +383,7 @@ v4l2loopback-,
 firewall-config
 
 # Utilities
+gcolor3
 gucharmap
 udiskie
 xdg-utils

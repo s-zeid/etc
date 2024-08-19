@@ -445,6 +445,7 @@ v4l2loopback-src
 #%endif
 
 # Utilities
+gcolor3
 gucharmap
 udiskie,-
  doc
