@@ -95,6 +95,17 @@ include "%L"
 <Multi_key> <R> <x>                     : "℞" U211E  # PRESCRRIPTION TAKE
 <Multi_key> <r> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
 <Multi_key> <R> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
+<Multi_key> <s> <f> <minus>                                    : "🯅" U1FBC5 # STICK FIGURE
+<Multi_key> <o> <bar> <minus> <slash> <backslash>              : "🯅" U1FBC5 # STICK FIGURE
+<Multi_key> <s> <f> <v>                                        : "🯆" U1FBC6 # STICK FIGURE WITH ARMS RAISED
+<Multi_key> <o> <bar> <v> <slash> <backslash>                  : "🯆" U1FBC6 # STICK FIGURE WITH ARMS RAISED
+<Multi_key> <o> <bar> <backslash> <slash> <slash> <backslash>  : "🯆" U1FBC6 # STICK FIGURE WITH ARMS RAISED
+<Multi_key> <s> <f> <slash>                                    : "🯇" U1FBC7 # STICK FIGURE LEANING LEFT
+<Multi_key> <o> <bar> <slash> <slash> <backslash>              : "🯇" U1FBC7 # STICK FIGURE LEANING LEFT
+<Multi_key> <s> <f> <backslash>                                : "🯈" U1FBC8 # STICK FIGURE LEANING RIGHT
+<Multi_key> <o> <bar> <backslash> <slash> <backslash>          : "🯈" U1FBC8 # STICK FIGURE LEANING RIGHT
+<Multi_key> <s> <f> <d>                                        : "🯉" U1FBC9 # STICK FIGURE WITH DRESS
+<Multi_key> <o> <bar> <minus> <slash> <underscore> <backslash> : "🯉" U1FBC9 # STICK FIGURE WITH DRESS
 
 
 # Superscript ordinal suffixes  #{{{1
@@ -320,6 +331,29 @@ include "%L"
 <Multi_key>             <parenleft> <asciicircum> <2> <0> <parenright> : "⁽²⁰⁾"
 
 
+# Segmented digits  #{{{1
+<Multi_key> <0> <bar>                   : "🯰" U1FBF0  # SEGMENTED DIGIT ZERO
+<Multi_key> <bar> <0>                   : "🯰" U1FBF0  # SEGMENTED DIGIT ZERO
+<Multi_key> <1> <bar>                   : "🯱" U1FBF1  # SEGMENTED DIGIT ONE
+<Multi_key> <bar> <1>                   : "🯱" U1FBF1  # SEGMENTED DIGIT ONE
+<Multi_key> <2> <bar>                   : "🯲" U1FBF2  # SEGMENTED DIGIT TWO
+<Multi_key> <bar> <2>                   : "🯲" U1FBF2  # SEGMENTED DIGIT TWO
+<Multi_key> <3> <bar>                   : "🯳" U1FBF3  # SEGMENTED DIGIT THREE
+<Multi_key> <bar> <3>                   : "🯳" U1FBF3  # SEGMENTED DIGIT THREE
+<Multi_key> <4> <bar>                   : "🯴" U1FBF4  # SEGMENTED DIGIT FOUR
+<Multi_key> <bar> <4>                   : "🯴" U1FBF4  # SEGMENTED DIGIT FOUR
+<Multi_key> <5> <bar>                   : "🯵" U1FBF5  # SEGMENTED DIGIT FIVE
+<Multi_key> <bar> <5>                   : "🯵" U1FBF5  # SEGMENTED DIGIT FIVE
+<Multi_key> <6> <bar>                   : "🯶" U1FBF6  # SEGMENTED DIGIT SIX
+<Multi_key> <bar> <6>                   : "🯶" U1FBF6  # SEGMENTED DIGIT SIX
+<Multi_key> <7> <bar>                   : "🯷" U1FBF7  # SEGMENTED DIGIT SEVEN
+<Multi_key> <bar> <7>                   : "🯷" U1FBF7  # SEGMENTED DIGIT SEVEN
+<Multi_key> <8> <bar>                   : "🯸" U1FBF8  # SEGMENTED DIGIT EIGHT
+<Multi_key> <bar> <8>                   : "🯸" U1FBF8  # SEGMENTED DIGIT EIGHT
+<Multi_key> <9> <bar>                   : "🯹" U1FBF9  # SEGMENTED DIGIT NINE
+<Multi_key> <bar> <9>                   : "🯹" U1FBF9  # SEGMENTED DIGIT NINE
+
+
 # Vulgar fractions not included in the Chrome OS extension *  #{{{1
 <Multi_key> <1> <7>                     : "⅐" U2150  # VULGAR FRACTION ONE SEVENTH
 <Multi_key> <1> <9>                     : "⅑" U2151  # VULGAR FRACTION ONE NINTH
@@ -484,6 +518,12 @@ include "%L"
 <Multi_key> <l> <2> <5>                 : "y" U0079  # LATIN SMALL LETTER Y
 <Multi_key> <L> <2> <6>                 : "Z" U005A  # LATIN CAPITAL LETTER Z
 <Multi_key> <l> <2> <6>                 : "z" U007A  # LATIN SMALL LETTER Z
+
+
+# Broken A key  {{{1
+<Multi_key> <Multi_key> <period> <Multi_key> : "A" U0041  # LATIN CAPITAL LETTER A
+<Multi_key> <Multi_key> <comma> <Multi_key> : "A" U0041  # LATIN CAPITAL LETTER A
+<Multi_key> <Multi_key> <Multi_key>     : "a" U0061  # LATIN SMALL LETTER A
 
 
 # Footnotes  {{{1
