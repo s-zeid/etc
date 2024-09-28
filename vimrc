@@ -14,6 +14,7 @@ set showtabline=2
 set number
 set foldcolumn=1
 set laststatus=1
+set scrolloff=0
 set wildmenu
 set wildoptions=pum
 
