@@ -15,6 +15,7 @@ set number
 set foldcolumn=1
 set laststatus=1
 set scrolloff=0
+set whichwrap=b,s,<,>,[,]
 set wildmenu
 set wildoptions=pum
 
@@ -60,6 +61,30 @@ au BufRead,BufNewFile *.py setlocal expandtab< tabstop< softtabstop< shiftwidth<
 
 
 " Key mappings {{{1
+
+" Use display lines for vertical movement when _not_ prefixed with `g`
+noremap <silent> <Down> g<Down>
+noremap <silent> j gj
+noremap <silent> <Up> g<Up>
+noremap <silent> k gk
+inoremap <silent> <Down> <C-o>g<Down>
+inoremap <silent> <Up> <C-o>g<Up>
+vnoremap <silent> <Down> g<Down>
+vnoremap <silent> j gj
+vnoremap <silent> <Up> g<Up>
+vnoremap <silent> k gk
+
+" Use actual lines for vertical movement when prefixed with `g`
+noremap <silent> g<Down> <Down>
+noremap <silent> gj j
+noremap <silent> g<Up> <Up>
+noremap <silent> gk k
+inoremap <silent> g<Down> <C-o><Down>
+inoremap <silent> g<Up> <C-o><Up>
+vnoremap <silent> g<Down> <Down>
+vnoremap <silent> gj j
+vnoremap <silent> g<Up> <Up>
+vnoremap <silent> gk k
 
 " Cut to clipboard
 vmap <silent> <C-d> "+d
