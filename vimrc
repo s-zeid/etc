@@ -27,6 +27,8 @@ endif
 set spelllang=en_us
 nmap <silent> zs :set spell!<CR>
 
+let g:netrw_browse_split = 3  " make <CR> open selected files in new tabs
+
 " Cursor shape
 try
   let s:blink = "-blinkwait800-blinkon800-blinkoff800"
