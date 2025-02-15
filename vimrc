@@ -28,6 +28,7 @@ set spelllang=en_us
 nmap <silent> zs :set spell!<CR>
 
 let g:netrw_browse_split = 3  " make <CR> open selected files in new tabs
+let g:netrw_sort_sequence = "[\/]$,*,~$,\.bak$,\.o$,\.swp$,\.obj$"
 
 " Cursor shape
 try
