@@ -198,6 +198,7 @@ include "%L"
 <Multi_key> <colon> <less> <3>          : "😍" U1F60D  # SMILING FACE WITH HEART-SHAPED EYES
 <Multi_key> <colon> <less> <numbersign> : "😍" U1F60D  # SMILING FACE WITH HEART-SHAPED EYES
 <Multi_key> <colon> <bar>               : "😐" U1F610  # NEUTRAL FACE
+<Multi_key> <Multi_key> <colon> <bar>   : "⸚" U2E1A  # HYPHEN WITH DIAERESIS
 <Multi_key> <colon> <slash>             : "😕" U1F615  # CONFUSED FACE
 <Multi_key> <colon> <p>                 : "😛" U1F61B  # FACE WITH STUCK-OUT TONGUE
 <Multi_key> <colon> <P>                 : "😛" U1F61B  # FACE WITH STUCK-OUT TONGUE
