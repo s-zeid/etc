@@ -150,6 +150,9 @@ include "%L"
 <Multi_key> <m> <e> <o> <w>             : "🐱" U1F431  # CAT FACE
 <Multi_key> <M> <E> <o> <w>             : "😺" U1F63A  # SMILING CAT FACE WITH OPEN MOUTH
 <Multi_key> <p> <a> <w>                 : "🐾" U1F43E  # PAW PRINTS
+<Multi_key> <e> <y> <e> <s>             : "👀" U1F440  # EYES
+<Multi_key> <e> <underscore> <e>        : "👀" U1F440  # EYES
+<Multi_key> <e> <y> <e> <period>        : "👁️"  # EYE, VS16
 <Multi_key> <equal> <minus> <less>      : "👈" U1F448  # WHITE LEFT POINTING BACKHAND INDEX
 <Multi_key> <equal> <minus> <greater>   : "👉" U1F449  # WHITE RIGHT POINTING BACKHAND INDEX
 <Multi_key> <h> <i>                     : "👋" U1F44B  # WAVING HAND SIGN
