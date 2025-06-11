@@ -35,7 +35,7 @@ include "%L"
 <Multi_key> <v> <bar>                   : "↓" U2193  # DOWNWARDS ARROW
 <Multi_key> <bar> <v>                   : "↓" U2193  # DOWNWARDS ARROW
 <Multi_key> <less> <minus>              : "←" U2190  # LEFTWARDS ARROW *
-<Multi_key> <minus> <left>              : "←" U2190  # LEFTWARDS ARROW
+<Multi_key> <minus> <less>              : "←" U2190  # LEFTWARDS ARROW
 <Multi_key> <minus> <greater>           : "→" U2192  # RIGHTWARDS ARROW *
 <Multi_key> <greater> <minus>           : "→" U2192  # RIGHTWARDS ARROW
 <Multi_key> <less> <equal>              : "≤" U2264  # LESS-THAN OR EQUAL TO *
@@ -60,7 +60,7 @@ include "%L"
 <Multi_key> <space> <numbersign>        : " " U2007  # FIGURE SPACE †
 <Multi_key> <f> <space>                 : " " U2007  # FIGURE SPACE
 <Multi_key> <space> <f>                 : " " U2007  # FIGURE SPACE
-<Multi_key> <t> <a> <b>                 : "	" U0009  # CHARACTER TABULATION
+<Multi_key> <t> <a> <b>                 : "\x09"  # CHARACTER TABULATION
 <Multi_key> <underscore> <space>        : "␣" U2423  # OPEN BOX
 <Multi_key> <space> <underscore>        : "␣" U2423  # OPEN BOX
 <Multi_key> <backslash> <minus>         : "­" U00AD  # SOFT HYPHEN †
@@ -463,14 +463,14 @@ include "%L"
 
 
 # Technical  {{{1
-<Multi_key> <Multi_key> <v> <s> <t>     : "︎" UFE0E # VARIATION SELECTOR-15 (text)
-<Multi_key> <Multi_key> <V> <S> <T>     : "︎" UFE0E # VARIATION SELECTOR-15 (text)
-<Multi_key> <Multi_key> <v> <s> <1> <5> : "︎" UFE0E # VARIATION SELECTOR-15 (text)
-<Multi_key> <Multi_key> <V> <S> <1> <5> : "︎" UFE0E # VARIATION SELECTOR-15 (text)
-<Multi_key> <Multi_key> <v> <s> <e>     : "️" FE0F # VARIATION SELECTOR-16 (emoji)
-<Multi_key> <Multi_key> <V> <S> <E>     : "️" FE0F # VARIATION SELECTOR-16 (emoji)
-<Multi_key> <Multi_key> <v> <s> <1> <6> : "️" FE0F # VARIATION SELECTOR-16 (emoji)
-<Multi_key> <Multi_key> <V> <S> <1> <6> : "️" FE0F # VARIATION SELECTOR-16 (emoji)
+<Multi_key> <Multi_key> <v> <s> <t>     : "︎" UFE0E  # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <V> <S> <T>     : "︎" UFE0E  # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <v> <s> <1> <5> : "︎" UFE0E  # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <V> <S> <1> <5> : "︎" UFE0E  # VARIATION SELECTOR-15 (text)
+<Multi_key> <Multi_key> <v> <s> <e>     : "️" UFE0F  # VARIATION SELECTOR-16 (emoji)
+<Multi_key> <Multi_key> <V> <S> <E>     : "️" UFE0F  # VARIATION SELECTOR-16 (emoji)
+<Multi_key> <Multi_key> <v> <s> <1> <6> : "️" UFE0F  # VARIATION SELECTOR-16 (emoji)
+<Multi_key> <Multi_key> <V> <S> <1> <6> : "️" UFE0F  # VARIATION SELECTOR-16 (emoji)
 
 
 # Latin letters by number  {{{1
