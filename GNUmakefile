@@ -68,7 +68,7 @@ find-role-dirs:
 	NEWLINE='
 	'
 	
-	root=$(if $(filter-out 0,${absolute}),$$(cd "$$(dirname -- "${_MAKEFILE}")" && pwd)/,)
+	root=$(if $(filter-out 0,${absolute}),$$(cd "`dirname -- "${_MAKEFILE}"`" && pwd)/,)
 	role_dirs=
 	for i in +*; do
 	  if [ -d "$$i" ]; then
