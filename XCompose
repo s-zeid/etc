@@ -95,6 +95,8 @@ include "%L"
 <Multi_key> <R> <x>                     : "℞" U211E  # PRESCRRIPTION TAKE
 <Multi_key> <r> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
 <Multi_key> <R> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
+<Multi_key> <apostrophe> <asciitilde>   : "ⸯ" U2E2F  # VERTICAL TILDE
+<Multi_key> <asciitilde> <apostrophe>   : "ⸯ" U2E2F  # VERTICAL TILDE
 
 
 # Stick figures  {{{1
