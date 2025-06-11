@@ -106,7 +106,7 @@ _find_targets:
 	
 	all_reversed=
 	for i in ${_dir_globs}; do
-	  if ! printf '%s\n' "$$(basename "$$i")" | egrep -q -e ${_exclude_ere}; then
+	  if ! printf '%s\n' "$$(basename "$$i")" | grep -q -E -e ${_exclude_ere}; then
 	    role_dir=$(if ${_role_dir},${_role_dir}/,)
 	    if [ -e "$$i/_deep" ]; then
 	      old_ifs=$$IFS
@@ -140,7 +140,7 @@ _find_targets:
 	IFS=$$NEWLINE
 	for target in $$all_reversed; do
 	  base_target=$$(printf '%s\n' "$$target" | sed -e '1,1s|^\(+[^/]*/\)\+||')
-	  if ! printf '%s\n' "$$seen_base_targets" | fgrep -q -x -e "$$base_target"; then
+	  if ! printf '%s\n' "$$seen_base_targets" | grep -q -x -F -e "$$base_target"; then
 	    seen_base_targets="$$seen_base_targets$$NEWLINE$$base_target"
 	    targets="$$target$$NEWLINE$$targets"
 	  fi
