@@ -26,6 +26,7 @@ help:
 .PHONY: install  # {{{1
 install: dry_run := 0
 install: list := 0
+install: no_backups := 0
 install:
 	@set -e
 	
@@ -35,15 +36,16 @@ install:
 	for i in $$(make -s -f "${_MAKEFILE}" _find_targets); do
 	  make -s -f "${_MAKEFILE}" _install_link \
 	    src="$$i" \
-	    dry_run="${dry_run}" list="${list}"
+	    dry_run="${dry_run}" list="${list}" no_backups="${no_backups}"
 	done
 	IFS=$$old_ifs
 
 
 .PHONY: dry-run  # {{{1
+dry-run: no_backups := 0
 dry-run:
 	@set -e
-	make -s -f "${_MAKEFILE}" install dry_run=1
+	make -s -f "${_MAKEFILE}" install dry_run=1 no_backups="${no_backups}"
 
 .PHONY: dry  # {{{1
 dry: dry-run
@@ -155,6 +157,7 @@ _install_link: src :=
 _install_link: dest := ${HOME}
 _install_link: dry_run := 0
 _install_link: list := 0
+_install_link: no_backups := 0
 _install_link:
 	@set -e
 	
@@ -186,7 +189,8 @@ _install_link:
 	              haystack="$$_old_target" needle="$$_dotdots$$_root_relpwd/")
 	      then
 	        _timestamp=$$(date -u +%Y-%m-%dT%H-%M-%S_%NZ)
-	        echo_run mv "$$_link_path" "$$_link_path.$$_timestamp.bak"
+	        $(if $(filter-out 0,${no_backups}),,
+		  echo_run mv "$$_link_path" "$$_link_path.$$_timestamp.bak")
 	      fi
 	    fi
 	    if ! [ -d "$$(dirname -- "$$_link_path")" ]; then
