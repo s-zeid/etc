@@ -196,7 +196,7 @@ _install_link:
 	    if ! [ -d "$$(dirname -- "$$_link_path")" ]; then
 	      echo_run mkdir -p "$$(dirname -- "$$_link_path")"
 	    fi
-	    echo_run ln -sf "$$_target" "$$_link_path"
+	    echo_run ln -sfn "$$_target" "$$_link_path"
 	  else
 	    true
 	  fi
