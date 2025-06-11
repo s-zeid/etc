@@ -95,6 +95,9 @@ include "%L"
 <Multi_key> <R> <x>                     : "℞" U211E  # PRESCRRIPTION TAKE
 <Multi_key> <r> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
 <Multi_key> <R> <X>                     : "℞" U211E  # PRESCRRIPTION TAKE
+
+
+# Stick figures  {{{1
 <Multi_key> <s> <f> <minus>                                    : "🯅" U1FBC5 # STICK FIGURE
 <Multi_key> <o> <bar> <minus> <slash> <backslash>              : "🯅" U1FBC5 # STICK FIGURE
 <Multi_key> <s> <f> <v>                                        : "🯆" U1FBC6 # STICK FIGURE WITH ARMS RAISED
