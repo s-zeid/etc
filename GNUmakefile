@@ -26,7 +26,6 @@ help:
 .PHONY: install  # {{{1
 install: dry_run := 0
 install: list := 0
-install: _dirs := $(patsubst ./*,*,$(addsuffix /*,${_include_dirs}))
 install:
 	@set -e
 	
@@ -97,7 +96,7 @@ find-role-dirs:
 
 
 .PHONY: _find_targets  #{{{1
-_find_targets: _dirs := $(patsubst ./*,*,$(addsuffix /*,${_include_dirs}))
+_find_targets: _dir_globs := $(patsubst ./*,*,$(addsuffix /*,${_include_dirs}))
 _find_targets: _do_roles := 1
 _find_targets: _role_dir := 
 _find_targets:
@@ -106,10 +105,20 @@ _find_targets:
 	'
 	
 	all_reversed=
-	for i in ${_dirs}; do
+	for i in ${_dir_globs}; do
 	  if ! printf '%s\n' "$$(basename "$$i")" | egrep -q -e ${_exclude_ere}; then
-	    if [ -e "$$i" ]; then
-	      all_reversed="$(if ${_role_dir},${_role_dir}/,)$$i$$NEWLINE$$all_reversed"
+	    role_dir=$(if ${_role_dir},${_role_dir}/,)
+	    if [ -e "$$i/_deep" ]; then
+	      old_ifs=$$IFS
+	      IFS=$$NEWLINE
+	      for j in $$(find "$$i" -type f -o -type l); do
+	        if [ x"$$j" != x"$$i/_deep" ]; then
+	          all_reversed="$$role_dir$$j$$NEWLINE$$all_reversed"
+		fi
+	      done
+	      IFS=$$old_ifs
+	    elif [ -e "$$i" ]; then
+	      all_reversed="$$role_dir$$i$$NEWLINE$$all_reversed"
 	    fi
 	  fi
 	done

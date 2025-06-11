@@ -40,13 +40,17 @@ If a destination file already exists, and it does not already point to a file
 or directory in this repository, then it will be backed up to a name of the
 form `{filename}.%Y-%m-%dT%H-%M-%S_%NZ.bak`.
 
+If `{filename}` is a directory which contains a file called `_deep`, then
+the directory will be recursively scanned for regular files and symbolic links,
+which will themselves be installed instead of the directory as a whole.
+
 The following files and directories will be excluded from installation:
 
 * `GNUmakefile`
 * `*.md`
 * `*.txt`
 * `.*` (hidden files or directories)
-* `_*` (special files or directories; see above for `_config`)
+* `_*` (special files or directories; see above for `_config` and `_deep`)
 * `+*` (role directories; see "Conditional configuration" below)
 
 as well as these backup/cache files:
