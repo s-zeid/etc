@@ -1,0 +1,154 @@
+#!/usr/bin/env python3
+
+"""Check an XCompose file for errors using libxkbcommon.
+
+This is basically equivalent to `xkbcli compile-compose --test`,
+but it does not require installing a separate package for `xkbcli`.
+
+"""
+
+
+import ctypes.util
+import os
+import locale
+import sys
+
+from ctypes import *
+
+
+def main(argv: list[str]) -> int:
+  prog = os.path.basename(argv[0])
+  prog = prog if prog != "__main__.py" else __package__ or __name__
+
+  # fmt: off
+  import argparse
+  p = argparse.ArgumentParser(
+    prog=prog,
+    description=(__doc__ or "\n").splitlines()[0],
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+  )
+  p.add_argument("-l", "--locale",
+                 help="the locale to use (default: from environment)")
+  p.add_argument("xcompose_file", nargs="?",
+                 help="the xcompose file to check (default: auto; `-` for standard input)")
+  # fmt: on
+  try:
+    options = p.parse_args(argv[1:])
+  except SystemExit as exc:
+    return int(exc.code) if exc.code is not None else 127
+
+  locale.setlocale(locale.LC_ALL, "")
+  use_locale = locale.setlocale(locale.LC_CTYPE, "") or "C"
+  if options.locale:
+    use_locale = options.locale
+
+  xcompose_data: bytes | None = None
+  if options.xcompose_file:
+    if options.xcompose_file == "-":
+      xcompose_data = sys.stdin.buffer.read()
+    else:
+      with open(options.xcompose_file, "rb") as f:
+        xcompose_data = f.read()
+
+  result = 127
+
+  ctx = xkbcommon.xkb_context_new(xkbcommon.xkb_context_flags.XKB_CONTEXT_NO_FLAGS)
+  if not ctx:
+    print(f"{prog}: error: could not create xkb context")
+    return 1
+  try:
+    stderr_fd = os.dup(2)
+    pipe_r, pipe_w = os.pipe()
+    os.dup2(pipe_w, 2)
+    try:
+      if xcompose_data:
+        compose_table = xkbcommon.xkb_compose_table_new_from_buffer(
+          ctx,
+          xcompose_data,
+          len(xcompose_data),
+          use_locale.encode("utf-8"),
+          xkbcommon.xkb_compose_format.XKB_COMPOSE_FORMAT_TEXT_V1,
+          xkbcommon.xkb_compose_compile_flags.XKB_COMPOSE_COMPILE_NO_FLAGS,
+        )
+      else:
+        compose_table = xkbcommon.xkb_compose_table_new_from_locale(
+          ctx,
+          use_locale.encode("utf-8"),
+          xkbcommon.xkb_compose_compile_flags.XKB_COMPOSE_COMPILE_NO_FLAGS,
+        )
+    except BaseException:
+      os.dup2(stderr_fd, 2)
+      os.close(pipe_w)
+      os.close(pipe_r)
+      raise
+    else:
+      os.dup2(stderr_fd, 2)
+      os.close(pipe_w)
+    try:
+      with open(pipe_r, "rb") as f:
+        errors = f.read()
+
+      result = 1 if len(errors) else 0
+      sys.stdout.buffer.write(errors)
+    finally:
+      xkbcommon.xkb_compose_table_unref(compose_table)
+  finally:
+    xkbcommon.xkb_context_unref(ctx)
+
+  return result
+
+
+class xkbcommon:
+  lib = CDLL(ctypes.util.find_library("xkbcommon"))  # apk add libxkbcommon
+
+  xkb_context_new = lib.xkb_context_new
+  xkb_context_new.argtypes = [c_int]
+  xkb_context_new.restype = c_void_p
+  
+  xkb_compose_table_new_from_locale = lib.xkb_compose_table_new_from_locale
+  xkb_compose_table_new_from_locale.argtypes = [c_void_p, c_char_p, c_int]
+  xkb_compose_table_new_from_locale.restype = c_void_p
+
+  xkb_compose_table_new_from_buffer = lib.xkb_compose_table_new_from_buffer
+  xkb_compose_table_new_from_buffer.argtypes = [
+    c_void_p, c_char_p, c_size_t, c_char_p, c_int, c_int,
+  ]
+  xkb_compose_table_new_from_buffer.restype = c_void_p
+
+  xkb_compose_table_unref = lib.xkb_compose_table_unref
+  xkb_compose_table_unref.argtypes = [c_void_p]
+  xkb_compose_table_unref.restype = None
+
+  xkb_context_unref = lib.xkb_context_unref
+  xkb_context_unref.argtypes = [c_void_p]
+  xkb_context_unref.restype = None
+
+  class xkb_compose_compile_flags:
+    XKB_COMPOSE_COMPILE_NO_FLAGS = c_int(0)
+  
+  class xkb_compose_format:
+    XKB_COMPOSE_FORMAT_TEXT_V1 = c_int(1)
+  
+  class xkb_context_flags:
+    XKB_CONTEXT_NO_FLAGS = c_int(0)
+    XKB_CONTEXT_NO_DEFAULT_INCLUDES = c_int(1 << 0)
+    XKB_CONTEXT_NO_ENVIRONMENT_NAMES = c_int(1 << 1)
+    XKB_CONTEXT_NO_SECURE_GETENV = c_int(1 << 2)
+
+
+if __name__ == "__main__":
+  try:
+    # pip: setproctitle; apt/dnf: python3-setproctitle; apk: py3-setproctitle
+    from setproctitle import setproctitle as _setproctitle
+
+    os.putenv("SPT_NOENV", "1")
+    _setproctitle(" ".join([os.path.basename(sys.argv[0])] + sys.argv[1:]))
+    os.unsetenv("SPT_NOENV")
+    os.putenv("SPT_NOENV", os.environ["SPT_NOENV"])
+  except (ImportError, KeyError):
+    pass
+
+  try:
+    sys.exit(main(sys.argv))
+  except KeyboardInterrupt:
+    pass
