@@ -43,25 +43,40 @@ def main(argv: list[str]) -> int:
     use_locale = options.locale
 
   xcompose_data: bytes | None = None
-  if options.xcompose_file:
-    if options.xcompose_file == "-":
-      xcompose_data = sys.stdin.buffer.read()
-    else:
-      with open(options.xcompose_file, "rb") as f:
-        xcompose_data = f.read()
+  if options.xcompose_file == "-":
+    xcompose_data = sys.stdin.buffer.read()
+  elif options.xcompose_file:
+    if not os.path.exists(options.xcompose_file):
+      print(f"{prog}: error: {options.xcompose_file}: No such file or directory")
+      return 2
+    elif not os.path.isfile(options.xcompose_file):
+      print(f"{prog}: error: {options.xcompose_file}: Not a regular file")
+      return 2
 
-  result = 127
+  result: int
 
   ctx = xkbcommon.xkb_context_new(xkbcommon.xkb_context_flags.XKB_CONTEXT_NO_FLAGS)
   if not ctx:
     print(f"{prog}: error: could not create xkb context")
-    return 1
+    return 127
   try:
     stderr_fd = os.dup(2)
     pipe_r, pipe_w = os.pipe()
     os.dup2(pipe_w, 2)
     try:
-      if xcompose_data:
+      if options.xcompose_file not in (None, "", "-"):
+        os.putenv("XCOMPOSEFILE", options.xcompose_file)
+        try:
+          compose_table = xkbcommon.xkb_compose_table_new_from_locale(
+            ctx,
+            use_locale.encode("utf-8"),
+            xkbcommon.xkb_compose_compile_flags.XKB_COMPOSE_COMPILE_NO_FLAGS,
+          )
+        finally:
+          os.unsetenv("XCOMPOSEFILE")
+          if "XCOMPOSEFILE" in os.environ:
+            os.putenv("XCOMPOSEFILE", os.environ["XCOMPOSEFILE"])
+      elif xcompose_data:
         compose_table = xkbcommon.xkb_compose_table_new_from_buffer(
           ctx,
           xcompose_data,
