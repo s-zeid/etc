@@ -1,0 +1,2 @@
+#!/bin/sh
+echo ":$XDG_CURRENT_DESKTOP:" | grep -q ':KDE:'
