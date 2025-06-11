@@ -24,3 +24,18 @@ Notes
   
   To check if your system is using ibus, run `ps x | grep ibus-daemon` and look
   for an `ibus-daemon` process.
+
+* To check for errors in an XCompose file:
+
+  `xkbcli compile-compose --test [file]`
+
+  If the file is omitted, then the default XCompose file will be checked.
+
+  To install xkbcli:
+
+      alpine# apk add xkbcli
+      debian# apt install libxkbcommon-tools
+      fedora# dnf install libxkbcommon-utils
+
+  There is also a Python script in this repository at <./\_bin/xcompose-check>
+  which uses xkbcommon via ctypes to do the same checks.
