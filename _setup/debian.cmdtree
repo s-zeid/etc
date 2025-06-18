@@ -293,6 +293,7 @@ libtool
 pkg-config
 
 # Languages
+golang-go
 python2
 python-setuptools
 pipx

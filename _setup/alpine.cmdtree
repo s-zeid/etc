@@ -103,8 +103,10 @@ ncurses,-
  doc
 openrc,-
  doc
+ user-pam
 openssh,-
  doc
+ server-pam
 shadow,-
  doc
 #%if !%DOAS_SUDO_SHIM
@@ -319,6 +321,8 @@ pkgconf
 
 # Languages
 dash,-
+ doc
+go,-
  doc
 pipx
 python3,-
@@ -742,6 +746,17 @@ $$  mkdir -p -m 700 /etc/doas.d &&
 $$  echo "permit persist :wheel" > /etc/doas.d/wheel.conf &&
 $$  chmod 600 /etc/doas.d/wheel.conf
 $$ '
+
+
+# openrc - setup user services  #{{{2
+$ mkdir -p ~/.config/rc/init.d
+$$ sudo sh -c '
+$$  ln -s user /etc/init.d/"user.$1"
+$$  if ! [ -e /etc/runlevels/default/"user.$1" ]; then
+$$   rc-update add "user.$1"
+$$   service "user.$1" start
+$$  fi
+$$ ' -- "$(id -un)"
 
 
 # flatpak - Repositories  #{{{2
