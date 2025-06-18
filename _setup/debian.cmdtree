@@ -699,6 +699,11 @@ $ PIP_BREAK_SYSTEM_PACKAGES=true pip3 install --user -U  #{{{1
 awscli
 
 
+# go install  #{{{1
+
+go install github.com/openrdap/rdap/cmd/rdap@master
+
+
 # Install user config files  #{{{1
 
 $ [ -d ~/etc ] && true || git clone https://gitlab.com/s-zeid/etc.git ~/etc
