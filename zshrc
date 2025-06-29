@@ -1,11 +1,3 @@
-if [ -f "$HOME/.profile" ]; then
-  emulate sh -c '. "$HOME/.profile"'
-fi
-
-if [ -z "$PATH" ]; then
-  PATH="/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin"
-fi
-
 __home=${ZDOTDIR:-$HOME}
 __etc="$(cd "$__home" && cd "$(dirname -- "$(readlink "$__home/.zshrc")")" && pwd)"
 __role_dirs=$({ cd "$__etc" && make find-role-dirs absolute=1 suffix=/_zsh; } 2>/dev/null)
