@@ -82,8 +82,8 @@ noremap <silent> g<Down> <Down>
 noremap <silent> gj j
 noremap <silent> g<Up> <Up>
 noremap <silent> gk k
-inoremap <silent> g<Down> <C-o><Down>
-inoremap <silent> g<Up> <C-o><Up>
+inoremap <silent> <C-o>g<Down> <C-o><Down>
+inoremap <silent> <C-o>g<Up> <C-o><Up>
 vnoremap <silent> g<Down> <Down>
 vnoremap <silent> gj j
 vnoremap <silent> g<Up> <Up>
