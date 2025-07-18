@@ -52,6 +52,12 @@ include "%L"
 <Multi_key> <asciicircum> <underscore>  : "̅" U0305  # COMBINING OVERLINE
 <Multi_key> <asciicircum> <minus>       : "⁻" U207B  # SUPERSCRIPT MINUS
 <Multi_key> <underscore> <minus>        : "₋" U208B  # SUBSCRIPT MINUS †
+<Multi_key> <h> <minus>                 : "‐" U2010  # HYPHEN
+<Multi_key> <minus> <h>                 : "‐" U2010  # HYPHEN
+<Multi_key> <n> <b> <minus>             : "‑" U2011  # NON-BREAKING HYPHEN
+<Multi_key> <n> <h> <minus>             : "‑" U2011  # NON-BREAKING HYPHEN
+<Multi_key> <h> <n> <minus>             : "‑" U2011  # NON-BREAKING HYPHEN
+<Multi_key> <minus> <h> <n>             : "‑" U2011  # NON-BREAKING HYPHEN
 <Multi_key> <minus> <numbersign>        : "‒" U2012  # FIGURE DASH
 <Multi_key> <numbersign> <minus>        : "‒" U2012  # FIGURE DASH
 <Multi_key> <minus> <f>                 : "‒" U2012  # FIGURE DASH
