@@ -629,28 +629,22 @@ $ curl -L "https://github.com/mtoyoda/sl/raw/$sl_version/sl.1"
 
 
 # renameutils  #{{{2
-$ renameutils_src=renameutils-0.12.0
-$ if ! [ -e "/usr/local/src/$renameutils_src/_installed" ]; then
-$  sudo mkdir -p /usr/local/src && cd /usr/local/src
-$  sudo curl -o "/dev/shm/$renameutils_src.tar.gz"
-   -L "https://download.savannah.gnu.org/releases/renameutils/$renameutils_src.tar.gz" &&
-   [ x"$(sha256sum "/dev/shm/$renameutils_src.tar.gz" | sed -e 's/[^0-9a-fA-F].*$//g')"
-   = x"cbd2f002027ccf5a923135c3f529c6d17fabbca7d85506a394ca37694a9eb4a3" ]
-$  sudo tar -xzf "/dev/shm/$renameutils_src.tar.gz" && sudo rm -f "/dev/shm/$renameutils_src.tar.gz"
-$  cd "$renameutils_src"
-$  sudo curl -o "build-aux/config.guess"
-   -L "https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=805517123cbfe33d17c989a18e78c5789fab0437" &&
-   [ x"$(sha256sum "build-aux/config.guess" | sed -e 's/[^0-9a-fA-F].*$//g')"
-   = x"af8a1922c9b3c240bf2119d4ec0965a0b5ec36b1016017ba66db44b3b53e9cea" ]
-$  sudo curl -o "build-aux/config.sub"
-   -L "https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=805517123cbfe33d17c989a18e78c5789fab0437" &&
-   [ x"$(sha256sum "build-aux/config.sub" | sed -e 's/[^0-9a-fA-F].*$//g')"
-   = x"325caa596fa7aee6495bc416af6ed7d9e36b23aa2e0f6fba04cbb07838b37a27" ]
-$  sudo sed -i -e 's/(\$bindir)/$(bindir)/g' src/Makefile.in
-$  sudo ./configure
-$  sudo make
-$  sudo make install
-$  sudo touch _installed
+$ pkg='renameutils'; pkg_src="$pkg-0.12.0"; pkg_tgz="$pkg_src.tar.gz"
+$ if ! [ -e "/usr/local/src/$pkg_src/_installed" ]; then
+$  sudo mkdir -p /usr/local/src; cd /usr/local/src; sudo mkdir -p "$pkg_src"
+$  sudo curl -fL --output-dir "$pkg_src"
+    -o 'config.guess' 'https://cgit.git.savannah.gnu.org/cgit/config.git/plain/config.guess?id=805517123cbfe33d17c989a18e78c5789fab0437'
+    -o 'config.sub' 'https://cgit.git.savannah.gnu.org/cgit/config.git/plain/config.sub?id=805517123cbfe33d17c989a18e78c5789fab0437'
+    -o "$pkg_src.tar.gz" "https://download.savannah.gnu.org/releases/$pkg/$pkg_tgz"
+$  sh -ec 'cd "$0"; printf "%s\\n" "$@" | sha256sum -c -' "$pkg_src"
+    'af8a1922c9b3c240bf2119d4ec0965a0b5ec36b1016017ba66db44b3b53e9cea config.guess'
+    '325caa596fa7aee6495bc416af6ed7d9e36b23aa2e0f6fba04cbb07838b37a27 config.sub'
+    "cbd2f002027ccf5a923135c3f529c6d17fabbca7d85506a394ca37694a9eb4a3 $pkg_tgz"
+$  sudo tar -xzf "$pkg_src/$pkg_tgz"; sudo rm -rf "$pkg_src/$pkg_tgz"
+$  cd "$pkg_src"; sudo mv ./config.[gs]u* build-aux/
+$  sudo sed -i.orig -e 's/^gl_LIBOBJS[ \t]*=.*$/\0 error.o/' gnulib-lib/Makefile.in
+$  sudo sed -i.orig -e 's/(\$bindir)/$(bindir)/g' src/Makefile.in
+$  sudo sh -exc './configure; make CFLAGS="-std=gnu99"; make install; touch _installed'
 $  cd -
 $ fi
 
