@@ -76,6 +76,7 @@ include "%L"
 <Multi_key> <space> <period>            : " " U200A  # HAIR SPACE
 <Multi_key> <z> <w> <s>                 : "​" U200B  # ZERO WIDTH SPACE
 <Multi_key> <z> <s>                     : "​" U200B  # ZERO WIDTH SPACE
+<Multi_key> <z> <space>                 : "​" U200B  # ZERO WIDTH SPACE
 <Multi_key> <0> <s>                     : "​" U200B  # ZERO WIDTH SPACE
 <Multi_key> <0> <space>                 : "​" U200B  # ZERO WIDTH SPACE
 <Multi_key> <z> <w> <n> <j>             : "‌" U200C  # ZERO WIDTH NON-JOINER
