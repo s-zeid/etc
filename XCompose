@@ -545,9 +545,9 @@ include "%L"
 
 # Footnotes  {{{1
 
-# † — from dotXcompose (<https://github.com/kragen/xcompose>)
 # * — from libX11 (https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre)
 #     (included for compatibility or reference)
+# † — from dotXcompose (<https://github.com/kragen/xcompose>)
 
 
 # vim: set fdm=marker:  {{{1
