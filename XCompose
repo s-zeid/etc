@@ -46,6 +46,9 @@ include "%L"
 <Multi_key> <period> <slash>            : "⧸" U29F8  # BIG SOLIDUS
 <Multi_key> <colon> <equal>             : "≔" U2254  # COLON EQUALS
 <Multi_key> <equal> <colon>             : "≕" U2255  # EQUALS COLON
+<Multi_key> <percent> <o>               : "‰" U2030  # PER MILLE SIGN *
+<Multi_key> <percent> <0>               : "‰" U2030  # PER MILLE SIGN
+<Multi_key> <percent> <8>               : "‱" U2031  # PER TEN THOUSAND SIGN
 <Multi_key> <v> <period> <period>       : "⋮" U22EE  # VERTICAL ELLIPSIS †
 <Multi_key> <c> <period> <period>       : "⋯" U22EF  # MIDLINE HORIZONTAL ELLIPSIS †
 <Multi_key> <o> <v>                     : "̅" U0305  # COMBINING OVERLINE
