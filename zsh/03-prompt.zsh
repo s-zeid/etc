@@ -92,10 +92,19 @@ else
 fi
 
 
+# work around issue where the cursor starts two spaces after the sigil,
+# instead of one space, when running in tmux (idk what the actual reason is)
+
+RPS1_CURSOR_WORKAROUND=''
+if [ -n "$TMUX" ]; then
+  RPS1_CURSOR_WORKAROUND="$(printf '\x08')"
+fi
+
+
 # set PS1 and RPS1
 
-PS1="$PS1_COLOR$PS1_PREFIX${PS1_PREFIX:+$PS1_SEP}%~$PS1_SIGIL %{$(printf "$_COLOR_NONE")%}"
-RPS1="%{ %}$RPS1_DATE_COLOR%D{$RPS1_DATE_FORMAT} $RPS1_TIME_COLOR%D{$RPS1_TIME_FORMAT}%{$(printf "$_COLOR_NONE"'\x08')%}"
+PS1="$PS1_COLOR$PS1_PREFIX${PS1_PREFIX:+$PS1_SEP}%~$PS1_SIGIL%{$(printf "$_COLOR_NONE")%} "
+RPS1="%{ %}$RPS1_DATE_COLOR%D{$RPS1_DATE_FORMAT} $RPS1_TIME_COLOR%D{$RPS1_TIME_FORMAT}%{$(printf "$_COLOR_NONE")$RPS1_CURSOR_WORKAROUND%}"
 setopt PROMPT_SUBST
 
 
@@ -107,6 +116,7 @@ unset \
  RPS1_TIME_COLOR_24bit RPS1_TIME_COLOR_256 RPS1_TIME_COLOR_BASIC \
  PS1_COLOR PS1_USER PS1_MACHINE PS1_SIGIL \
  RPS1_DATE_COLOR RPS1_DATE_FORMAT RPS1_TIME_COLOR RPS1_TIME_FORMAT \
+ RPS1_CURSOR_WORKAROUND \
  _COLOR_NONE
 
 for color in RED YELLOW GREEN CYAN BLUE MAGENTA WHITE DEFAULT; do
