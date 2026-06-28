@@ -196,6 +196,8 @@ include "%L"
 <Multi_key> <M> <F> <P>                 : "🤦‍♂️"  # FACE PALM, ZWJ, MALE SIGN, VS16
 <Multi_key> <m> <f> <p>                 : "🤦‍♂️"  # FACE PALM, ZWJ, MALE SIGN, VS16
 <Multi_key> <Multi_key> <c> <r> <a> <b> : "🦀" U1F980  # CRAB
+<Multi_key> <Multi_key> <t> <h> <r> <e> <a> <d> : "🧵" U1F9F5  # THREAD
+<Multi_key> <y> <a> <r> <n>             : "🧶" U1F9F6  # BALL OF YARN
 <Multi_key> <h> <u> <g>                 : "🫂" U1FAC2  # PEOPLE HUGGING
 
 
