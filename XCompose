@@ -200,6 +200,10 @@ include "%L"
 <Multi_key> <Multi_key> <t> <h> <r> <e> <a> <d> : "🧵" U1F9F5  # THREAD
 <Multi_key> <y> <a> <r> <n>             : "🧶" U1F9F6  # BALL OF YARN
 <Multi_key> <h> <u> <g>                 : "🫂" U1FAC2  # PEOPLE HUGGING
+<Multi_key> <t> <g>                     : "⚧" U26A7  # MALE WITH STROKE AND MALE AND FEMALE SIGN
+<Multi_key> <r> <b>                     : "🌈" U1F308  # RAINBOW
+<Multi_key> <t> <r> <a> <n> <s>         : "🏳️‍⚧️"  # Transgender flag
+<Multi_key> <p> <r> <i> <d> <e>         : "🏳️‍🌈"  # Pride flag
 
 
 # Face emojis  #{{{1
