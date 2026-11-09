@@ -50,6 +50,8 @@ endif
 set shiftwidth=2
 set tabstop=8
 set expandtab
+set copyindent
+set preserveindent
 " Insert real tabs on <Tab> without Ctrl/Shift modifiers
 " (but not all terminals support binding <C-Tab> and <C-i>)
 inoremap <silent> <S-Tab> <Tab>
