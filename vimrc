@@ -62,7 +62,7 @@ inoremap <silent> <Tab> <C-v><Tab>
 set autoindent
 filetype plugin indent on
 
-au BufRead,BufNewFile *.py setlocal expandtab< tabstop< softtabstop< shiftwidth<
+au FileType python setlocal ci< et< pi< sts=-1 sw< ts<
 
 
 " Key mappings {{{1
